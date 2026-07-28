@@ -69,7 +69,7 @@ proposent pas.
 ## Installation
 
 Les APK signés sont publiés dans
-[Releases](https://github.com/Eraile/metrov_navbar/releases). Android demandera
+[Releases](https://github.com/Eraile/metrocore_labarre/releases). Android demandera
 d'autoriser l'installation depuis la source utilisée (navigateur ou gestionnaire de
 fichiers) — c'est normal, et ça ne se demande qu'une fois.
 

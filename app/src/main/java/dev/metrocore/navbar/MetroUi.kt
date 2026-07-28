@@ -12,6 +12,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -318,6 +319,45 @@ class MetroUi(
      * ne se fait jamais dans une petite boite flottante, la page entiere bascule.
      */
     fun pickerRow(labelText: String, valueText: String, onClick: () -> Unit): LinearLayout {
+        // La valeur vit dans une boite bordee : c'est l'etat replie du ListPicker WP, et
+        // c'est ce qui la distingue d'un lien. En texte accent nu — ce qu'elle etait —
+        // elle avait exactement l'allure d'un linkRow, et rien ne disait qu'il y avait
+        // plusieurs choix derriere. Meme bordure de 2 px que le rail de l'interrupteur.
+        val value = TextView(context).apply {
+            text = valueText
+            setTextColor(fg)
+            typeface = regular
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, MetroTokens.FS_MEDIUM * scale)
+            background = pickerBox()
+            setPadding(px(12f), px(8f), px(12f), px(8f))
+            minHeight = px(MetroTokens.TOUCH_MIN)
+            gravity = Gravity.CENTER_VERTICAL
+        }
+        return LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, px(8f), 0, px(8f))
+            minimumHeight = px(MetroTokens.LIST_ROW_1)
+            addView(label(labelText).apply { setTextColor(sub) })
+            addView(
+                value,
+                LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                ).apply { topMargin = px(4f) },
+            )
+            isClickable = true
+            setOnClickListener { onClick() }
+            setTag(R.id.tag_picker_value, value)
+        }
+    }
+
+    /**
+     * Une ligne qui *fait* quelque chose, la ou [pickerRow] laisse *choisir* : meme
+     * disposition, mais la valeur reste en texte accent, comme un lien. C'est la
+     * distinction que le cadre sert a marquer — encadre, il y a plusieurs reponses
+     * possibles ; en accent nu, l'appui declenche l'action et c'est tout.
+     */
+    fun actionRow(labelText: String, valueText: String, onClick: () -> Unit): LinearLayout {
         val value = TextView(context).apply {
             text = valueText
             setTextColor(accent)
@@ -332,8 +372,14 @@ class MetroUi(
             addView(value)
             isClickable = true
             setOnClickListener { onClick() }
-            setTag(R.id.tag_picker_value, value)
         }
+    }
+
+    /** Le cadre du ListPicker replie : rectangle net, 2 px, rien d'arrondi. */
+    private fun pickerBox() = GradientDrawable().apply {
+        shape = GradientDrawable.RECTANGLE
+        setColor(Color.TRANSPARENT)
+        setStroke(px(2f), fg)
     }
 
     /**
@@ -354,7 +400,7 @@ class MetroUi(
     fun updatePickerRow(row: View, valueText: String) {
         (row.getTag(R.id.tag_picker_value) as? TextView)?.apply {
             text = valueText
-            setTextColor(accent)
+            setTextColor(fg)
         }
     }
 

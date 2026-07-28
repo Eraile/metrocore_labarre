@@ -7,10 +7,12 @@
 
     <string name="section_overview">概览</string>
     <string name="section_appearance">外观</string>
+    <string name="section_behaviour">行为</string>
     <string name="section_feedback">反馈</string>
 
     <string name="status_on">导航栏已开启</string>
     <string name="status_off">导航栏已关闭</string>
+    <string name="hint_gesture_nav">手势导航 — 系统不会在底部留出空间，导航栏会遮住应用最后几毫米。三按钮导航才是它正好落位的地方。</string>
     <string name="row_accessibility">无障碍</string>
     <string name="row_accessibility_value">打开系统设置</string>
     <string name="toast_hint">在列表中找到「metrocore — La Barre」并开启。</string>
@@ -21,6 +23,15 @@
     <string name="label_icon_color">图标颜色</string>
     <string name="label_bar_height">导航栏高度</string>
     <string name="label_icon_size">图标大小</string>
+
+    <string name="label_bar_mode">何时显示</string>
+    <string name="label_bar_mode_hint">手势导航不会在底部留出空间 —「只在放得下时」会避开那里</string>
+    <string name="mode_fitted">只在放得下时</string>
+    <string name="mode_always">始终</string>
+    <string name="label_hide_fullscreen">全屏时隐藏</string>
+    <string name="label_hide_fullscreen_hint">应用占满屏幕时导航栏自动让开 — 视频、游戏、阅读</string>
+    <string name="label_hide_lockscreen">锁屏时隐藏</string>
+    <string name="label_hide_lockscreen_hint">手机解锁后导航栏会回来</string>
     <string name="value_auto">自动（%1$d dp）</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">自动（%1$d%%）</string>

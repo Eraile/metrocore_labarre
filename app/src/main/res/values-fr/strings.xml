@@ -7,10 +7,12 @@
 
     <string name="section_overview">vue d\'ensemble</string>
     <string name="section_appearance">apparence</string>
+    <string name="section_behaviour">comportement</string>
     <string name="section_feedback">retour</string>
 
     <string name="status_on">barre active</string>
     <string name="status_off">barre inactive</string>
+    <string name="hint_gesture_nav">navigation gestuelle — le systeme ne reserve rien en bas, la barre recouvre donc les derniers millimetres de l\'application. C\'est en navigation a 3 boutons qu\'elle tombe juste.</string>
     <string name="row_accessibility">accessibilite</string>
     <string name="row_accessibility_value">ouvrir les reglages systeme</string>
     <string name="toast_hint">Cherche « metrocore — La Barre » dans la liste et active-le.</string>
@@ -21,6 +23,15 @@
     <string name="label_icon_color">couleur des glyphes</string>
     <string name="label_bar_height">hauteur de la barre</string>
     <string name="label_icon_size">taille des glyphes</string>
+
+    <string name="label_bar_mode">quand l\'afficher</string>
+    <string name="label_bar_mode_hint">la navigation gestuelle ne laisse aucune place en bas — « seulement la ou elle tient » l\'y evite</string>
+    <string name="mode_fitted">seulement la ou elle tient</string>
+    <string name="mode_always">toujours</string>
+    <string name="label_hide_fullscreen">masquer en plein ecran</string>
+    <string name="label_hide_fullscreen_hint">la barre s\'efface quand une application prend tout l\'ecran — video, jeux, lecture</string>
+    <string name="label_hide_lockscreen">masquer sur l\'ecran de verrouillage</string>
+    <string name="label_hide_lockscreen_hint">la barre revient une fois le telephone deverrouille</string>
     <string name="value_auto">auto (%1$d dp)</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">auto (%1$d %%)</string>

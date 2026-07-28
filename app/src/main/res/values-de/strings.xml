@@ -11,10 +11,12 @@
 
     <string name="section_overview">uebersicht</string>
     <string name="section_appearance">darstellung</string>
+    <string name="section_behaviour">verhalten</string>
     <string name="section_feedback">rueckmeldung</string>
 
     <string name="status_on">leiste aktiv</string>
     <string name="status_off">leiste inaktiv</string>
+    <string name="hint_gesture_nav">gestensteuerung — das system haelt unten keinen platz frei, die leiste verdeckt daher die letzten millimeter der app. Bei der 3-tasten-navigation sitzt sie genau richtig.</string>
     <string name="row_accessibility">bedienungshilfen</string>
     <string name="row_accessibility_value">systemeinstellungen oeffnen</string>
     <string name="toast_hint">Suche „metrocore — La Barre“ in der Liste und aktiviere es.</string>
@@ -25,6 +27,15 @@
     <string name="label_icon_color">symbolfarbe</string>
     <string name="label_bar_height">hoehe der leiste</string>
     <string name="label_icon_size">groesse der symbole</string>
+
+    <string name="label_bar_mode">wann anzeigen</string>
+    <string name="label_bar_mode_hint">die gestensteuerung haelt unten keinen platz frei — „nur wo platz ist“ bleibt dort weg</string>
+    <string name="mode_fitted">nur wo platz ist</string>
+    <string name="mode_always">immer</string>
+    <string name="label_hide_fullscreen">im vollbild ausblenden</string>
+    <string name="label_hide_fullscreen_hint">die leiste tritt zurueck, wenn eine app den ganzen bildschirm einnimmt — video, spiele, lesen</string>
+    <string name="label_hide_lockscreen">auf dem sperrbildschirm ausblenden</string>
+    <string name="label_hide_lockscreen_hint">die leiste kehrt zurueck, sobald das telefon entsperrt ist</string>
     <string name="value_auto">auto (%1$d dp)</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">auto (%1$d %%)</string>

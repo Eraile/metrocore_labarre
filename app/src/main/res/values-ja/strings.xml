@@ -7,10 +7,12 @@
 
     <string name="section_overview">概要</string>
     <string name="section_appearance">外観</string>
+    <string name="section_behaviour">動作</string>
     <string name="section_feedback">フィードバック</string>
 
     <string name="status_on">バーは有効</string>
     <string name="status_off">バーは無効</string>
+    <string name="hint_gesture_nav">ジェスチャーナビゲーション — システムが画面下に領域を空けないため、バーはアプリの下端に重なります。3ボタンナビゲーションならぴたりと収まります。</string>
     <string name="row_accessibility">ユーザー補助</string>
     <string name="row_accessibility_value">システム設定を開く</string>
     <string name="toast_hint">一覧から「metrocore — La Barre」を探して有効にしてください。</string>
@@ -21,6 +23,15 @@
     <string name="label_icon_color">アイコンの色</string>
     <string name="label_bar_height">バーの高さ</string>
     <string name="label_icon_size">アイコンの大きさ</string>
+
+    <string name="label_bar_mode">表示するとき</string>
+    <string name="label_bar_mode_hint">ジェスチャーナビゲーションは画面下に場所を空けません。「収まるときだけ」ならそこを避けます</string>
+    <string name="mode_fitted">収まるときだけ</string>
+    <string name="mode_always">常に</string>
+    <string name="label_hide_fullscreen">全画面時に隠す</string>
+    <string name="label_hide_fullscreen_hint">アプリが画面全体を使うときにバーが退きます — 動画、ゲーム、読書</string>
+    <string name="label_hide_lockscreen">ロック画面で隠す</string>
+    <string name="label_hide_lockscreen_hint">ロックを解除するとバーが戻ります</string>
     <string name="value_auto">自動（%1$d dp）</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">自動（%1$d%%）</string>

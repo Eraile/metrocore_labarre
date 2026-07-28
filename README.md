@@ -33,8 +33,9 @@ Trois boutons, en overlay tout en bas de l'écran. Réglages par défaut :
 
 Tout est modifiable depuis l'écran de réglages : couleur du fond et des glyphes
 (les 20 accents WP8.1, ou **Material You** pour suivre le fond d'écran), hauteur de la
-barre, taille des glyphes, vibration, et pour chacun des trois boutons une glyphe parmi
-45, sa taille propre, et une action par appui court et par appui long.
+barre, taille des glyphes, vibration, masquage automatique en plein écran et sur l'écran
+de verrouillage, et pour chacun des trois boutons une glyphe parmi 45, sa taille propre,
+et une action par appui court et par appui long.
 
 <p align="center">
   <img src="README/overview.png" width="245" alt="vue d'ensemble">
@@ -93,7 +94,9 @@ Rien n'est réglé à l'œil. Métriques, couleurs, courbes et durées viennent 
 - **hauteur de barre** — WP posait 60 px de bande sur un écran large de 480 px, soit
   un huitième de la largeur. On ancre sur la **largeur** et non sur la hauteur : les
   téléphones actuels sont bien plus allongés que le 5:3 du WVGA, et un ratio pris sur
-  la hauteur donnerait une bande énorme. Sur un écran de 411 dp ça fait 51 dp.
+  la hauteur donnerait une bande énorme. Sur un écran de 411 dp ça fait 51 dp. C'est
+  aujourd'hui la valeur de repli : la hauteur automatique se cale d'abord sur la bande
+  que réserve la barre système, qui en fait 48 — voir *La place en bas de l'écran*.
 - **taille des glyphes** — le tiers de la bande (20 sur 60), d'où le « auto (33 %) ».
 - **retour visuel** — l'opacité tombe à 45 % en 100 ms et remonte en 200 ms, avec un
   enfoncement à 0.985. C'est `.mc-navkey.is-down` et les tokens `tilt`. Pas
@@ -151,7 +154,7 @@ L'app suit la langue du téléphone. L'anglais est la langue par défaut
 | `es` espagnol | `pl` polonais | `zh` chinois simplifié | `ar` arabe |
 | `pt` portugais | `it` italien | `ja` japonais | `eu` euskara |
 
-64 chaînes traduisibles par langue, toutes présentes dans les douze fichiers. Les 7
+74 chaînes traduisibles par langue, toutes présentes dans les douze fichiers. Les 7
 restantes sont les noms de produit — « metrocore — La Barre », « La Barre »,
 « metrocore », « metrocore.dev » — marqués `translatable="false"` : elles n'existent que
 dans le fichier par défaut et ne bougent dans aucune langue.
@@ -231,7 +234,9 @@ et un téléphone sont connectés en même temps.
 - [NavKeyView.kt](app/src/main/java/dev/metrocore/navbar/NavKeyView.kt) — une touche :
   appui, maintien, retour visuel, haptique.
 - [NavBarService.kt](app/src/main/java/dev/metrocore/navbar/NavBarService.kt) — le service
-  d'accessibilité.
+  d'accessibilité, et les deux raisons de s'effacer : plein écran, verrouillage.
+- [SystemBars.kt](app/src/main/java/dev/metrocore/navbar/SystemBars.kt) — ce que le
+  système réserve déjà en bas de l'écran.
 - [MetroUi.kt](app/src/main/java/dev/metrocore/navbar/MetroUi.kt) — les briques Metro
   (interrupteur, pastilles, radios, ListPicker, slider), dessinées à la main.
 - [PanoramaView.kt](app/src/main/java/dev/metrocore/navbar/PanoramaView.kt) — le panorama.
@@ -251,15 +256,92 @@ largeur d'écran, alors que mesures et `layout` sont tous corrects.
 Les réglages passent par les `SharedPreferences` et le service les écoute : l'écran
 écrit, la barre se reconstruit toute seule. Aucun binder à maintenir entre les deux.
 
+## La place en bas de l'écran
+
+**Aucun overlay ne peut réserver d'espace.** Ni `TYPE_ACCESSIBILITY_OVERLAY`, ni
+`TYPE_APPLICATION_OVERLAY` : seul le système pose des insets, et seulement pour sa propre
+barre. La Barre se dessine donc *par-dessus*, et c'est vrai de toutes les barres de
+navigation tierces. Ce qui change d'un mode de navigation à l'autre, c'est ce qu'il y a
+dessous.
+
+- **Navigation à 3 boutons** — le système réserve déjà sa bande (~48 dp) et le contenu
+  des applications s'arrête au-dessus. La Barre se pose sur cette bande : elle recouvre
+  la barre système, pas le contenu. C'est le mode le plus confortable.
+- **Navigation gestuelle** — le système ne réserve que la poignée (~24 dp) et le contenu
+  descend jusqu'en bas. Une barre plus haute que cette poignée mord donc sur le contenu.
+
+### Le référentiel : la place de la barre système
+
+La hauteur automatique n'est plus dérivée de la proportion WP mais **de ce que le système
+réserve réellement**, mesuré par
+[SystemBars.kt](app/src/main/java/dev/metrocore/navbar/SystemBars.kt). En 3 boutons, La
+Barre vient donc se poser exactement sur la bande système : elle ne recouvre rien de plus
+que ce que la barre système recouvrait déjà.
+
+Cette formulation est prudente exprès. Depuis qu'Android impose le bord à bord, une
+application qui n'applique pas ses insets dessine sous la bande réservée, et son contenu
+disparaît derrière la barre système — un clavier de jeu, par exemple. Ça arrive avec la
+barre stock, sur n'importe quel appareil, et La Barre posée au même endroit n'y ajoute
+rien : le correctif appartient à l'application, pas à nous.
+
+Le changement coûte étonnamment peu en fidélité. La proportion WP — 60 px sur 480 —
+donne 51 dp sur un écran de 411 dp de large ; une barre système Android en fait 48. Les
+deux référentiels tombaient déjà presque au même endroit, ce qui est moins un hasard
+qu'un rappel que 48 dp est la hauteur d'une rangée de boutons pour un pouce.
+
+En navigation gestuelle il n'y a plus de bande à prendre, seulement la poignée. S'y caler
+donnerait une barre de 24 dp : sous n'importe quel minimum tactile — le token
+`TOUCH_MIN` de metrocore, déjà bas, est à 34 dp — et posée pile sur la zone du geste.
+Il n'y a donc plus de référentiel du tout : on revient à la proportion WP et le
+recouvrement est assumé. Le réglage **quand l'afficher**, dans *comportement*, tranche
+entre les deux seules réponses possibles :
+
+- **toujours** — la barre est là partout, elle recouvre là où il n'y a pas la place.
+  C'est le défaut : une barre absente au premier lancement passe pour une panne.
+- **seulement là où elle tient** — elle ne s'affiche que là où le système lui laisse une
+  bande, donc pas en navigation gestuelle.
+
+### Se masquer
+
+- **masquer en plein écran** — la barre s'efface quand l'application au premier plan
+  prend tout l'écran. C'est ce qui règle les jeux et les lecteurs vidéo, quel que soit le
+  mode de navigation. Actif par défaut.
+
+La détection du plein écran ne lit **aucun contenu d'écran** : `getWindows()` ne rend que
+des types et des rectangles, et `canRetrieveWindowContent` reste à `false`. Le critère est
+**l'absence de la barre d'état**, cherchée nommément : la seule fenêtre `TYPE_SYSTEM`
+collée au bord haut et basse — le plafond de hauteur écarte le volet de notifications
+déployé, qui part aussi du haut.
+
+Deux critères plus simples ont été essayés et ne marchent pas :
+
+- *comparer les bornes de la fenêtre active à celles de l'écran* — depuis le bord à bord
+  imposé, une application couvre tout l'écran même barres système affichées.
+- *l'absence de toute fenêtre `TYPE_SYSTEM`* — ce type couvre bien plus que les barres
+  (poignée de geste, fenêtres système flottantes) et il en reste presque toujours une, si
+  bien que la condition n'était jamais vraie et que rien ne se masquait.
+
+Tant que La Barre n'a jamais reconnu de barre d'état sur l'appareil, elle ne masque rien :
+sans ce garde-fou, un fabricant qui exposerait ses barres autrement la ferait disparaître
+en permanence, ce qui est bien pire que de ne jamais se masquer. L'écran de réglages
+suffit à l'amorcer.
+
+Pour voir ce qu'un appareil expose réellement, passer `DEBUG` à `true` dans
+[NavBarService.kt](app/src/main/java/dev/metrocore/navbar/NavBarService.kt) et lire
+`adb logcat -s LaBarre` : chaque évaluation trace le type et les bornes de toutes les
+fenêtres.
+
+**masquer sur l'écran de verrouillage** suit la même logique, via `KeyguardManager` et
+les diffusions d'allumage d'écran. Actif par défaut lui aussi.
+
 ## Limites connues
 
-- La barre se superpose au contenu ; elle ne réserve pas d'espace (pas d'inset système).
-  En navigation gestuelle Android c'est peu gênant, en navigation à 3 boutons elle se
-  pose par-dessus la barre système.
-- Pas de masquage automatique en plein écran, ni de swipe-up pour la rappeler.
+- Pas de swipe-up pour rappeler la barre quand elle s'est masquée : elle revient d'elle
+  même en quittant le plein écran.
+- En navigation gestuelle, la barre recouvre le bas du contenu. Il n'y a pas de correctif
+  possible (voir ci-dessus) : seulement le masquage en plein écran, ou ne pas l'afficher
+  du tout dans ce mode.
 - L'arabe est traduit mais la mise en page n'est pas en miroir (voir *Langues*).
-- La compilation `release` est encore signée avec la clé de debug — à remplacer par une
-  vraie clé avant toute distribution. Voir [SIGNING.md](SIGNING.md) et [RELEASING.md](RELEASING.md).
 
 ## Licence et crédits
 

@@ -7,10 +7,12 @@
 
     <string name="section_overview">przeglad</string>
     <string name="section_appearance">wyglad</string>
+    <string name="section_behaviour">zachowanie</string>
     <string name="section_feedback">reakcja</string>
 
     <string name="status_on">pasek wlaczony</string>
     <string name="status_off">pasek wylaczony</string>
+    <string name="hint_gesture_nav">nawigacja gestami — system nie rezerwuje nic na dole, wiec pasek zaslania ostatnie milimetry aplikacji. Przy nawigacji 3 przyciskami trafia dokladnie na swoje miejsce.</string>
     <string name="row_accessibility">ulatwienia dostepu</string>
     <string name="row_accessibility_value">otworz ustawienia systemu</string>
     <string name="toast_hint">Znajdz „metrocore — La Barre” na liscie i wlacz go.</string>
@@ -21,6 +23,15 @@
     <string name="label_icon_color">kolor ikon</string>
     <string name="label_bar_height">wysokosc paska</string>
     <string name="label_icon_size">rozmiar ikon</string>
+
+    <string name="label_bar_mode">kiedy pokazywac</string>
+    <string name="label_bar_mode_hint">nawigacja gestami nie zostawia miejsca na dole — „tylko tam, gdzie sie miesci” omija ten problem</string>
+    <string name="mode_fitted">tylko tam, gdzie sie miesci</string>
+    <string name="mode_always">zawsze</string>
+    <string name="label_hide_fullscreen">ukryj na pelnym ekranie</string>
+    <string name="label_hide_fullscreen_hint">pasek ustepuje, gdy aplikacja zajmuje caly ekran — wideo, gry, czytanie</string>
+    <string name="label_hide_lockscreen">ukryj na ekranie blokady</string>
+    <string name="label_hide_lockscreen_hint">pasek wraca po odblokowaniu telefonu</string>
     <string name="value_auto">auto (%1$d dp)</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">auto (%1$d %%)</string>

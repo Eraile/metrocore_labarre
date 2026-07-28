@@ -30,6 +30,26 @@ enum class Haptic(val key: String, val labelRes: Int, val ms: Long, val amplitud
 }
 
 /**
+ * Quand la barre s'affiche, face a la place disponible.
+ *
+ * Il n'y a que deux reponses possibles au fait qu'aucun overlay ne peut reserver
+ * d'espace (voir [SystemBars]) : ne se montrer que la ou le systeme en laisse, ou se
+ * montrer quand meme et recouvrir. Autant les nommer.
+ */
+enum class BarMode(val key: String, val labelRes: Int) {
+    /** Affichee seulement la ou le systeme reserve une bande — navigation a 3 boutons. */
+    FITTED("fitted", R.string.mode_fitted),
+
+    /** Affichee partout, recouvrement assume la ou il n'y a pas de place. */
+    ALWAYS("always", R.string.mode_always),
+    ;
+
+    companion object {
+        fun from(key: String?): BarMode = entries.firstOrNull { it.key == key } ?: ALWAYS
+    }
+}
+
+/**
  * Reglage d'un bouton : sa glyphe, son appui court, son appui long.
  *
  * [iconScalePct] ajuste la glyphe par rapport a la taille commune. Le logo central est
@@ -86,10 +106,43 @@ data class NavBarConfig(
      * d'origine, sinon l'app ne ressemble plus a ce qu'elle reconstruit.
      */
     val dynamicColor: Boolean = false,
+    /**
+     * S'afficher partout, ou seulement la ou le systeme laisse la place. Ne change rien
+     * en navigation a 3 boutons : la bande est reservee, les deux modes s'y valent.
+     */
+    val mode: BarMode = BarMode.ALWAYS,
+    /** S'effacer quand l'application au premier plan passe en plein ecran. */
+    val hideFullscreen: Boolean = true,
+    /** S'effacer sur l'ecran de verrouillage. */
+    val hideLockscreen: Boolean = true,
 ) {
     /** Hauteur reelle, en dp, pour un ecran de [screenWidthDp] de large. */
     fun resolvedHeightDp(screenWidthDp: Int): Int =
         if (barHeightDp > 0) barHeightDp else MetroTokens.barHeightDpFor(screenWidthDp)
+
+    /**
+     * La hauteur reelle. C'est celle-ci qui fait foi : le referentiel n'est plus la
+     * proportion WP mais **la place que prend la barre systeme**.
+     *
+     * En navigation a 3 boutons le systeme reserve sa bande et La Barre vient s'y poser
+     * exactement : rien du contenu n'est recouvert. L'ecart avec la proportion WP est
+     * d'ailleurs minime — 60/480 donne 51 dp sur un ecran de 411 dp, la barre Android
+     * en fait 48 — donc on ne perd a peu pres rien de la fidelite en se calant dessus.
+     *
+     * En navigation gestuelle le systeme ne reserve que la poignee. Se caler dessus
+     * donnerait une barre de 24 dp : sous n'importe quel minimum tactile, et posee pile
+     * sur la zone du geste. Il n'y a plus de place a prendre, donc plus de referentiel —
+     * on revient a la proportion WP, et le recouvrement est assume. [showInGestureNav]
+     * decide si on affiche quand meme.
+     */
+    fun resolvedHeightDp(context: Context): Int {
+        if (barHeightDp > 0) return barHeightDp
+
+        val system = SystemBars.navigationBarHeightDp(context)
+        if (system >= SystemBars.USABLE_MIN_DP) return system
+
+        return MetroTokens.barHeightDpFor(context.resources.configuration.screenWidthDp)
+    }
 
     /** Taille de glyphe commune, en dp. */
     fun resolvedIconDp(screenWidthDp: Int): Int =
@@ -204,6 +257,9 @@ class ConfigStore(context: Context) {
             haptic = Haptic.from(prefs.getString("haptic", d.haptic.key)),
             pressFeedback = prefs.getBoolean("press_feedback", d.pressFeedback),
             dynamicColor = prefs.getBoolean("dynamic_color", d.dynamicColor),
+            mode = BarMode.from(prefs.getString("bar_mode", d.mode.key)),
+            hideFullscreen = prefs.getBoolean("hide_fullscreen", d.hideFullscreen),
+            hideLockscreen = prefs.getBoolean("hide_lockscreen", d.hideLockscreen),
             slots = Slot.entries.associateWith { slot ->
                 val fallback = d.slots.getValue(slot)
                 SlotConfig(
@@ -230,6 +286,9 @@ class ConfigStore(context: Context) {
             putString("haptic", config.haptic.key)
             putBoolean("press_feedback", config.pressFeedback)
             putBoolean("dynamic_color", config.dynamicColor)
+            putString("bar_mode", config.mode.key)
+            putBoolean("hide_fullscreen", config.hideFullscreen)
+            putBoolean("hide_lockscreen", config.hideLockscreen)
             config.slots.forEach { (slot, sc) ->
                 putString("${slot.key}_icon", sc.iconKey)
                 putString("${slot.key}_tap", sc.tap.key)

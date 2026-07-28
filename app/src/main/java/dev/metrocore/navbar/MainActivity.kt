@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity() {
 
             addPreviewSection(pano)
             addAppearanceSection(pano)
+            addBehaviourSection(pano)
             addFeedbackSection(pano)
             Slot.entries.forEach { addSlotSection(pano, it) }
             addAboutSection(pano)
@@ -151,15 +152,22 @@ class MainActivity : AppCompatActivity() {
             body.addView(it, marginTop(ui.px(20f)))
         }
 
+        // Le mode de navigation explique a lui seul la moitie des surprises — barre qui
+        // rogne le bas de l'ecran, barre absente. Autant le dire la ou on regarde en
+        // premier, plutot que d'attendre que la question remonte.
+        if (SystemBars.isGestureNav(this)) {
+            body.addView(ui.sub(getString(R.string.hint_gesture_nav)))
+        }
+
         body.addView(
-            ui.pickerRow(
+            ui.actionRow(
                 getString(R.string.row_accessibility),
                 getString(R.string.row_accessibility_value),
             ) { openAccessibilitySettings() },
         )
 
         body.addView(
-            ui.pickerRow(getString(R.string.row_reset), getString(R.string.row_reset_value)) {
+            ui.actionRow(getString(R.string.row_reset), getString(R.string.row_reset_value)) {
                 store.reset()
                 config = store.load()
                 buildPanorama()
@@ -171,7 +179,6 @@ class MainActivity : AppCompatActivity() {
     private fun renderPreview() {
         val host = previewHost ?: return
         host.removeAllViews()
-        val widthDp = resources.configuration.screenWidthDp
         val bar = NavBarView.build(this, config, haptics) { action, _ ->
             // Dans l'apercu on montre ce que ferait le bouton sans le faire : appliquer
             // "precedent" ou "accueil" ici quitterait l'ecran de reglages.
@@ -181,7 +188,9 @@ class MainActivity : AppCompatActivity() {
             bar,
             FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                NavBarView.dp(this, config.resolvedHeightDp(widthDp)),
+                // Le contexte, et pas la largeur seule : c'est lui qui sait ce que le
+                // systeme reserve, quand la hauteur est calee dessus.
+                NavBarView.dp(this, config.resolvedHeightDp(this)),
             ),
         )
     }
@@ -237,7 +246,10 @@ class MainActivity : AppCompatActivity() {
             },
         )
 
-        val autoHeight = MetroTokens.barHeightDpFor(resources.configuration.screenWidthDp)
+        // « auto » ne veut plus dire la proportion WP mais la place que prend la barre
+        // systeme : on demande donc sa valeur au meme calcul que la barre reelle, plutot
+        // que de refaire le sien ici.
+        val autoHeight = config.copy(barHeightDp = 0).resolvedHeightDp(this)
 
         body.addView(
             ui.slider(
@@ -260,6 +272,59 @@ class MainActivity : AppCompatActivity() {
                 format = { getString(R.string.value_pct, it) },
             ) { v -> update { it.copy(iconSizePct = if (v == 0) 0 else v.coerceAtLeast(12)) } },
         )
+    }
+
+    // --------------------------------------------------------- comportement
+
+    /**
+     * Quand la barre s'efface d'elle-meme.
+     *
+     * Aucun overlay ne peut reserver d'espace a l'ecran (voir [SystemBars]), donc la
+     * seule reponse au « elle recouvre le contenu » est de disparaitre la ou ca gene :
+     * le plein ecran et le verrouillage. Les deux sont actifs par defaut — c'est une
+     * correction, pas une preference.
+     */
+    private fun addBehaviourSection(pano: PanoramaView) {
+        val body = pano.addSection(getString(R.string.section_behaviour))
+
+        // Le mode se propose toujours, meme en 3 boutons ou il ne change rien : c'est la
+        // reponse a « pourquoi elle recouvre le bas de l'ecran », et une question qu'on
+        // ne se pose qu'apres avoir change de mode de navigation.
+        lateinit var modeRow: View
+        modeRow = ui.pickerRow(
+            getString(R.string.label_bar_mode),
+            getString(config.mode.labelRes),
+        ) {
+            ui.showPicker(
+                title = getString(R.string.label_bar_mode),
+                options = BarMode.entries.toList(),
+                selected = config.mode,
+                labelOf = { getString(it.labelRes) },
+            ) { picked ->
+                update { it.copy(mode = picked) }
+                ui.updatePickerRow(modeRow, getString(picked.labelRes))
+            }
+        }
+        body.addView(modeRow)
+        body.addView(ui.sub(getString(R.string.label_bar_mode_hint)))
+
+        body.addView(
+            ui.Toggle(
+                getString(R.string.label_hide_fullscreen),
+                config.hideFullscreen,
+            ) { on -> update { it.copy(hideFullscreen = on) } },
+            marginTop(ui.px(18f)),
+        )
+        body.addView(ui.sub(getString(R.string.label_hide_fullscreen_hint)))
+
+        body.addView(
+            ui.Toggle(
+                getString(R.string.label_hide_lockscreen),
+                config.hideLockscreen,
+            ) { on -> update { it.copy(hideLockscreen = on) } },
+            marginTop(ui.px(18f)),
+        )
+        body.addView(ui.sub(getString(R.string.label_hide_lockscreen_hint)))
     }
 
     // ---------------------------------------------------------------- retour

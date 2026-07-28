@@ -7,10 +7,12 @@
 
     <string name="section_overview">обзор</string>
     <string name="section_appearance">оформление</string>
+    <string name="section_behaviour">поведение</string>
     <string name="section_feedback">отклик</string>
 
     <string name="status_on">панель включена</string>
     <string name="status_off">панель выключена</string>
+    <string name="hint_gesture_nav">навигация жестами — система ничего не оставляет внизу, поэтому панель закрывает последние миллиметры приложения. При навигации тремя кнопками она встаёт точно на место.</string>
     <string name="row_accessibility">специальные возможности</string>
     <string name="row_accessibility_value">открыть настройки системы</string>
     <string name="toast_hint">Найдите «metrocore — La Barre» в списке и включите.</string>
@@ -21,6 +23,15 @@
     <string name="label_icon_color">цвет значков</string>
     <string name="label_bar_height">высота панели</string>
     <string name="label_icon_size">размер значков</string>
+
+    <string name="label_bar_mode">когда показывать</string>
+    <string name="label_bar_mode_hint">навигация жестами не оставляет места внизу — «только там, где есть место» туда не лезет</string>
+    <string name="mode_fitted">только там, где есть место</string>
+    <string name="mode_always">всегда</string>
+    <string name="label_hide_fullscreen">скрывать в полноэкранном режиме</string>
+    <string name="label_hide_fullscreen_hint">панель уходит, когда приложение занимает весь экран — видео, игры, чтение</string>
+    <string name="label_hide_lockscreen">скрывать на экране блокировки</string>
+    <string name="label_hide_lockscreen_hint">панель возвращается после разблокировки телефона</string>
     <string name="value_auto">авто (%1$d dp)</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">авто (%1$d %%)</string>

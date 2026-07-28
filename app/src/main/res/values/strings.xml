@@ -16,12 +16,14 @@
     <!-- panorama sections -->
     <string name="section_overview">overview</string>
     <string name="section_appearance">appearance</string>
+    <string name="section_behaviour">behaviour</string>
     <string name="section_feedback">feedback</string>
     <string name="section_about" translatable="false">metrocore</string>
 
     <!-- service -->
     <string name="status_on">bar is on</string>
     <string name="status_off">bar is off</string>
+    <string name="hint_gesture_nav">gesture navigation — the system keeps no room at the bottom, so the bar covers the last millimetres of the app. 3-button navigation is where it lands exactly.</string>
     <string name="row_accessibility">accessibility</string>
     <string name="row_accessibility_value">open system settings</string>
     <string name="toast_hint">Find “metrocore — La Barre” in the list and turn it on.</string>
@@ -34,6 +36,16 @@
     <string name="label_icon_color">glyph colour</string>
     <string name="label_bar_height">bar height</string>
     <string name="label_icon_size">glyph size</string>
+
+    <!-- behaviour -->
+    <string name="label_bar_mode">when to show</string>
+    <string name="label_bar_mode_hint">gesture navigation keeps no room at the bottom — “only where it fits” stays out of it</string>
+    <string name="mode_fitted">only where it fits</string>
+    <string name="mode_always">always</string>
+    <string name="label_hide_fullscreen">hide in fullscreen</string>
+    <string name="label_hide_fullscreen_hint">the bar steps aside when an app takes the whole screen — video, games, reading</string>
+    <string name="label_hide_lockscreen">hide on the lock screen</string>
+    <string name="label_hide_lockscreen_hint">the bar comes back once the phone is unlocked</string>
     <string name="value_auto">auto (%1$d dp)</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">auto (%1$d %%)</string>

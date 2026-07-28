@@ -14,10 +14,12 @@
 
     <string name="section_overview">نظرة عامة</string>
     <string name="section_appearance">المظهر</string>
+    <string name="section_behaviour">السلوك</string>
     <string name="section_feedback">الاستجابة</string>
 
     <string name="status_on">الشريط مفعّل</string>
     <string name="status_off">الشريط معطّل</string>
+    <string name="hint_gesture_nav">التنقّل بالإيماءات — لا يترك النظام أي مساحة في الأسفل، لذلك يغطي الشريط آخر مليمترات التطبيق. أما مع التنقّل بثلاثة أزرار فيستقر في مكانه تمامًا.</string>
     <string name="row_accessibility">إمكانية الوصول</string>
     <string name="row_accessibility_value">فتح إعدادات النظام</string>
     <string name="toast_hint">ابحث عن «metrocore — La Barre» في القائمة وفعّله.</string>
@@ -28,6 +30,15 @@
     <string name="label_icon_color">لون الرموز</string>
     <string name="label_bar_height">ارتفاع الشريط</string>
     <string name="label_icon_size">حجم الرموز</string>
+
+    <string name="label_bar_mode">متى يظهر</string>
+    <string name="label_bar_mode_hint">التنقّل بالإيماءات لا يترك مساحة في الأسفل — خيار «فقط حيث يتّسع» يتجنّبها</string>
+    <string name="mode_fitted">فقط حيث يتّسع</string>
+    <string name="mode_always">دائمًا</string>
+    <string name="label_hide_fullscreen">إخفاء في وضع ملء الشاشة</string>
+    <string name="label_hide_fullscreen_hint">ينزوي الشريط عندما يشغل تطبيق الشاشة بأكملها — الفيديو والألعاب والقراءة</string>
+    <string name="label_hide_lockscreen">إخفاء في شاشة القفل</string>
+    <string name="label_hide_lockscreen_hint">يعود الشريط بعد فتح قفل الهاتف</string>
     <string name="value_auto">تلقائي (%1$d dp)</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">تلقائي (%1$d%%)</string>

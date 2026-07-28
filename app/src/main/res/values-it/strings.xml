@@ -7,10 +7,12 @@
 
     <string name="section_overview">panoramica</string>
     <string name="section_appearance">aspetto</string>
+    <string name="section_behaviour">comportamento</string>
     <string name="section_feedback">risposta</string>
 
     <string name="status_on">barra attiva</string>
     <string name="status_off">barra non attiva</string>
+    <string name="hint_gesture_nav">navigazione a gesti — il sistema non riserva nulla in basso, quindi la barra copre gli ultimi millimetri dell\'applicazione. Con la navigazione a 3 pulsanti cade esattamente al suo posto.</string>
     <string name="row_accessibility">accessibilita</string>
     <string name="row_accessibility_value">apri le impostazioni di sistema</string>
     <string name="toast_hint">Cerca «metrocore — La Barre» nell\'elenco e attivalo.</string>
@@ -21,6 +23,15 @@
     <string name="label_icon_color">colore delle icone</string>
     <string name="label_bar_height">altezza della barra</string>
     <string name="label_icon_size">dimensione delle icone</string>
+
+    <string name="label_bar_mode">quando mostrarla</string>
+    <string name="label_bar_mode_hint">la navigazione a gesti non lascia spazio in basso — «solo dove ci sta» se ne tiene fuori</string>
+    <string name="mode_fitted">solo dove ci sta</string>
+    <string name="mode_always">sempre</string>
+    <string name="label_hide_fullscreen">nascondi a schermo intero</string>
+    <string name="label_hide_fullscreen_hint">la barra si ritira quando un\'applicazione occupa tutto lo schermo — video, giochi, lettura</string>
+    <string name="label_hide_lockscreen">nascondi nella schermata di blocco</string>
+    <string name="label_hide_lockscreen_hint">la barra torna quando il telefono viene sbloccato</string>
     <string name="value_auto">auto (%1$d dp)</string>
     <string name="value_dp">%1$d dp</string>
     <string name="value_auto_pct">auto (%1$d %%)</string>

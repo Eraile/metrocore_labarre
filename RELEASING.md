@@ -1,125 +1,85 @@
-# Publier l'APK sur GitHub
+# Publier une version
 
-GitHub Releases est la voie la plus directe pour cette app : aucune revue, aucun risque
-de retrait, et pas la politique d'accessibilité de Play (voir [SIGNING.md](SIGNING.md)).
+La clé de signature est **locale et le reste**. Rien de secret ne part sur GitHub : on
+construit l'APK ici, on n'envoie que le binaire.
 
-Il faut d'abord une clé de signature. **Ne distribue pas l'APK de debug** : il est signé
-avec la clé de debug du SDK Android, que tout le monde possède — n'importe qui peut donc
-fabriquer une mise à jour qu'Android acceptera comme venant de toi.
+## La clé
 
----
-
-## 1. Créer la clé (une seule fois, à garder à vie)
+`labarre.jks` à la racine, avec ses mots de passe dans `keystore.properties`. Les deux
+sont ignorés par git — vérifiable à tout moment :
 
 ```bash
-keytool -genkeypair -v \
-  -keystore labarre.jks \
-  -alias labarre \
-  -keyalg RSA -keysize 2048 -validity 10000 \
-  -storetype PKCS12
+git check-ignore -v labarre.jks keystore.properties
 ```
 
-Hors de Play, **il n'y a aucune récupération possible**. Si tu perds ce fichier ou son
-mot de passe, tu ne peux plus jamais publier de mise à jour : Android refusera
-d'installer par-dessus un APK signé par une autre clé. Sauvegarde-le ailleurs que dans
-le dépôt — gestionnaire de mots de passe, disque chiffré, ce que tu veux, mais deux
-copies.
+> **Sauvegarde ces deux fichiers hors du projet, maintenant.**
+> Hors de Play il n'existe aucune récupération. Perdre la clé ou son mot de passe
+> signifie que tu ne peux plus jamais publier de mise à jour : Android refuse
+> d'installer par-dessus un APK signé par une autre clé. Les gens devraient
+> désinstaller — et perdraient leurs réglages.
+>
+> Deux copies, ailleurs : gestionnaire de mots de passe, disque chiffré, clé USB.
 
-## 2. Le déclarer localement
+Empreinte du certificat actuel, pour pouvoir vérifier plus tard qu'il s'agit bien de la
+même clé :
 
-`keystore.properties` à la racine — déjà ignoré par git, comme le `.jks` :
-
-```properties
-storeFile=labarre.jks
-storePassword=…
-keyAlias=labarre
-keyPassword=…
+```
+SHA-256  fe:b0:fe:04:ca:39:d0:df:be:90:eb:5e:c1:c6:8a:ad:eb:5c:78:4e:c6:0d:9b:52:4a:3d:8c:d9:1e:09:56:a5
+DN       CN=NoMercy Studios, O=NoMercy Studios, L=Bayonne, C=FR
 ```
 
----
-
-## Voie A — à la main (la plus simple pour la première fois)
+## Construire
 
 ```bash
-# 1. monter la version dans app/build.gradle.kts
-#    versionCode = 2 ; versionName = "1.0.1"
-
-# 2. construire
 ./gradlew assembleRelease
-# -> app/build/outputs/apk/release/app-release.apk
-
-# 3. s'authentifier une fois
-gh auth login
-
-# 4. taguer et publier
-git tag v1.0.0
-git push origin v1.0.0
-gh release create v1.0.0 \
-  app/build/outputs/apk/release/app-release.apk \
-  --title "La Barre v1.0.0" \
-  --generate-notes
 ```
 
-Sans le CLI `gh` : sur GitHub, **Releases → Draft a new release**, choisir le tag,
-glisser l'APK dans *Attach binaries*.
+Sort `app/build/outputs/apk/release/app-release.apk`.
 
-Vérifie que le fichier s'appelle bien `app-release.apk` et **pas**
-`app-release-unsigned.apk` — ce dernier veut dire que `keystore.properties` n'a pas été
-trouvé, et il ne s'installe pas.
-
----
-
-## Voie B — automatique (recommandée ensuite)
-
-[`.github/workflows/release.yml`](.github/workflows/release.yml) construit et publie
-l'APK signé à chaque tag. Il faut lui donner la clé, une fois.
-
-Encoder le keystore en base64 :
+Vérifier que c'est bien signé — le nom du fichier suffit à trancher :
+`app-release-**unsigned**.apk` veut dire que `keystore.properties` n'a pas été trouvé,
+et il ne s'installera pas.
 
 ```bash
-# Linux / macOS / Git Bash
-base64 -w0 labarre.jks > labarre.jks.b64
-
-# PowerShell
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("labarre.jks")) | Set-Content labarre.jks.b64
+# verification complete
+"$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs \
+  app/build/outputs/apk/release/app-release.apk
 ```
 
-Puis dans **Settings → Secrets and variables → Actions → New repository secret** :
+## Publier sur GitHub
 
-| Secret | Contenu |
-|---|---|
-| `KEYSTORE_BASE64` | le contenu de `labarre.jks.b64` |
-| `KEYSTORE_PASSWORD` | mot de passe du keystore |
-| `KEY_ALIAS` | `labarre` |
-| `KEY_PASSWORD` | mot de passe de la clé |
+Le dossier `dist/` (ignoré par git) contient l'APK renommé, prêt à envoyer.
 
-Supprime `labarre.jks.b64` ensuite : c'est ta clé en clair.
+**Par le web**, sans rien installer :
+GitHub → **Releases** → *Draft a new release* → *Choose a tag* → `v1.0.0` (*Create new
+tag on publish*) → glisser `dist/la-barre-v1.0.apk` dans *Attach binaries* → *Publish*.
 
-Ensuite, publier tient en deux commandes :
+**Par le CLI**, si tu installes `gh` un jour :
 
 ```bash
-git tag v1.0.1
-git push origin v1.0.1
+gh auth login                       # une fois
+git tag v1.0.0 && git push origin v1.0.0
+gh release create v1.0.0 dist/la-barre-v1.0.apk \
+  --title "La Barre v1.0.0" --generate-notes
 ```
 
-Le workflow échoue explicitement si un secret manque, plutôt que de publier un APK non
-signé sans que ça se voie.
+## À chaque nouvelle version
 
----
+1. **Monter `versionCode`** dans [app/build.gradle.kts](app/build.gradle.kts), et
+   `versionName` si tu veux. Android refuse d'installer par-dessus un `versionCode` égal
+   ou inférieur — c'est l'explication de la plupart des « la mise à jour ne s'installe
+   pas ».
+2. `./gradlew assembleRelease`
+3. Copier dans `dist/` sous un nom versionné, publier la Release.
 
-## À chaque version
+Toujours **la même clé**, sinon la mise à jour ne s'installera pas par-dessus.
 
-- **Monter `versionCode`** dans [app/build.gradle.kts](app/build.gradle.kts). Android
-  refuse d'installer par-dessus un `versionCode` égal ou inférieur — c'est l'erreur la
-  plus courante quand une mise à jour « ne s'installe pas ».
-- Toujours **la même clé**. Changer de clé oblige les gens à désinstaller d'abord, ce
-  qui efface leurs réglages.
+## Et l'automatisation ?
 
-## Ce que voient les gens qui installent
+Un workflow GitHub Actions pourrait construire et publier tout seul, mais il faudrait
+déposer la clé (encodée) dans les secrets du dépôt. C'est refusé ici volontairement : la
+clé ne quitte pas la machine. La contrepartie est ces trois commandes à chaque version.
 
-Android bloque par défaut l'installation hors Play. Au premier APK, le téléphone
-proposera d'autoriser la source (le navigateur, ou le gestionnaire de fichiers) —
-c'est normal et ça ne se demande qu'une fois par source.
-
-Ça vaut la peine de le dire dans les notes de version, avec le rappel que la barre
-demande ensuite d'activer son service d'accessibilité.
+Si tu changes d'avis un jour, le principe est : `base64` du `.jks` + les mots de passe
+dans *Settings → Secrets and variables → Actions*, et un job qui reconstruit
+`keystore.properties` avant `assembleRelease`.

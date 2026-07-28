@@ -13,3 +13,6 @@ captures/
 keystore.properties
 *.jks
 *.keystore
+
+# APK construits localement
+dist/

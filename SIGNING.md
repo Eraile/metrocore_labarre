@@ -53,6 +53,9 @@ L'AAB sort dans `app/build/outputs/bundle/release/`.
 Pense à monter `versionCode` dans [app/build.gradle.kts](app/build.gradle.kts) à chaque
 envoi : Play refuse deux fois le même.
 
+> La clé de ce projet est déjà créée : `labarre.jks` à la racine, mots de passe dans
+> `keystore.properties`. Voir [RELEASING.md](RELEASING.md) pour construire et publier.
+
 ## 4. Play App Signing
 
 À la première publication, Play propose de gérer la clé de signature à ta place. La clé

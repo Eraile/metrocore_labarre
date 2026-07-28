@@ -307,24 +307,32 @@ entre les deux seules réponses possibles :
   prend tout l'écran. C'est ce qui règle les jeux et les lecteurs vidéo, quel que soit le
   mode de navigation. Actif par défaut.
 
-La détection du plein écran ne lit **aucun contenu d'écran** : `getWindows()` ne rend que
-des types et des rectangles, et `canRetrieveWindowContent` reste à `false`. Le critère est
-**l'absence de la barre d'état**, cherchée nommément : la seule fenêtre `TYPE_SYSTEM`
-collée au bord haut et basse — le plafond de hauteur écarte le volet de notifications
-déployé, qui part aussi du haut.
+Le critère est **l'absence de la barre de navigation système** : une fenêtre `TYPE_SYSTEM`
+collée au bord bas et mince. C'est sa place qu'occupe La Barre, donc c'est sur elle qu'il
+faut se caler — et pas sur la barre d'état, mesure à l'appui : l'appareil photo masque la
+barre d'état mais garde la barre de navigation, et se fier à la première faisait
+disparaître La Barre alors qu'il restait la place.
 
-Deux critères plus simples ont été essayés et ne marchent pas :
+Trois approches plus simples ont été essayées et **mesurées fausses** :
 
 - *comparer les bornes de la fenêtre active à celles de l'écran* — depuis le bord à bord
-  imposé, une application couvre tout l'écran même barres système affichées.
-- *l'absence de toute fenêtre `TYPE_SYSTEM`* — ce type couvre bien plus que les barres
-  (poignée de geste, fenêtres système flottantes) et il en reste presque toujours une, si
-  bien que la condition n'était jamais vraie et que rien ne se masquait.
+  imposé, une application couvre tout l'écran même barres affichées. Sur l'écran d'accueil
+  déjà : `type=1 Rect(0, 0 - 1080, 2400)` sur un écran de 2400.
+- *l'absence de toute fenêtre `TYPE_SYSTEM`* — ce type couvre plus que les barres, il en
+  reste presque toujours une, si bien que la condition n'était jamais vraie.
+- *`rootWindowInsets`*, qui aurait été l'API juste — elle rend `null` sur un overlay
+  d'accessibilité, le système ne lui dispatche pas d'insets.
 
-Tant que La Barre n'a jamais reconnu de barre d'état sur l'appareil, elle ne masque rien :
-sans ce garde-fou, un fabricant qui exposerait ses barres autrement la ferait disparaître
-en permanence, ce qui est bien pire que de ne jamais se masquer. L'écran de réglages
-suffit à l'amorcer.
+Tant que La Barre n'a jamais reconnu de barre de navigation sur l'appareil, elle ne masque
+rien : sans ce garde-fou, un fabricant qui exposerait ses barres autrement la ferait
+disparaître en permanence, ce qui est bien pire que de ne jamais se masquer.
+
+**Le prix à payer** : `getWindows()` n'est alimenté que si le service déclare
+`canRetrieveWindowContent="true"` — Android conditionne `flagRetrieveInteractiveWindows`
+à cette capacité. Avec `false`, la liste est vide et aucune détection n'est possible. La
+Barre ne lit toujours aucun contenu — jamais de `getRootInActiveWindow()`, jamais un nœud
+— mais elle déclare désormais la capacité de le faire. Voir [SIGNING.md](SIGNING.md) :
+c'est la capacité déclarée qui compte dans le formulaire Play.
 
 Pour voir ce qu'un appareil expose réellement, passer `DEBUG` à `true` dans
 [NavBarService.kt](app/src/main/java/dev/metrocore/navbar/NavBarService.kt) et lire

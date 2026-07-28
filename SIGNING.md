@@ -82,8 +82,13 @@ Concrètement, à la publication :
 - Les apps de personnalisation d'interface qui passent par cette API sont **régulièrement
   refusées ou retirées**. Ça arrive à des lanceurs et des barres de navigation
   alternatives depuis des années.
-- Le service ne lit aucun contenu d'écran ici (`canRetrieveWindowContent="false"`,
-  `accessibilityFlags` minimal), et ça se plaide — mais ça ne garantit rien.
+- Le service **ne lit aucun contenu d'écran** : il n'appelle jamais
+  `getRootInActiveWindow()` ni ne lit le moindre nœud. Il déclare en revanche
+  `canRetrieveWindowContent="true"`, parce qu'Android le **conditionne** à
+  `flagRetrieveInteractiveWindows` : sans lui, `getWindows()` rend une liste vide, et
+  c'est elle qui sert à savoir si une barre système est encore à l'écran. On ne se sert
+  que des types et des rectangles. C'est plaidable, mais c'est la capacité déclarée qui
+  apparaît dans le formulaire — et elle ne garantit rien.
 
 **Les voies qui marchent en pratique**, par ordre de friction :
 

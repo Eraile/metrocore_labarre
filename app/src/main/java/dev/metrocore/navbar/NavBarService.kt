@@ -45,7 +45,7 @@ class NavBarService : AccessibilityService(),
     private var config = NavBarConfig.DEFAULT
 
     /** Voir [isFullscreen] : on ne masque pas tant qu'on ne sait pas lire l'appareil. */
-    private var sawStatusBar = false
+    private var sawNavBar = false
 
     /**
      * Le verrouillage ne produit pas toujours d'evenement d'accessibilite exploitable —
@@ -184,21 +184,26 @@ class NavBarService : AccessibilityService(),
     }
 
     /**
-     * Plein ecran = la barre d'etat n'est plus a l'ecran.
+     * Plein ecran = la barre de navigation systeme n'est plus a l'ecran.
      *
-     * Comparer les limites de la fenetre active a celles de l'ecran ne discrimine rien :
-     * depuis Android 15 les applications dessinent bord a bord par defaut, et leur
-     * fenetre couvre tout l'ecran meme barres systeme affichees.
+     * C'est **la barre de navigation** qui sert de repere, et pas la barre d'etat : La
+     * Barre occupe sa place, elle doit donc s'effacer exactement quand celle-ci
+     * s'efface. Mesure a l'appui — l'appareil photo masque la barre d'etat mais garde
+     * la barre de navigation, et se fier a la premiere faisait disparaitre La Barre
+     * alors qu'il restait la place.
      *
-     * « Aucune fenetre TYPE_SYSTEM » ne marchait pas non plus : ce type couvre bien plus
-     * que les barres — poignee de geste, fenetres systeme flottantes — et il en reste
-     * presque toujours une, donc la condition n'etait jamais vraie. On cherche donc la
-     * barre d'etat *nommement* : la seule fenetre systeme collee au bord haut et basse.
-     * Le plafond de hauteur ecarte le volet de notifications deploye, qui part aussi du
-     * haut mais couvre l'ecran.
+     * Deux criteres plus simples ont ete essayes et mesures faux :
      *
-     * `getWindows()` ne donne que des types et des rectangles, pas du contenu ; il ne
-     * demande que `flagRetrieveInteractiveWindows`, deja declare.
+     * - *comparer les limites de la fenetre active a l'ecran* — depuis le bord a bord
+     *   impose, une application couvre tout l'ecran barres affichees. Sur l'ecran
+     *   d'accueil deja : `type=1 Rect(0, 0 - 1080, 2400)` sur un ecran de 2400.
+     * - *l'absence de toute fenetre TYPE_SYSTEM* — il en reste presque toujours une.
+     *
+     * `rootWindowInsets`, qui aurait ete l'API juste, rend `null` sur un overlay
+     * d'accessibilite : le systeme ne lui dispatche pas d'insets.
+     *
+     * `getWindows()` ne donne que des types et des rectangles, jamais du contenu — mais
+     * il exige la capacite de lecture, voir [navbar_service_config.xml].
      */
     private fun isFullscreen(): Boolean {
         val open = runCatching { windows }.getOrNull() ?: return false
@@ -207,32 +212,37 @@ class NavBarService : AccessibilityService(),
         val screenHeight = resources.displayMetrics.heightPixels
         val rect = Rect()
 
-        val statusBarShown = open.any { window ->
+        val navBarShown = open.any { window ->
             if (window.type != AccessibilityWindowInfo.TYPE_SYSTEM) return@any false
             window.getBoundsInScreen(rect)
-            !rect.isEmpty && rect.top <= 0 && rect.height() <= screenHeight / 4
+            // Collee au bord bas et mince. Le plafond de hauteur ecarte les fenetres
+            // systeme qui touchent le bas en couvrant l'ecran — volet de notifications
+            // deploye, menu marche/arret.
+            !rect.isEmpty &&
+                rect.bottom >= screenHeight - EDGE_SLACK &&
+                rect.height() <= screenHeight / 4
         }
 
-        if (DEBUG) logWindows(open, statusBarShown)
+        if (DEBUG) logWindows(open, navBarShown)
 
-        // Tant qu'on n'a jamais reconnu de barre d'etat ici, on ne sait pas lire cet
-        // appareil — et on ne masque rien. Sans ce garde-fou, un fabricant qui exposerait
-        // ses barres autrement verrait La Barre disparaitre en permanence, ce qui est
-        // bien pire que de ne jamais se masquer. L'ecran de reglages suffit a l'amorcer.
-        if (statusBarShown) {
-            sawStatusBar = true
+        // Tant qu'on n'a jamais reconnu de barre de navigation ici, on ne sait pas lire
+        // cet appareil — et on ne masque rien. Sans ce garde-fou, un fabricant qui
+        // exposerait ses barres autrement verrait La Barre disparaitre en permanence, ce
+        // qui est bien pire que de ne jamais se masquer.
+        if (navBarShown) {
+            sawNavBar = true
             return false
         }
-        return sawStatusBar
+        return sawNavBar
     }
 
-    private fun logWindows(open: List<AccessibilityWindowInfo>, statusBarShown: Boolean) {
+    private fun logWindows(open: List<AccessibilityWindowInfo>, navBarShown: Boolean) {
         val rect = Rect()
         val inventory = open.joinToString(" | ") { window ->
             window.getBoundsInScreen(rect)
             "type=${window.type} $rect"
         }
-        Log.d(TAG, "statusBar=$sawStatusBar/$statusBarShown fenetres: $inventory")
+        Log.d(TAG, "navBar=$sawNavBar/$navBarShown fenetres: $inventory")
     }
 
     companion object {
@@ -246,6 +256,9 @@ class NavBarService : AccessibilityService(),
          */
         private const val DEBUG = false
         private const val TAG = "LaBarre"
+
+        /** Tolerance en px pour « collee au bord bas » : les bornes ne sont pas exactes. */
+        private const val EDGE_SLACK = 8
 
         /** Non nul tant que le service est actif. */
         @Volatile

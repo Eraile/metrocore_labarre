@@ -10,8 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://metrocore.dev">metrocore.dev</a> ·
-  <a href="https://navbar.metrocore.dev">navbar.metrocore.dev</a>
+  <a href="https://metrocore.dev">metrocore.dev</a>
 </p>
 
 <p align="center">
@@ -62,6 +61,15 @@ lisibles que par le lanceur par défaut (`LauncherApps` exige ce rôle). « acti
 rapide » passe donc par `ACTION_CREATE_SHORTCUT` : l'application ouvre son propre
 sélecteur et rend un intent, qu'on rejoue ensuite. Toutes les applications ne le
 proposent pas.
+
+## Installation
+
+Les APK signés sont publiés dans
+[Releases](https://github.com/Eraile/metrov_navbar/releases). Android demandera
+d'autoriser l'installation depuis la source utilisée (navigateur ou gestionnaire de
+fichiers) — c'est normal, et ça ne se demande qu'une fois.
+
+Pour publier une version : [RELEASING.md](RELEASING.md).
 
 ## Setup (une seule fois, sur le téléphone)
 
@@ -247,7 +255,7 @@ Les réglages passent par les `SharedPreferences` et le service les écoute : l'
 - Pas de masquage automatique en plein écran, ni de swipe-up pour la rappeler.
 - L'arabe est traduit mais la mise en page n'est pas en miroir (voir *Langues*).
 - La compilation `release` est encore signée avec la clé de debug — à remplacer par une
-  vraie clé avant toute distribution. Voir [SIGNING.md](SIGNING.md).
+  vraie clé avant toute distribution. Voir [SIGNING.md](SIGNING.md) et [RELEASING.md](RELEASING.md).
 
 ## Licence et crédits
 

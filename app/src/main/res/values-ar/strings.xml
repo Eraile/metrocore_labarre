@@ -23,6 +23,7 @@
     <string name="toast_hint">ابحث عن «metrocore — La Barre» في القائمة وفعّله.</string>
     <string name="toast_no_settings">تعذّر فتح إعدادات إمكانية الوصول.</string>
 
+    <string name="label_dynamic_color_hint">يأخذ الشريط لونه من خلفية الشاشة</string>
     <string name="label_bar_color">لون الخلفية</string>
     <string name="label_icon_color">لون الرموز</string>
     <string name="label_bar_height">ارتفاع الشريط</string>

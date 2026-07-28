@@ -16,6 +16,7 @@
     <string name="toast_hint">Найдите «metrocore — La Barre» в списке и включите.</string>
     <string name="toast_no_settings">Не удалось открыть настройки специальных возможностей.</string>
 
+    <string name="label_dynamic_color_hint">панель берёт цвет из обоев</string>
     <string name="label_bar_color">цвет фона</string>
     <string name="label_icon_color">цвет значков</string>
     <string name="label_bar_height">высота панели</string>

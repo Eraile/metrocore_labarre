@@ -28,6 +28,8 @@
     <string name="toast_no_settings">Could not open the accessibility settings.</string>
 
     <!-- appearance -->
+    <string name="label_dynamic_color" translatable="false">Material You</string>
+    <string name="label_dynamic_color_hint">the bar takes its colour from your wallpaper</string>
     <string name="label_bar_color">background colour</string>
     <string name="label_icon_color">glyph colour</string>
     <string name="label_bar_height">bar height</string>

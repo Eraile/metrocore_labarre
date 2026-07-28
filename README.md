@@ -32,9 +32,9 @@ Trois boutons, en overlay tout en bas de l'écran. Réglages par défaut :
 | Droite | 🔍 loupe | Recherche système | — |
 
 Tout est modifiable depuis l'écran de réglages : couleur du fond et des glyphes
-(les 20 accents WP8.1), hauteur de la barre, taille des glyphes, vibration, et pour
-chacun des trois boutons une glyphe parmi 45, sa taille propre, et une action par appui
-court et par appui long.
+(les 20 accents WP8.1, ou **Material You** pour suivre le fond d'écran), hauteur de la
+barre, taille des glyphes, vibration, et pour chacun des trois boutons une glyphe parmi
+45, sa taille propre, et une action par appui court et par appui long.
 
 <p align="center">
   <img src="README/overview.png" width="245" alt="vue d'ensemble">
@@ -151,7 +151,7 @@ L'app suit la langue du téléphone. L'anglais est la langue par défaut
 | `es` espagnol | `pl` polonais | `zh` chinois simplifié | `ar` arabe |
 | `pt` portugais | `it` italien | `ja` japonais | `eu` euskara |
 
-63 chaînes traduisibles par langue, toutes présentes dans les douze fichiers. Les 6
+64 chaînes traduisibles par langue, toutes présentes dans les douze fichiers. Les 7
 restantes sont les noms de produit — « metrocore — La Barre », « La Barre »,
 « metrocore », « metrocore.dev » — marqués `translatable="false"` : elles n'existent que
 dans le fichier par défaut et ne bougent dans aucune langue.

@@ -79,6 +79,13 @@ data class NavBarConfig(
     val haptic: Haptic,
     val pressFeedback: Boolean,
     val slots: Map<Slot, SlotConfig>,
+    /**
+     * Material You : le fond de la barre suit l'accent que le systeme tire du fond
+     * d'ecran, et se remet a jour tout seul quand celui-ci change. Prend le pas sur
+     * [barColorKey]. Faux par defaut — les vingt accents WP restent le reglage
+     * d'origine, sinon l'app ne ressemble plus a ce qu'elle reconstruit.
+     */
+    val dynamicColor: Boolean = false,
 ) {
     /** Hauteur reelle, en dp, pour un ecran de [screenWidthDp] de large. */
     fun resolvedHeightDp(screenWidthDp: Int): Int =
@@ -102,18 +109,26 @@ data class NavBarConfig(
         return (bar * pct / 100f * scalePct / 100f).roundToInt().coerceAtLeast(8)
     }
 
-    val barColor: Int get() = resolveBarColor(barColorKey)
+    /**
+     * Le fond de la barre. Demande un contexte car Material You lit une couleur du
+     * systeme, qui change avec le fond d'ecran.
+     */
+    fun barColor(context: Context): Int {
+        if (dynamicColor) {
+            MetroTokens.dynamicAccent(context)?.let { return it }
+        }
+        return resolveBarColor(barColorKey)
+    }
 
     /** En automatique, la glyphe prend le contraste du fond, a l'opacite WP (75 %). */
-    val iconColor: Int
-        get() = when (iconColorKey) {
-            "auto" ->
-                if (prefersDarkForeground(barColor)) Color.parseColor("#BF000000")
-                else MetroTokens.NAVKEYS_FG
-            "white" -> Color.WHITE
-            "black" -> Color.BLACK
-            else -> MetroTokens.accent(iconColorKey)
-        }
+    fun iconColor(context: Context): Int = when (iconColorKey) {
+        "auto" ->
+            if (prefersDarkForeground(barColor(context))) Color.parseColor("#BF000000")
+            else MetroTokens.NAVKEYS_FG
+        "white" -> Color.WHITE
+        "black" -> Color.BLACK
+        else -> MetroTokens.accent(iconColorKey)
+    }
 
     companion object {
         /** 20 sur 60, le ratio WP. */
@@ -188,6 +203,7 @@ class ConfigStore(context: Context) {
             iconSizePct = prefs.getInt("icon_pct", d.iconSizePct),
             haptic = Haptic.from(prefs.getString("haptic", d.haptic.key)),
             pressFeedback = prefs.getBoolean("press_feedback", d.pressFeedback),
+            dynamicColor = prefs.getBoolean("dynamic_color", d.dynamicColor),
             slots = Slot.entries.associateWith { slot ->
                 val fallback = d.slots.getValue(slot)
                 SlotConfig(
@@ -213,6 +229,7 @@ class ConfigStore(context: Context) {
             putInt("icon_pct", config.iconSizePct)
             putString("haptic", config.haptic.key)
             putBoolean("press_feedback", config.pressFeedback)
+            putBoolean("dynamic_color", config.dynamicColor)
             config.slots.forEach { (slot, sc) ->
                 putString("${slot.key}_icon", sc.iconKey)
                 putString("${slot.key}_tap", sc.tap.key)

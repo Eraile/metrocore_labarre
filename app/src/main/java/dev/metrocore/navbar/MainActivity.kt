@@ -208,7 +208,22 @@ class MainActivity : AppCompatActivity() {
 
         val gridWidth = pano.sectionContentWidthPx()
 
-        body.addView(ui.sub(getString(R.string.label_bar_color)))
+        // Material You n'existe qu'a partir d'Android 12 : ailleurs, on ne propose pas
+        // un reglage qui ne ferait rien.
+        if (MetroTokens.dynamicAvailable) {
+            body.addView(
+                ui.Toggle(
+                    getString(R.string.label_dynamic_color),
+                    config.dynamicColor,
+                ) { on -> update { it.copy(dynamicColor = on) } },
+            )
+            body.addView(ui.sub(getString(R.string.label_dynamic_color_hint)))
+        }
+
+        body.addView(
+            ui.sub(getString(R.string.label_bar_color)),
+            marginTop(ui.px(if (MetroTokens.dynamicAvailable) 18f else 0f)),
+        )
         body.addView(
             ui.swatchGrid(NavBarConfig.BAR_COLORS, config.barColorKey, gridWidth) { key ->
                 update { it.copy(barColorKey = key) }

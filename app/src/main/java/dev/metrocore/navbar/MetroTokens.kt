@@ -154,6 +154,26 @@ object MetroTokens {
             ?: ACCENTS.first { it.first == DEFAULT_ACCENT }.second
 
     /**
+     * L'accent Material You, tire du fond d'ecran par le systeme (Android 12+).
+     *
+     * On prend la nuance 600 : assez soutenue pour porter des glyphes blanches, la ou
+     * la 500 vire au criard sur une bande de 51 dp. Rend null en-dessous d'Android 12 —
+     * l'option n'est alors simplement pas proposee.
+     */
+    fun dynamicAccent(context: android.content.Context): Int? {
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.S) return null
+        return runCatching {
+            androidx.core.content.ContextCompat.getColor(
+                context,
+                android.R.color.system_accent1_600,
+            )
+        }.getOrNull()
+    }
+
+    val dynamicAvailable: Boolean
+        get() = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S
+
+    /**
      * Hauteur de barre pour un ecran donne.
      *
      * WP posait 60 px de bande sur 480 px de large, soit un huitieme de la largeur.

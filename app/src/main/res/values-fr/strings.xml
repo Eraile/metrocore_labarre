@@ -16,6 +16,7 @@
     <string name="toast_hint">Cherche « metrocore — La Barre » dans la liste et active-le.</string>
     <string name="toast_no_settings">Impossible d\'ouvrir les reglages d\'accessibilite.</string>
 
+    <string name="label_dynamic_color_hint">la barre prend la couleur de ton fond d\'ecran</string>
     <string name="label_bar_color">couleur du fond</string>
     <string name="label_icon_color">couleur des glyphes</string>
     <string name="label_bar_height">hauteur de la barre</string>

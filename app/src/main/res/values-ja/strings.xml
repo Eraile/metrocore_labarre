@@ -16,6 +16,7 @@
     <string name="toast_hint">一覧から「metrocore — La Barre」を探して有効にしてください。</string>
     <string name="toast_no_settings">ユーザー補助の設定を開けませんでした。</string>
 
+    <string name="label_dynamic_color_hint">バーが壁紙の色を使います</string>
     <string name="label_bar_color">背景の色</string>
     <string name="label_icon_color">アイコンの色</string>
     <string name="label_bar_height">バーの高さ</string>

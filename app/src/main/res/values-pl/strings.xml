@@ -16,6 +16,7 @@
     <string name="toast_hint">Znajdz „metrocore — La Barre” na liscie i wlacz go.</string>
     <string name="toast_no_settings">Nie udalo sie otworzyc ustawien ulatwien dostepu.</string>
 
+    <string name="label_dynamic_color_hint">pasek przyjmuje kolor tapety</string>
     <string name="label_bar_color">kolor tla</string>
     <string name="label_icon_color">kolor ikon</string>
     <string name="label_bar_height">wysokosc paska</string>

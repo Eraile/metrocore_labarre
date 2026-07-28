@@ -20,6 +20,7 @@
     <string name="toast_hint">Suche „metrocore — La Barre“ in der Liste und aktiviere es.</string>
     <string name="toast_no_settings">Die Bedienungshilfen konnten nicht geoeffnet werden.</string>
 
+    <string name="label_dynamic_color_hint">die leiste nimmt die farbe deines hintergrunds</string>
     <string name="label_bar_color">hintergrundfarbe</string>
     <string name="label_icon_color">symbolfarbe</string>
     <string name="label_bar_height">hoehe der leiste</string>

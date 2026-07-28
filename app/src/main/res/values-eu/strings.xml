@@ -21,6 +21,7 @@
     <string name="toast_hint">Bilatu «metrocore — La Barre» zerrendan eta gaitu ezazu.</string>
     <string name="toast_no_settings">Ezin izan dira irisgarritasun-ezarpenak ireki.</string>
 
+    <string name="label_dynamic_color_hint">barrak horma-paperaren kolorea hartzen du</string>
     <string name="label_bar_color">atzeko planoaren kolorea</string>
     <string name="label_icon_color">ikurren kolorea</string>
     <string name="label_bar_height">barraren altuera</string>

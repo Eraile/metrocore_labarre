@@ -16,6 +16,7 @@
     <string name="toast_hint">在列表中找到「metrocore — La Barre」并开启。</string>
     <string name="toast_no_settings">无法打开无障碍设置。</string>
 
+    <string name="label_dynamic_color_hint">导航栏取用壁纸的颜色</string>
     <string name="label_bar_color">背景颜色</string>
     <string name="label_icon_color">图标颜色</string>
     <string name="label_bar_height">导航栏高度</string>

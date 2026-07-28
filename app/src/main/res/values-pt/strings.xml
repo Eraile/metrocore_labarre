@@ -16,6 +16,7 @@
     <string name="toast_hint">Procura «metrocore — La Barre» na lista e ativa-o.</string>
     <string name="toast_no_settings">Nao foi possivel abrir as definicoes de acessibilidade.</string>
 
+    <string name="label_dynamic_color_hint">a barra usa a cor do teu fundo de ecra</string>
     <string name="label_bar_color">cor do fundo</string>
     <string name="label_icon_color">cor dos icones</string>
     <string name="label_bar_height">altura da barra</string>

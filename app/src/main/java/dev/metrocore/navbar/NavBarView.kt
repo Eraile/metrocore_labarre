@@ -29,11 +29,11 @@ object NavBarView {
         onAction: (NavAction, String?) -> Unit,
     ): LinearLayout {
         val widthDp = context.resources.configuration.screenWidthDp
-        val tint = ColorStateList.valueOf(config.iconColor)
+        val tint = ColorStateList.valueOf(config.iconColor(context))
 
         val bar = LinearLayout(context).apply {
             orientation = LinearLayout.HORIZONTAL
-            setBackgroundColor(config.barColor)
+            setBackgroundColor(config.barColor(context))
             isBaselineAligned = false
         }
 

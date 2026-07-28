@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Les couleurs de l'interface vivent dans MetroTokens (palettes claire et sombre,
+     accents WP) : elles sont choisies au runtime et n'ont pas de place ici. Ce fichier
+     ne garde que ce dont le manifeste et le theme ont besoin avant tout code. -->
+<resources>
+    <!-- Haut du degrade du panorama. Sert de fond de fenetre et de barre d'etat, pour
+         qu'il n'y ait aucune couture au lancement. -->
+    <color name="panorama_top">#FFFAF6EC</color>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Italiano. Le etichette sono in minuscolo: e una regola di stile Metro. -->
+<resources>
+    <string name="service_description">Mostra la barra di navigazione di Windows Phone ed esegue l\'azione impostata per ogni pulsante.</string>
+
+    <string name="preview_hint">anteprima — i pulsanti rispondono senza eseguire l\'azione</string>
+
+    <string name="section_overview">panoramica</string>
+    <string name="section_appearance">aspetto</string>
+    <string name="section_feedback">risposta</string>
+
+    <string name="status_on">barra attiva</string>
+    <string name="status_off">barra non attiva</string>
+    <string name="row_accessibility">accessibilita</string>
+    <string name="row_accessibility_value">apri le impostazioni di sistema</string>
+    <string name="toast_hint">Cerca «metrocore — La Barre» nell\'elenco e attivalo.</string>
+    <string name="toast_no_settings">Impossibile aprire le impostazioni di accessibilita.</string>
+
+    <string name="label_bar_color">colore dello sfondo</string>
+    <string name="label_icon_color">colore delle icone</string>
+    <string name="label_bar_height">altezza della barra</string>
+    <string name="label_icon_size">dimensione delle icone</string>
+    <string name="value_auto">auto (%1$d dp)</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">auto (%1$d %%)</string>
+    <string name="value_pct">%1$d %%</string>
+
+    <string name="label_haptic">vibrazione</string>
+    <string name="label_press_feedback">animazione alla pressione</string>
+    <string name="state_on">attiva</string>
+    <string name="state_off">disattivata</string>
+    <string name="haptic_off">nessuna</string>
+    <string name="haptic_light">leggera</string>
+    <string name="haptic_medium">media</string>
+    <string name="haptic_strong">forte</string>
+
+    <string name="slot_left">pulsante sinistro</string>
+    <string name="slot_center">pulsante centrale</string>
+    <string name="slot_right">pulsante destro</string>
+    <string name="label_icon">icona</string>
+    <string name="label_icon_scale">dimensione di questa icona</string>
+    <string name="label_tap">pressione breve</string>
+    <string name="label_hold">pressione lunga</string>
+
+    <string name="act_none">nessuna azione</string>
+    <string name="act_back">indietro</string>
+    <string name="act_home">schermata iniziale</string>
+    <string name="act_recents">app recenti</string>
+    <string name="act_notifications">notifiche</string>
+    <string name="act_quick_settings">impostazioni rapide</string>
+    <string name="act_power_dialog">menu di spegnimento</string>
+    <string name="act_split_screen">schermo diviso</string>
+    <string name="act_lock_screen">blocca</string>
+    <string name="act_screenshot">screenshot</string>
+    <string name="act_global_search">ricerca di sistema</string>
+    <string name="act_assistant">assistente</string>
+    <string name="act_voice_search">ricerca vocale</string>
+    <string name="act_web_search">ricerca sul web</string>
+    <string name="act_launch_app">apri un\'app</string>
+    <string name="act_shortcut">azione rapida</string>
+    <string name="toast_no_handler">Nessuna app risponde a questa azione.</string>
+    <string name="toast_no_shortcut">Questa app non ha restituito nessuna scorciatoia.</string>
+
+    <string name="picker_app">quale app</string>
+    <string name="picker_shortcut">quale app</string>
+    <string name="picker_empty">Nessuna app lo propone.</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">ripristina</string>
+    <string name="row_reset_value">torna alle impostazioni originali</string>
+    <string name="toast_reset">Impostazioni ripristinate.</string>
+
+    <string name="about_blurb">La Barre fa parte del progetto metrocore. Riproduce la barra di navigazione di Windows Phone: misure, colori, curve e durate vengono tutte da metrocore, e nessuna e stata regolata a occhio.</string>
+    <string name="about_project">il progetto</string>
+    <string name="about_made_in">Fatto nei Paesi Baschi</string>
+    <string name="about_flag_desc">Ikurriña, la bandiera dei Paesi Baschi</string>
+</resources>

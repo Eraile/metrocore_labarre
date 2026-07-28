@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 日本語。 -->
+<resources>
+    <string name="service_description">Windows Phone のナビゲーションバーを表示し、各ボタンに設定した動作を実行します。</string>
+
+    <string name="preview_hint">プレビュー — ボタンは反応しますが、動作は実行されません</string>
+
+    <string name="section_overview">概要</string>
+    <string name="section_appearance">外観</string>
+    <string name="section_feedback">フィードバック</string>
+
+    <string name="status_on">バーは有効</string>
+    <string name="status_off">バーは無効</string>
+    <string name="row_accessibility">ユーザー補助</string>
+    <string name="row_accessibility_value">システム設定を開く</string>
+    <string name="toast_hint">一覧から「metrocore — La Barre」を探して有効にしてください。</string>
+    <string name="toast_no_settings">ユーザー補助の設定を開けませんでした。</string>
+
+    <string name="label_bar_color">背景の色</string>
+    <string name="label_icon_color">アイコンの色</string>
+    <string name="label_bar_height">バーの高さ</string>
+    <string name="label_icon_size">アイコンの大きさ</string>
+    <string name="value_auto">自動（%1$d dp）</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">自動（%1$d%%）</string>
+    <string name="value_pct">%1$d%%</string>
+
+    <string name="label_haptic">バイブレーション</string>
+    <string name="label_press_feedback">押したときのアニメーション</string>
+    <string name="state_on">オン</string>
+    <string name="state_off">オフ</string>
+    <string name="haptic_off">なし</string>
+    <string name="haptic_light">弱</string>
+    <string name="haptic_medium">中</string>
+    <string name="haptic_strong">強</string>
+
+    <string name="slot_left">左ボタン</string>
+    <string name="slot_center">中央ボタン</string>
+    <string name="slot_right">右ボタン</string>
+    <string name="label_icon">アイコン</string>
+    <string name="label_icon_scale">このアイコンの大きさ</string>
+    <string name="label_tap">短押し</string>
+    <string name="label_hold">長押し</string>
+
+    <string name="act_none">動作なし</string>
+    <string name="act_back">戻る</string>
+    <string name="act_home">ホーム</string>
+    <string name="act_recents">最近のアプリ</string>
+    <string name="act_notifications">通知</string>
+    <string name="act_quick_settings">クイック設定</string>
+    <string name="act_power_dialog">電源メニュー</string>
+    <string name="act_split_screen">分割画面</string>
+    <string name="act_lock_screen">画面をロック</string>
+    <string name="act_screenshot">スクリーンショット</string>
+    <string name="act_global_search">システム検索</string>
+    <string name="act_assistant">アシスタント</string>
+    <string name="act_voice_search">音声検索</string>
+    <string name="act_web_search">ウェブ検索</string>
+    <string name="act_launch_app">アプリを開く</string>
+    <string name="act_shortcut">クイック操作</string>
+    <string name="toast_no_handler">この動作に対応するアプリがありません。</string>
+    <string name="toast_no_shortcut">このアプリはショートカットを返しませんでした。</string>
+
+    <string name="picker_app">アプリを選択</string>
+    <string name="picker_shortcut">アプリを選択</string>
+    <string name="picker_empty">対応するアプリがありません。</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">リセット</string>
+    <string name="row_reset_value">初期設定に戻す</string>
+    <string name="toast_reset">設定をリセットしました。</string>
+
+    <string name="about_blurb">La Barre は metrocore プロジェクトの一部です。Windows Phone のナビゲーションバーを再現しており、寸法・色・カーブ・時間はすべて metrocore から取られ、目分量で決めたものは一つもありません。</string>
+    <string name="about_project">プロジェクト</string>
+    <string name="about_made_in">バスク地方製</string>
+    <string name="about_flag_desc">イクリニャ、バスク地方の旗</string>
+</resources>

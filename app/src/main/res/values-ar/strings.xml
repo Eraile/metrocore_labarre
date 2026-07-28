@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- العربية.
+
+     ملاحظة: النص العربي يُعرض من اليمين إلى اليسار كما يجب، لكن تخطيط الصفحة يبقى من
+     اليسار إلى اليمين: شريط البانوراما ينزلق أفقيًا بحكم بنائه، وعكس الهوامش دون عكسه
+     يبدو أسوأ من تخطيط متسق.
+
+     (Le texte arabe s'affiche bien en RTL, mais la mise en page reste LTR :
+     supportsRtl est a false, voir le README.) -->
+<resources>
+    <string name="service_description">يعرض شريط تنقّل ويندوز فون وينفّذ الإجراء المحدّد لكل زر.</string>
+
+    <string name="preview_hint">معاينة — الأزرار تستجيب دون تنفيذ الإجراء</string>
+
+    <string name="section_overview">نظرة عامة</string>
+    <string name="section_appearance">المظهر</string>
+    <string name="section_feedback">الاستجابة</string>
+
+    <string name="status_on">الشريط مفعّل</string>
+    <string name="status_off">الشريط معطّل</string>
+    <string name="row_accessibility">إمكانية الوصول</string>
+    <string name="row_accessibility_value">فتح إعدادات النظام</string>
+    <string name="toast_hint">ابحث عن «metrocore — La Barre» في القائمة وفعّله.</string>
+    <string name="toast_no_settings">تعذّر فتح إعدادات إمكانية الوصول.</string>
+
+    <string name="label_bar_color">لون الخلفية</string>
+    <string name="label_icon_color">لون الرموز</string>
+    <string name="label_bar_height">ارتفاع الشريط</string>
+    <string name="label_icon_size">حجم الرموز</string>
+    <string name="value_auto">تلقائي (%1$d dp)</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">تلقائي (%1$d%%)</string>
+    <string name="value_pct">%1$d%%</string>
+
+    <string name="label_haptic">الاهتزاز</string>
+    <string name="label_press_feedback">حركة الضغط</string>
+    <string name="state_on">مفعّلة</string>
+    <string name="state_off">معطّلة</string>
+    <string name="haptic_off">بدون</string>
+    <string name="haptic_light">خفيف</string>
+    <string name="haptic_medium">متوسط</string>
+    <string name="haptic_strong">قوي</string>
+
+    <string name="slot_left">الزر الأيسر</string>
+    <string name="slot_center">الزر الأوسط</string>
+    <string name="slot_right">الزر الأيمن</string>
+    <string name="label_icon">الرمز</string>
+    <string name="label_icon_scale">حجم هذا الرمز</string>
+    <string name="label_tap">ضغطة قصيرة</string>
+    <string name="label_hold">ضغطة مطوّلة</string>
+
+    <string name="act_none">بدون إجراء</string>
+    <string name="act_back">رجوع</string>
+    <string name="act_home">الشاشة الرئيسية</string>
+    <string name="act_recents">التطبيقات الأخيرة</string>
+    <string name="act_notifications">الإشعارات</string>
+    <string name="act_quick_settings">الإعدادات السريعة</string>
+    <string name="act_power_dialog">قائمة الطاقة</string>
+    <string name="act_split_screen">تقسيم الشاشة</string>
+    <string name="act_lock_screen">قفل الشاشة</string>
+    <string name="act_screenshot">لقطة شاشة</string>
+    <string name="act_global_search">بحث النظام</string>
+    <string name="act_assistant">المساعد</string>
+    <string name="act_voice_search">البحث الصوتي</string>
+    <string name="act_web_search">البحث في الويب</string>
+    <string name="act_launch_app">فتح تطبيق</string>
+    <string name="act_shortcut">إجراء سريع</string>
+    <string name="toast_no_handler">لا يوجد تطبيق يستجيب لهذا الإجراء.</string>
+    <string name="toast_no_shortcut">لم يُرجع هذا التطبيق أي اختصار.</string>
+
+    <string name="picker_app">أي تطبيق</string>
+    <string name="picker_shortcut">أي تطبيق</string>
+    <string name="picker_empty">لا يوفّر أي تطبيق ذلك.</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">إعادة الضبط</string>
+    <string name="row_reset_value">العودة إلى الإعدادات الأصلية</string>
+    <string name="toast_reset">تمت إعادة ضبط الإعدادات.</string>
+
+    <string name="about_blurb">‏La Barre جزء من مشروع metrocore. يعيد بناء شريط تنقّل ويندوز فون: المقاسات والألوان والمنحنيات والمُدد كلّها مأخوذة من metrocore، ولم يُضبط أي منها بالعين.</string>
+    <string name="about_project">المشروع</string>
+    <string name="about_made_in">صُنع في بلاد الباسك</string>
+    <string name="about_flag_desc">الإيكورينيا، علم بلاد الباسك</string>
+</resources>

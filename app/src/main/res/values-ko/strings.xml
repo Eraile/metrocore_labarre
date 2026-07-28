@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 한국어. -->
+<resources>
+    <string name="service_description">Windows Phone 탐색 모음을 표시하고 각 버튼에 설정한 동작을 실행합니다.</string>
+
+    <string name="preview_hint">미리보기 — 버튼은 반응하지만 동작은 실행되지 않습니다</string>
+
+    <string name="section_overview">개요</string>
+    <string name="section_appearance">모양</string>
+    <string name="section_feedback">피드백</string>
+
+    <string name="status_on">막대 켜짐</string>
+    <string name="status_off">막대 꺼짐</string>
+    <string name="row_accessibility">접근성</string>
+    <string name="row_accessibility_value">시스템 설정 열기</string>
+    <string name="toast_hint">목록에서 “metrocore — La Barre”를 찾아 켜세요.</string>
+    <string name="toast_no_settings">접근성 설정을 열 수 없습니다.</string>
+
+    <string name="label_bar_color">배경 색상</string>
+    <string name="label_icon_color">아이콘 색상</string>
+    <string name="label_bar_height">막대 높이</string>
+    <string name="label_icon_size">아이콘 크기</string>
+    <string name="value_auto">자동 (%1$d dp)</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">자동 (%1$d%%)</string>
+    <string name="value_pct">%1$d%%</string>
+
+    <string name="label_haptic">진동</string>
+    <string name="label_press_feedback">누름 애니메이션</string>
+    <string name="state_on">켜짐</string>
+    <string name="state_off">꺼짐</string>
+    <string name="haptic_off">없음</string>
+    <string name="haptic_light">약하게</string>
+    <string name="haptic_medium">보통</string>
+    <string name="haptic_strong">강하게</string>
+
+    <string name="slot_left">왼쪽 버튼</string>
+    <string name="slot_center">가운데 버튼</string>
+    <string name="slot_right">오른쪽 버튼</string>
+    <string name="label_icon">아이콘</string>
+    <string name="label_icon_scale">이 아이콘의 크기</string>
+    <string name="label_tap">짧게 누르기</string>
+    <string name="label_hold">길게 누르기</string>
+
+    <string name="act_none">동작 없음</string>
+    <string name="act_back">뒤로</string>
+    <string name="act_home">홈</string>
+    <string name="act_recents">최근 앱</string>
+    <string name="act_notifications">알림</string>
+    <string name="act_quick_settings">빠른 설정</string>
+    <string name="act_power_dialog">전원 메뉴</string>
+    <string name="act_split_screen">화면 분할</string>
+    <string name="act_lock_screen">화면 잠금</string>
+    <string name="act_screenshot">화면 캡처</string>
+    <string name="act_global_search">시스템 검색</string>
+    <string name="act_assistant">어시스턴트</string>
+    <string name="act_voice_search">음성 검색</string>
+    <string name="act_web_search">웹 검색</string>
+    <string name="act_launch_app">앱 열기</string>
+    <string name="act_shortcut">빠른 동작</string>
+    <string name="toast_no_handler">이 동작을 처리할 앱이 없습니다.</string>
+    <string name="toast_no_shortcut">이 앱이 바로가기를 반환하지 않았습니다.</string>
+
+    <string name="picker_app">어떤 앱</string>
+    <string name="picker_shortcut">어떤 앱</string>
+    <string name="picker_empty">이를 제공하는 앱이 없습니다.</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">초기화</string>
+    <string name="row_reset_value">처음 설정으로 되돌리기</string>
+    <string name="toast_reset">설정을 초기화했습니다.</string>
+
+    <string name="about_blurb">La Barre는 metrocore 프로젝트의 일부입니다. Windows Phone의 탐색 모음을 재현하며, 치수와 색상, 곡선, 지속 시간은 모두 metrocore에서 가져왔고 어느 하나도 눈대중으로 정하지 않았습니다.</string>
+    <string name="about_project">프로젝트</string>
+    <string name="about_made_in">바스크 지방에서 제작</string>
+    <string name="about_flag_desc">이쿠리냐, 바스크 지방의 깃발</string>
+</resources>

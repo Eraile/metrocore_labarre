@@ -1,0 +1,21 @@
+{
+    // F5 lance la configuration selectionnee dans le menu deroulant "Run and Debug".
+    // La premiere de la liste est celle utilisee par defaut.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Build & Install -> Emulateur",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/run-android.ps1 -Target emulator"
+        },
+        {
+            "name": "Build & Install -> Appareil USB",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .vscode/run-android.ps1 -Target device"
+        }
+    ]
+}

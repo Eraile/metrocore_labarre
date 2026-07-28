@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Genere par tools/gen-icons.mjs — ne pas editer a la main.
+     Source : metrocore/src/controls/icons.ts (photo) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Toujours blanc ici : la couleur reelle est appliquee au runtime via
+         ImageView.imageTintList, pour qu'une seule icone serve a tous les themes. -->
+    <path
+        android:pathData="M3 5 H21 V19 H3 Z M3 16 L9 10 L13 14 L16 11 L21 16 M16 8.5 h.01"
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="square"
+        android:strokeLineJoin="miter" />
+</vector>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Русский. Подписи со строчной буквы: это правило стиля Metro. -->
+<resources>
+    <string name="service_description">Показывает панель навигации Windows Phone и выполняет действие, назначенное каждой кнопке.</string>
+
+    <string name="preview_hint">предпросмотр — кнопки отзываются, но действие не выполняется</string>
+
+    <string name="section_overview">обзор</string>
+    <string name="section_appearance">оформление</string>
+    <string name="section_feedback">отклик</string>
+
+    <string name="status_on">панель включена</string>
+    <string name="status_off">панель выключена</string>
+    <string name="row_accessibility">специальные возможности</string>
+    <string name="row_accessibility_value">открыть настройки системы</string>
+    <string name="toast_hint">Найдите «metrocore — La Barre» в списке и включите.</string>
+    <string name="toast_no_settings">Не удалось открыть настройки специальных возможностей.</string>
+
+    <string name="label_bar_color">цвет фона</string>
+    <string name="label_icon_color">цвет значков</string>
+    <string name="label_bar_height">высота панели</string>
+    <string name="label_icon_size">размер значков</string>
+    <string name="value_auto">авто (%1$d dp)</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">авто (%1$d %%)</string>
+    <string name="value_pct">%1$d %%</string>
+
+    <string name="label_haptic">вибрация</string>
+    <string name="label_press_feedback">анимация нажатия</string>
+    <string name="state_on">включена</string>
+    <string name="state_off">выключена</string>
+    <string name="haptic_off">нет</string>
+    <string name="haptic_light">слабая</string>
+    <string name="haptic_medium">средняя</string>
+    <string name="haptic_strong">сильная</string>
+
+    <string name="slot_left">левая кнопка</string>
+    <string name="slot_center">центральная кнопка</string>
+    <string name="slot_right">правая кнопка</string>
+    <string name="label_icon">значок</string>
+    <string name="label_icon_scale">размер этого значка</string>
+    <string name="label_tap">короткое нажатие</string>
+    <string name="label_hold">долгое нажатие</string>
+
+    <string name="act_none">без действия</string>
+    <string name="act_back">назад</string>
+    <string name="act_home">на главный экран</string>
+    <string name="act_recents">недавние приложения</string>
+    <string name="act_notifications">уведомления</string>
+    <string name="act_quick_settings">быстрые настройки</string>
+    <string name="act_power_dialog">меню выключения</string>
+    <string name="act_split_screen">разделённый экран</string>
+    <string name="act_lock_screen">заблокировать</string>
+    <string name="act_screenshot">снимок экрана</string>
+    <string name="act_global_search">системный поиск</string>
+    <string name="act_assistant">ассистент</string>
+    <string name="act_voice_search">голосовой поиск</string>
+    <string name="act_web_search">поиск в интернете</string>
+    <string name="act_launch_app">открыть приложение</string>
+    <string name="act_shortcut">быстрое действие</string>
+    <string name="toast_no_handler">Ни одно приложение не отвечает на это действие.</string>
+    <string name="toast_no_shortcut">Это приложение не вернуло ярлык.</string>
+
+    <string name="picker_app">какое приложение</string>
+    <string name="picker_shortcut">какое приложение</string>
+    <string name="picker_empty">Ни одно приложение этого не предлагает.</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">сбросить</string>
+    <string name="row_reset_value">вернуться к исходным настройкам</string>
+    <string name="toast_reset">Настройки сброшены.</string>
+
+    <string name="about_blurb">La Barre — часть проекта metrocore. Она воспроизводит панель навигации Windows Phone: размеры, цвета, кривые и длительности взяты из metrocore, и ни одно значение не подбиралось на глаз.</string>
+    <string name="about_project">проект</string>
+    <string name="about_made_in">Сделано в Стране Басков</string>
+    <string name="about_flag_desc">Икурринья, флаг Страны Басков</string>
+</resources>

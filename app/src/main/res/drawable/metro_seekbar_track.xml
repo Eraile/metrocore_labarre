@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Le rail plat de metrocore (`.mc-slider__bar`) : 12 px de haut, aucun arrondi.
+     Les couleurs sont posees au runtime via progressTintList / progressBackgroundTintList. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <size android:height="6dp" />
+            <solid android:color="#FF2B2B2B" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <size android:height="6dp" />
+                <solid android:color="#FF0050EF" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

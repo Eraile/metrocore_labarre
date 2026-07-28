@@ -1,0 +1,15 @@
+*.iml
+.gradle/
+local.properties
+.idea/
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+
+# Cle de signature : jamais dans le depot. Voir SIGNING.md.
+keystore.properties
+*.jks
+*.keystore

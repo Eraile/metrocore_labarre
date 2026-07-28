@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Deutsch.
+
+     Die Beschriftungen sind kleingeschrieben — auch die Substantive. Das ist eine
+     Metro-Stilregel und kein Fehler: Windows Phone hat seine deutsche Oberflaeche
+     genauso gesetzt. -->
+<resources>
+    <string name="service_description">Zeigt die Windows-Phone-Navigationsleiste an und fuehrt die fuer jede Taste festgelegte Aktion aus.</string>
+
+    <string name="preview_hint">vorschau — die tasten reagieren, ohne die aktion auszufuehren</string>
+
+    <string name="section_overview">uebersicht</string>
+    <string name="section_appearance">darstellung</string>
+    <string name="section_feedback">rueckmeldung</string>
+
+    <string name="status_on">leiste aktiv</string>
+    <string name="status_off">leiste inaktiv</string>
+    <string name="row_accessibility">bedienungshilfen</string>
+    <string name="row_accessibility_value">systemeinstellungen oeffnen</string>
+    <string name="toast_hint">Suche „metrocore — La Barre“ in der Liste und aktiviere es.</string>
+    <string name="toast_no_settings">Die Bedienungshilfen konnten nicht geoeffnet werden.</string>
+
+    <string name="label_bar_color">hintergrundfarbe</string>
+    <string name="label_icon_color">symbolfarbe</string>
+    <string name="label_bar_height">hoehe der leiste</string>
+    <string name="label_icon_size">groesse der symbole</string>
+    <string name="value_auto">auto (%1$d dp)</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">auto (%1$d %%)</string>
+    <string name="value_pct">%1$d %%</string>
+
+    <string name="label_haptic">vibration</string>
+    <string name="label_press_feedback">druckanimation</string>
+    <string name="state_on">ein</string>
+    <string name="state_off">aus</string>
+    <string name="haptic_off">keine</string>
+    <string name="haptic_light">leicht</string>
+    <string name="haptic_medium">mittel</string>
+    <string name="haptic_strong">stark</string>
+
+    <string name="slot_left">linke taste</string>
+    <string name="slot_center">mittlere taste</string>
+    <string name="slot_right">rechte taste</string>
+    <string name="label_icon">symbol</string>
+    <string name="label_icon_scale">groesse dieses symbols</string>
+    <string name="label_tap">kurz druecken</string>
+    <string name="label_hold">lang druecken</string>
+
+    <string name="act_none">keine aktion</string>
+    <string name="act_back">zurueck</string>
+    <string name="act_home">startbildschirm</string>
+    <string name="act_recents">zuletzt verwendet</string>
+    <string name="act_notifications">benachrichtigungen</string>
+    <string name="act_quick_settings">schnelleinstellungen</string>
+    <string name="act_power_dialog">ausschaltmenue</string>
+    <string name="act_split_screen">geteilter bildschirm</string>
+    <string name="act_lock_screen">sperren</string>
+    <string name="act_screenshot">bildschirmfoto</string>
+    <string name="act_global_search">systemsuche</string>
+    <string name="act_assistant">assistent</string>
+    <string name="act_voice_search">sprachsuche</string>
+    <string name="act_web_search">websuche</string>
+    <string name="act_launch_app">app oeffnen</string>
+    <string name="act_shortcut">schnellaktion</string>
+    <string name="toast_no_handler">Keine App reagiert auf diese Aktion.</string>
+    <string name="toast_no_shortcut">Diese App hat keine Verknuepfung zurueckgegeben.</string>
+
+    <string name="picker_app">welche app</string>
+    <string name="picker_shortcut">welche app</string>
+    <string name="picker_empty">Keine App bietet das an.</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">zuruecksetzen</string>
+    <string name="row_reset_value">zurueck zu den urspruenglichen einstellungen</string>
+    <string name="toast_reset">Einstellungen zurueckgesetzt.</string>
+
+    <string name="about_blurb">La Barre ist Teil des metrocore-Projekts. Sie bildet die Navigationsleiste von Windows Phone nach: Masse, Farben, Kurven und Dauern stammen alle aus metrocore, und keines davon wurde nach Augenmass gesetzt.</string>
+    <string name="about_project">das projekt</string>
+    <string name="about_made_in">Hergestellt im Baskenland</string>
+    <string name="about_flag_desc">Ikurriña, die Flagge des Baskenlands</string>
+</resources>

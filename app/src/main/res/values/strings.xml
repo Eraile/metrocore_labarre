@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Langue par defaut : anglais. Les traductions vivent dans values-<langue>/.
+     Les libelles d'interface sont en minuscules : c'est une regle de style Metro,
+     pas une coquille. Voir metrocore/docs/references/windows-phone-ux.md. -->
+<resources>
+    <!-- Nom de produit : jamais traduit. -->
+    <string name="app_name" translatable="false">metrocore — La Barre</string>
+    <string name="service_label" translatable="false">metrocore — La Barre</string>
+    <string name="title_navbar" translatable="false">La Barre</string>
+
+    <string name="service_description">Shows the Windows Phone navigation bar and runs the action set for each button.</string>
+
+    <!-- page header -->
+    <string name="preview_hint">preview — the buttons respond without running the action</string>
+
+    <!-- panorama sections -->
+    <string name="section_overview">overview</string>
+    <string name="section_appearance">appearance</string>
+    <string name="section_feedback">feedback</string>
+    <string name="section_about" translatable="false">metrocore</string>
+
+    <!-- service -->
+    <string name="status_on">bar is on</string>
+    <string name="status_off">bar is off</string>
+    <string name="row_accessibility">accessibility</string>
+    <string name="row_accessibility_value">open system settings</string>
+    <string name="toast_hint">Find “metrocore — La Barre” in the list and turn it on.</string>
+    <string name="toast_no_settings">Could not open the accessibility settings.</string>
+
+    <!-- appearance -->
+    <string name="label_bar_color">background colour</string>
+    <string name="label_icon_color">glyph colour</string>
+    <string name="label_bar_height">bar height</string>
+    <string name="label_icon_size">glyph size</string>
+    <string name="value_auto">auto (%1$d dp)</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">auto (%1$d %%)</string>
+    <string name="value_pct">%1$d %%</string>
+
+    <!-- feedback -->
+    <string name="label_haptic">vibration</string>
+    <string name="label_press_feedback">press animation</string>
+    <string name="state_on">on</string>
+    <string name="state_off">off</string>
+    <string name="haptic_off">none</string>
+    <string name="haptic_light">light</string>
+    <string name="haptic_medium">medium</string>
+    <string name="haptic_strong">strong</string>
+
+    <!-- buttons -->
+    <string name="slot_left">left button</string>
+    <string name="slot_center">centre button</string>
+    <string name="slot_right">right button</string>
+    <string name="label_icon">glyph</string>
+    <string name="label_icon_scale">size of this glyph</string>
+    <string name="label_tap">short press</string>
+    <string name="label_hold">long press</string>
+
+    <!-- actions -->
+    <string name="act_none">no action</string>
+    <string name="act_back">back</string>
+    <string name="act_home">home</string>
+    <string name="act_recents">recent apps</string>
+    <string name="act_notifications">notifications</string>
+    <string name="act_quick_settings">quick settings</string>
+    <string name="act_power_dialog">power menu</string>
+    <string name="act_split_screen">split screen</string>
+    <string name="act_lock_screen">lock</string>
+    <string name="act_screenshot">screenshot</string>
+    <string name="act_global_search">system search</string>
+    <string name="act_assistant">assistant</string>
+    <string name="act_voice_search">voice search</string>
+    <string name="act_web_search">web search</string>
+    <string name="act_launch_app">open an app</string>
+    <string name="act_shortcut">quick action</string>
+    <string name="toast_no_handler">No app answers that action.</string>
+    <string name="toast_no_shortcut">That app returned no shortcut.</string>
+
+    <!-- target pickers -->
+    <string name="picker_app">which app</string>
+    <string name="picker_shortcut">which app</string>
+    <string name="picker_empty">No app offers that.</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <!-- reset -->
+    <string name="row_reset">reset</string>
+    <string name="row_reset_value">back to the original settings</string>
+    <string name="toast_reset">Settings reset.</string>
+
+    <!-- about — « metrocore » est repere au runtime pour mettre « core » en gras -->
+    <string name="about_blurb">La Barre is part of the metrocore project. It reproduces the Windows Phone navigation bar: its metrics, colours, curves and durations all come from metrocore, and none of them were set by eye.</string>
+    <string name="about_project">the project</string>
+    <string name="about_site" translatable="false">metrocore.dev</string>
+    <string name="about_made_in">Made in Basque Country</string>
+    <string name="about_footer" translatable="false">2026 — NoMercy Studios</string>
+    <string name="about_flag_desc">Ikurriña, the flag of the Basque Country</string>
+</resources>

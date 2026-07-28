@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Euskara.
+
+     ABISUA: itzulpen hau ez du euskaldun batek berrikusi. Zuzendu lasai.
+     (Traduction non relue par un locuteur natif — a faire corriger.)
+
+     Etiketak minuskulaz: Metro estiloaren araua da, ez akats bat. -->
+<resources>
+    <string name="service_description">Windows Phone-ren nabigazio-barra erakusten du eta botoi bakoitzari esleitutako ekintza abiarazten du.</string>
+
+    <string name="preview_hint">aurrebista — botoiek erantzuten dute, ekintza abiarazi gabe</string>
+
+    <string name="section_overview">ikuspegi orokorra</string>
+    <string name="section_appearance">itxura</string>
+    <string name="section_feedback">erantzuna</string>
+
+    <string name="status_on">barra aktibo</string>
+    <string name="status_off">barra desaktibatuta</string>
+    <string name="row_accessibility">irisgarritasuna</string>
+    <string name="row_accessibility_value">ireki sistemaren ezarpenak</string>
+    <string name="toast_hint">Bilatu «metrocore — La Barre» zerrendan eta gaitu ezazu.</string>
+    <string name="toast_no_settings">Ezin izan dira irisgarritasun-ezarpenak ireki.</string>
+
+    <string name="label_bar_color">atzeko planoaren kolorea</string>
+    <string name="label_icon_color">ikurren kolorea</string>
+    <string name="label_bar_height">barraren altuera</string>
+    <string name="label_icon_size">ikurren tamaina</string>
+    <string name="value_auto">auto (%1$d dp)</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">auto (%%%1$d)</string>
+    <string name="value_pct">%%%1$d</string>
+
+    <string name="label_haptic">dardara</string>
+    <string name="label_press_feedback">sakatze-animazioa</string>
+    <string name="state_on">gaituta</string>
+    <string name="state_off">desgaituta</string>
+    <string name="haptic_off">bat ere ez</string>
+    <string name="haptic_light">arina</string>
+    <string name="haptic_medium">ertaina</string>
+    <string name="haptic_strong">bizia</string>
+
+    <string name="slot_left">ezkerreko botoia</string>
+    <string name="slot_center">erdiko botoia</string>
+    <string name="slot_right">eskuineko botoia</string>
+    <string name="label_icon">ikurra</string>
+    <string name="label_icon_scale">ikur honen tamaina</string>
+    <string name="label_tap">sakatze laburra</string>
+    <string name="label_hold">sakatze luzea</string>
+
+    <string name="act_none">ekintzarik ez</string>
+    <string name="act_back">atzera</string>
+    <string name="act_home">hasiera</string>
+    <string name="act_recents">azken aplikazioak</string>
+    <string name="act_notifications">jakinarazpenak</string>
+    <string name="act_quick_settings">ezarpen azkarrak</string>
+    <string name="act_power_dialog">itzaltzeko menua</string>
+    <string name="act_split_screen">pantaila zatitua</string>
+    <string name="act_lock_screen">blokeatu</string>
+    <string name="act_screenshot">pantaila-argazkia</string>
+    <string name="act_global_search">sistemaren bilaketa</string>
+    <string name="act_assistant">laguntzailea</string>
+    <string name="act_voice_search">ahots bidezko bilaketa</string>
+    <string name="act_web_search">web bilaketa</string>
+    <string name="act_launch_app">ireki aplikazio bat</string>
+    <string name="act_shortcut">ekintza azkarra</string>
+    <string name="toast_no_handler">Aplikaziorik ez dago ekintza horri erantzuteko.</string>
+    <string name="toast_no_shortcut">Aplikazio horrek ez du lasterbiderik itzuli.</string>
+
+    <string name="picker_app">zein aplikazio</string>
+    <string name="picker_shortcut">zein aplikazio</string>
+    <string name="picker_empty">Aplikaziorik ez dago hori eskaintzen duenik.</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">berrezarri</string>
+    <string name="row_reset_value">itzuli hasierako ezarpenetara</string>
+    <string name="toast_reset">Ezarpenak berrezarri dira.</string>
+
+    <string name="about_blurb">La Barre metrocore proiektuaren zati bat da. Windows Phone-ren nabigazio-barra berreraikitzen du: bere neurriak, koloreak, kurbak eta iraupenak metrocore-tik datoz denak, eta bat bera ere ez da begiz zehaztu.</string>
+    <string name="about_project">proiektua</string>
+    <string name="about_made_in">Euskal Herrian egina</string>
+    <string name="about_flag_desc">Ikurriña, Euskal Herriko bandera</string>
+</resources>

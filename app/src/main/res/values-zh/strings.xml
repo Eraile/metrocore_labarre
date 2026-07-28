@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 简体中文。 -->
+<resources>
+    <string name="service_description">显示 Windows Phone 导航栏，并执行为每个按钮设置的操作。</string>
+
+    <string name="preview_hint">预览 — 按钮会响应，但不会执行操作</string>
+
+    <string name="section_overview">概览</string>
+    <string name="section_appearance">外观</string>
+    <string name="section_feedback">反馈</string>
+
+    <string name="status_on">导航栏已开启</string>
+    <string name="status_off">导航栏已关闭</string>
+    <string name="row_accessibility">无障碍</string>
+    <string name="row_accessibility_value">打开系统设置</string>
+    <string name="toast_hint">在列表中找到「metrocore — La Barre」并开启。</string>
+    <string name="toast_no_settings">无法打开无障碍设置。</string>
+
+    <string name="label_bar_color">背景颜色</string>
+    <string name="label_icon_color">图标颜色</string>
+    <string name="label_bar_height">导航栏高度</string>
+    <string name="label_icon_size">图标大小</string>
+    <string name="value_auto">自动（%1$d dp）</string>
+    <string name="value_dp">%1$d dp</string>
+    <string name="value_auto_pct">自动（%1$d%%）</string>
+    <string name="value_pct">%1$d%%</string>
+
+    <string name="label_haptic">振动</string>
+    <string name="label_press_feedback">按下动画</string>
+    <string name="state_on">已开启</string>
+    <string name="state_off">已关闭</string>
+    <string name="haptic_off">无</string>
+    <string name="haptic_light">轻</string>
+    <string name="haptic_medium">中</string>
+    <string name="haptic_strong">强</string>
+
+    <string name="slot_left">左键</string>
+    <string name="slot_center">中键</string>
+    <string name="slot_right">右键</string>
+    <string name="label_icon">图标</string>
+    <string name="label_icon_scale">此图标的大小</string>
+    <string name="label_tap">短按</string>
+    <string name="label_hold">长按</string>
+
+    <string name="act_none">无操作</string>
+    <string name="act_back">返回</string>
+    <string name="act_home">主屏幕</string>
+    <string name="act_recents">最近应用</string>
+    <string name="act_notifications">通知栏</string>
+    <string name="act_quick_settings">快捷设置</string>
+    <string name="act_power_dialog">电源菜单</string>
+    <string name="act_split_screen">分屏</string>
+    <string name="act_lock_screen">锁定屏幕</string>
+    <string name="act_screenshot">屏幕截图</string>
+    <string name="act_global_search">系统搜索</string>
+    <string name="act_assistant">助理</string>
+    <string name="act_voice_search">语音搜索</string>
+    <string name="act_web_search">网页搜索</string>
+    <string name="act_launch_app">打开应用</string>
+    <string name="act_shortcut">快捷操作</string>
+    <string name="toast_no_handler">没有应用响应此操作。</string>
+    <string name="toast_no_shortcut">该应用未返回快捷方式。</string>
+
+    <string name="picker_app">选择应用</string>
+    <string name="picker_shortcut">选择应用</string>
+    <string name="picker_empty">没有应用提供此功能。</string>
+    <string name="value_action_target">%1$s — %2$s</string>
+
+    <string name="row_reset">重置</string>
+    <string name="row_reset_value">恢复初始设置</string>
+    <string name="toast_reset">设置已重置。</string>
+
+    <string name="about_blurb">La Barre 是 metrocore 项目的一部分。它复刻了 Windows Phone 的导航栏：尺寸、颜色、曲线和时长全部来自 metrocore，没有一项是凭感觉定的。</string>
+    <string name="about_project">项目</string>
+    <string name="about_made_in">制作于巴斯克地区</string>
+    <string name="about_flag_desc">伊库里尼亚旗，巴斯克地区的旗帜</string>
+</resources>

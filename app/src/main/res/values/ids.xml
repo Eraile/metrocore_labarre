@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cles de View.setTag : on attache l'etat aux vues construites en code plutot
+         que de le dupliquer dans l'activite. -->
+    <item name="tag_picker_value" type="id" />
+    <item name="tag_icon_cells" type="id" />
+</resources>

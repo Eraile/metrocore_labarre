@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Android: build & install (emulateur)",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", ".vscode/run-android.ps1",
+                "-Target", "emulator"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": [],
+            "group": { "kind": "build", "isDefault": true },
+            "presentation": { "clear": true }
+        },
+        {
+            "label": "Android: build & install (appareil USB)",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-ExecutionPolicy", "Bypass",
+                "-File", ".vscode/run-android.ps1",
+                "-Target", "device"
+            ],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": [],
+            "presentation": { "clear": true }
+        },
+        {
+            "label": "Android: build APK seul",
+            "type": "shell",
+            "command": "./gradlew.bat",
+            "args": ["assembleDebug"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": [],
+            "presentation": { "clear": true }
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- L'ecran de reglages est en theme clair (creme vers or). La barre de navigation
+         elle-meme garde sa palette propre, reglee dans l'app. -->
+    <style name="Theme.LaBarre" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/panorama_top</item>
+        <item name="android:windowBackground">@color/panorama_top</item>
+        <!-- Fond clair : il faut des icones systeme sombres pour les voir. -->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

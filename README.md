@@ -263,8 +263,13 @@ Les réglages passent par les `SharedPreferences` et le service les écoute : l'
 
 ## Licence et crédits
 
-Les métriques, couleurs, courbes et glyphes viennent de
-[metrocore](https://metrocore.dev), sous licence MPL-2.0.
+**[MPL-2.0](LICENSE)** — la même que [metrocore](https://metrocore.dev), dont ce projet
+porte les métriques, les couleurs, les courbes et les glyphes.
+
+La MPL est un copyleft **par fichier** : chaque source porte donc son en-tête, y compris
+celles que [tools/gen-icons.mjs](tools/gen-icons.mjs) génère. Concrètement, tu peux
+réutiliser ce code dans un projet fermé ; ce que tu modifies dans *ces* fichiers-là doit
+rester ouvert.
 
 Windows Phone, Windows et le logo Windows sont des marques de Microsoft. Ce projet est
 une reconstruction indépendante, sans lien avec Microsoft. Le drapeau Windows n'est

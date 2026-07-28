@@ -1,3 +1,7 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
 /*
  * Genere les VectorDrawable des icones a partir de metrocore/src/controls/icons.ts.
  *
@@ -68,7 +72,11 @@ const STROKE_WIDTH = 1.8; // navkeys.ts : icon(..., { weight: 1.8 })
 
 const xml = ({ name, path, filled }) => `<?xml version="1.0" encoding="utf-8"?>
 <!-- Genere par tools/gen-icons.mjs — ne pas editer a la main.
-     Source : metrocore/src/controls/icons.ts (${name}) -->
+     Source : metrocore/src/controls/icons.ts (${name})
+
+     This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this
+     file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
@@ -119,7 +127,11 @@ const ordered = [
     .sort((a, b) => a.name.localeCompare(b.name)),
 ];
 
-const kt = `/*
+const kt = `/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/. */
+
+/*
  * Genere par tools/gen-icons.mjs — ne pas editer a la main.
  * Source : metrocore/src/controls/icons.ts
  */

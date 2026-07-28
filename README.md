@@ -2,6 +2,10 @@
   <img src="README/metrocore.png" width="104" alt="metrocore">
 </p>
 
+<p align="center">
+  <img src="README/labarre.png" width="290" alt="La barre en bas de l'écran d'accueil">
+</p>
+
 <h1 align="center">La Barre</h1>
 
 <p align="center">
@@ -10,7 +14,7 @@
 </p>
 
 <p align="center">
-  <a href="https://metrocore.dev">metrocore.dev</a>
+  <a href="https://metrocore.dev"> >> metrocore.dev << </a>
 </p>
 
 <p align="center">

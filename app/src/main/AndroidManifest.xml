@@ -4,6 +4,12 @@
     <!-- Retour haptique des touches. Permission normale : accordee a l'installation. -->
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <!-- Mise a jour depuis les Releases GitHub, uniquement sur demande explicite : rien
+         n'est verifie ni telecharge tout seul. Voir Updates.kt. INSTALL_PACKAGES demande
+         en plus une autorisation de l'utilisateur depuis Android 8. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
     <!-- Depuis Android 11 la liste des paquets installes est cloisonnee. Sans ce bloc,
          le selecteur d'applications ne verrait que nos propres activites. -->
     <queries>
@@ -45,6 +51,18 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/navbar_service_config" />
         </service>
+
+        <!-- Passe l'APK telecharge a l'installeur systeme. Expose le seul sous-dossier
+             `updates/` du cache, et rien d'autre. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.updates"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_paths" />
+        </provider>
 
     </application>
 

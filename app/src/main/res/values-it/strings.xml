@@ -86,4 +86,13 @@
     <string name="about_project">il progetto</string>
     <string name="about_made_in">Fatto nei Paesi Baschi</string>
     <string name="about_flag_desc">Ikurriña, la bandiera dei Paesi Baschi</string>
+
+    <string name="label_update">aggiornamento</string>
+    <string name="update_check">cerca una nuova versione</string>
+    <string name="update_checking">ricerca…</string>
+    <string name="update_current">hai l\'ultima versione</string>
+    <string name="update_available">versione %1$s — tocca per installare</string>
+    <string name="update_downloading">scaricamento…</string>
+    <string name="update_failed">lo scaricamento non e riuscito</string>
+    <string name="update_needs_permission">Consenti a La Barre di installare applicazioni, poi tocca di nuovo.</string>
 </resources>

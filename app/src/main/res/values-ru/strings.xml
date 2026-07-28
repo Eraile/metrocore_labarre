@@ -86,4 +86,13 @@
     <string name="about_project">проект</string>
     <string name="about_made_in">Сделано в Стране Басков</string>
     <string name="about_flag_desc">Икурринья, флаг Страны Басков</string>
+
+    <string name="label_update">обновление</string>
+    <string name="update_check">поискать новую версию</string>
+    <string name="update_checking">поиск…</string>
+    <string name="update_current">у тебя последняя версия</string>
+    <string name="update_available">версия %1$s — нажми, чтобы установить</string>
+    <string name="update_downloading">загрузка…</string>
+    <string name="update_failed">загрузка не удалась</string>
+    <string name="update_needs_permission">Разреши La Barre устанавливать приложения и нажми ещё раз.</string>
 </resources>

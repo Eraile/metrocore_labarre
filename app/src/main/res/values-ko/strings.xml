@@ -86,4 +86,13 @@
     <string name="about_project">프로젝트</string>
     <string name="about_made_in">바스크 지방에서 제작</string>
     <string name="about_flag_desc">이쿠리냐, 바스크 지방의 깃발</string>
+
+    <string name="label_update">업데이트</string>
+    <string name="update_check">새 버전 찾기</string>
+    <string name="update_checking">확인 중…</string>
+    <string name="update_current">최신 버전입니다</string>
+    <string name="update_available">버전 %1$s — 눌러서 설치</string>
+    <string name="update_downloading">내려받는 중…</string>
+    <string name="update_failed">내려받기에 실패했습니다</string>
+    <string name="update_needs_permission">La Barre 에 앱 설치를 허용한 뒤 다시 누르세요.</string>
 </resources>

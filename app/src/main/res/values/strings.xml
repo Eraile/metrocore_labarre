@@ -108,4 +108,14 @@
     <string name="about_made_in">Made in Basque Country</string>
     <string name="about_footer" translatable="false">2026 — NoMercy Studios</string>
     <string name="about_flag_desc">Ikurriña, the flag of the Basque Country</string>
+
+    <!-- update -->
+    <string name="label_update">update</string>
+    <string name="update_check">look for a new version</string>
+    <string name="update_checking">looking…</string>
+    <string name="update_current">you have the latest version</string>
+    <string name="update_available">version %1$s — tap to install</string>
+    <string name="update_downloading">downloading…</string>
+    <string name="update_failed">download failed</string>
+    <string name="update_needs_permission">Allow La Barre to install apps, then tap again.</string>
 </resources>

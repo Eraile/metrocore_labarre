@@ -91,4 +91,13 @@
     <string name="about_project">proiektua</string>
     <string name="about_made_in">Euskal Herrian egina</string>
     <string name="about_flag_desc">Ikurriña, Euskal Herriko bandera</string>
+
+    <string name="label_update">eguneratzea</string>
+    <string name="update_check">bertsio berri baten bila joan</string>
+    <string name="update_checking">bilatzen…</string>
+    <string name="update_current">azken bertsioa duzu</string>
+    <string name="update_available">%1$s bertsioa — sakatu instalatzeko</string>
+    <string name="update_downloading">deskargatzen…</string>
+    <string name="update_failed">deskargak huts egin du</string>
+    <string name="update_needs_permission">Baimendu La Barre aplikazioak instalatzen, eta sakatu berriro.</string>
 </resources>

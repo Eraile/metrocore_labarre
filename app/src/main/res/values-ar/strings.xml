@@ -93,4 +93,13 @@
     <string name="about_project">المشروع</string>
     <string name="about_made_in">صُنع في بلاد الباسك</string>
     <string name="about_flag_desc">الإيكورينيا، علم بلاد الباسك</string>
+
+    <string name="label_update">التحديث</string>
+    <string name="update_check">البحث عن إصدار جديد</string>
+    <string name="update_checking">جارٍ البحث…</string>
+    <string name="update_current">لديك أحدث إصدار</string>
+    <string name="update_available">الإصدار %1$s — اضغط للتثبيت</string>
+    <string name="update_downloading">جارٍ التنزيل…</string>
+    <string name="update_failed">فشل التنزيل</string>
+    <string name="update_needs_permission">اسمح لـ La Barre بتثبيت التطبيقات، ثم اضغط مرة أخرى.</string>
 </resources>

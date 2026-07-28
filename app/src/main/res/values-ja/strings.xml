@@ -86,4 +86,13 @@
     <string name="about_project">プロジェクト</string>
     <string name="about_made_in">バスク地方製</string>
     <string name="about_flag_desc">イクリニャ、バスク地方の旗</string>
+
+    <string name="label_update">更新</string>
+    <string name="update_check">新しいバージョンを探す</string>
+    <string name="update_checking">確認中…</string>
+    <string name="update_current">最新バージョンです</string>
+    <string name="update_available">バージョン %1$s — タップしてインストール</string>
+    <string name="update_downloading">ダウンロード中…</string>
+    <string name="update_failed">ダウンロードに失敗しました</string>
+    <string name="update_needs_permission">La Barre にアプリのインストールを許可してから、もう一度タップしてください。</string>
 </resources>

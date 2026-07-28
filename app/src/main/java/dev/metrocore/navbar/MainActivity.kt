@@ -54,6 +54,9 @@ class MainActivity : AppCompatActivity() {
     /** Le bouton en attente pendant que l'application affiche son selecteur. */
     private var pendingShortcut: Triple<Slot, Trigger, () -> Unit>? = null
 
+    /** La version trouvee sur GitHub, tant qu'elle n'est pas installee. */
+    private var pendingUpdate: Update? = null
+
     /**
      * `ACTION_CREATE_SHORTCUT` rend l'intent choisi dans `EXTRA_SHORTCUT_INTENT`.
      * Le contrat est ancien mais c'est le seul qu'une application non-lanceur puisse
@@ -527,6 +530,14 @@ class MainActivity : AppCompatActivity() {
         body.addView(ui.sub(getString(R.string.about_project)), marginTop(ui.px(22f)))
         body.addView(ui.linkRow(getString(R.string.about_site)) { open(SITE_PROJECT) })
 
+        // La ligne porte son propre etat : « rechercher » → « recherche… » → la version
+        // trouvee, puis le meme appui telecharge et installe. Un seul endroit a regarder,
+        // et rien ne part sur le reseau sans appui.
+        body.addView(ui.sub(getString(R.string.label_update)), marginTop(ui.px(22f)))
+        lateinit var updateRow: TextView
+        updateRow = ui.linkRow(getString(R.string.update_check)) { onUpdateRowTapped(updateRow) }
+        body.addView(updateRow)
+
         body.addView(ui.sub(getString(R.string.about_footer)), marginTop(ui.px(30f)))
 
         // Le drapeau et la mention sur leur propre ligne. Un seul TextView avec le
@@ -582,6 +593,55 @@ class MainActivity : AppCompatActivity() {
             }
             .append("  ")
             .append(getString(R.string.about_made_in))
+    }
+
+    // ------------------------------------------------------------ mise a jour
+
+    /**
+     * Deux temps sur la meme ligne : le premier appui cherche, le second installe ce qui
+     * a ete trouve. Le reseau se fait sur un fil a part — [Updates] bloque, et il n'y a
+     * pas de coroutines dans ce projet.
+     */
+    private fun onUpdateRowTapped(row: TextView) {
+        val found = pendingUpdate
+        if (found != null) {
+            installUpdate(found, row)
+            return
+        }
+
+        row.text = getString(R.string.update_checking)
+        Thread {
+            val update = Updates.latest(this)
+            runOnUiThread {
+                if (isFinishing) return@runOnUiThread
+                pendingUpdate = update
+                row.text = if (update == null) {
+                    getString(R.string.update_current)
+                } else {
+                    getString(R.string.update_available, update.version)
+                }
+            }
+        }.start()
+    }
+
+    private fun installUpdate(update: Update, row: TextView) {
+        row.text = getString(R.string.update_downloading)
+        Thread {
+            val apk = Updates.download(this, update)
+            runOnUiThread {
+                if (isFinishing) return@runOnUiThread
+                if (apk == null) {
+                    row.text = getString(R.string.update_failed)
+                    return@runOnUiThread
+                }
+                row.text = getString(R.string.update_available, update.version)
+                // Faux veut dire que l'autorisation d'installer manque : l'ecran systeme
+                // vient de s'ouvrir, on dit pourquoi.
+                if (!Updates.install(this, apk)) {
+                    Toast.makeText(this, R.string.update_needs_permission, Toast.LENGTH_LONG).show()
+                }
+            }
+        }.start()
     }
 
     private fun open(url: String) {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Le FileProvider qui expose l'APK telecharge a l'installeur d'Android. Rien d'autre
+     n'est partage : uniquement le sous-dossier `updates/` du cache. -->
+<paths>
+    <cache-path name="updates" path="updates/" />
+</paths>

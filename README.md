@@ -76,6 +76,24 @@ fichiers) — c'est normal, et ça ne se demande qu'une fois.
 
 Pour publier une version : [RELEASING.md](RELEASING.md).
 
+### Se mettre à jour
+
+Hors du Play Store, personne ne pousse les mises à jour à votre place : une correction
+n'atteint que ceux qui repassent d'eux-mêmes sur la page du dépôt. La section *metrocore*
+de l'écran de réglages porte donc une ligne **mise à jour**, qui interroge les Releases du
+dépôt, télécharge l'APK et le passe à l'installeur d'Android.
+
+Rien n'est automatique : **ni vérification au démarrage, ni téléchargement en fond**. On
+ne va sur le réseau que sur appui, et l'installation reste celle du système, avec son
+écran de confirmation. Une application qui s'installe toute seule est exactement ce dont
+il faut se méfier. Voir
+[Updates.kt](app/src/main/java/dev/metrocore/navbar/Updates.kt).
+
+L'APK téléchargé atterrit dans le cache de l'application, et le `FileProvider` n'expose
+que ce sous-dossier. Comme il est signé de la même clé que celui installé, Android accepte
+la mise à jour par-dessus — c'est tout l'intérêt de garder la même clé à vie
+([RELEASING.md](RELEASING.md)).
+
 ## Setup (une seule fois, sur le téléphone)
 
 1. Installer l'APK.
@@ -154,7 +172,7 @@ L'app suit la langue du téléphone. L'anglais est la langue par défaut
 | `es` espagnol | `pl` polonais | `zh` chinois simplifié | `ar` arabe |
 | `pt` portugais | `it` italien | `ja` japonais | `eu` euskara |
 
-74 chaînes traduisibles par langue, toutes présentes dans les douze fichiers. Les 7
+82 chaînes traduisibles par langue, toutes présentes dans les douze fichiers. Les 7
 restantes sont les noms de produit — « metrocore — La Barre », « La Barre »,
 « metrocore », « metrocore.dev » — marqués `translatable="false"` : elles n'existent que
 dans le fichier par défaut et ne bougent dans aucune langue.
@@ -189,9 +207,11 @@ node tools/gen-icons.mjs [chemin/vers/metrocore]   # défaut : ../metrocore
 `app/src/main/java/dev/metrocore/navbar/NavIcons.kt`. Les deux sont versionnés : on ne
 régénère que si metrocore bouge.
 
-Aucune autre permission n'est demandée — pas de « Affichage par-dessus les autres
-applications ». L'overlay utilise `TYPE_ACCESSIBILITY_OVERLAY`, fourni par le service
-d'accessibilité lui-même.
+Pas de « Affichage par-dessus les autres applications » : l'overlay utilise
+`TYPE_ACCESSIBILITY_OVERLAY`, fourni par le service d'accessibilité lui-même. Les trois
+seules permissions déclarées sont `VIBRATE` pour l'haptique, et `INTERNET` +
+`REQUEST_INSTALL_PACKAGES` pour la mise à jour intégrée — cette dernière n'agit que si
+l'utilisateur l'autorise en plus, écran système à l'appui.
 
 ## Build & run depuis VS Code (F5)
 

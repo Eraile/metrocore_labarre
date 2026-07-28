@@ -90,4 +90,13 @@
     <string name="about_project">das projekt</string>
     <string name="about_made_in">Hergestellt im Baskenland</string>
     <string name="about_flag_desc">Ikurriña, die Flagge des Baskenlands</string>
+
+    <string name="label_update">aktualisierung</string>
+    <string name="update_check">nach einer neuen version suchen</string>
+    <string name="update_checking">suche…</string>
+    <string name="update_current">du hast die neueste version</string>
+    <string name="update_available">version %1$s — zum installieren tippen</string>
+    <string name="update_downloading">wird geladen…</string>
+    <string name="update_failed">das laden ist fehlgeschlagen</string>
+    <string name="update_needs_permission">Erlaube La Barre, apps zu installieren, und tippe erneut.</string>
 </resources>

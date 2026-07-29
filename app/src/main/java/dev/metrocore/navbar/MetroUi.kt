@@ -13,6 +13,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.StateListDrawable
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -383,6 +384,46 @@ class MetroUi(
     }
 
     /**
+     * Le bouton WP : un rectangle borde de 2 px, fond transparent, texte centre — et qui
+     * **s'inverse** a l'appui, le fond prenant la couleur du trait et le texte celle de
+     * la page. Rien n'est arrondi, rien n'est ombre : le cadre est tout ce qui dit que
+     * c'est un bouton, exactement comme le rail de l'interrupteur et la boite du
+     * ListPicker.
+     *
+     * A reserver aux actions qui meritent d'etre vues. Une action de second plan reste
+     * un [actionRow] ; un lien reste un [linkRow].
+     */
+    fun button(text: String, onClick: () -> Unit): TextView = TextView(context).apply {
+        this.text = text
+        typeface = regular
+        setTextSize(TypedValue.COMPLEX_UNIT_SP, MetroTokens.FS_MEDIUM * scale)
+        gravity = Gravity.CENTER
+        minHeight = px(BUTTON_H)
+        minWidth = px(BUTTON_W)
+        setPadding(px(20f), px(8f), px(20f), px(8f))
+
+        background = StateListDrawable().apply {
+            addState(intArrayOf(android.R.attr.state_pressed), buttonFace(fill = fg))
+            addState(intArrayOf(), buttonFace(fill = Color.TRANSPARENT))
+        }
+        setTextColor(
+            ColorStateList(
+                arrayOf(intArrayOf(android.R.attr.state_pressed), intArrayOf()),
+                intArrayOf(bg, fg),
+            ),
+        )
+
+        isClickable = true
+        setOnClickListener { onClick() }
+    }
+
+    private fun buttonFace(fill: Int) = GradientDrawable().apply {
+        shape = GradientDrawable.RECTANGLE
+        setColor(fill)
+        setStroke(px(2f), fg)
+    }
+
+    /**
      * Une adresse cliquable. Meme traitement qu'une valeur de ListPicker — texte en
      * accent, pas de soulignement : Metro ne souligne pas ses liens.
      */
@@ -696,5 +737,16 @@ class MetroUi(
     fun retintIconGrid(grid: View, color: Int) {
         (grid.getTag(R.id.tag_icon_cells) as? Map<String, IconCell>)
             ?.values?.forEach { it.setTint(color) }
+    }
+
+    private companion object {
+        /**
+         * Le gabarit du bouton WP, en pixels logiques WVGA comme le reste de ce fichier.
+         * Ces deux-la ne viennent pas de `spec/tokens.json` — metrocore n'expose pas de
+         * bouton — mais des metriques du controle d'origine : une bande de 60 et une
+         * largeur minimale qui empeche un libelle court de produire un carre.
+         */
+        const val BUTTON_H = 60f
+        const val BUTTON_W = 150f
     }
 }

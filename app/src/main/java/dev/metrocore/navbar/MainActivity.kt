@@ -534,9 +534,17 @@ class MainActivity : AppCompatActivity() {
         // trouvee, puis le meme appui telecharge et installe. Un seul endroit a regarder,
         // et rien ne part sur le reseau sans appui.
         body.addView(ui.sub(getString(R.string.label_update)), marginTop(ui.px(22f)))
-        lateinit var updateRow: TextView
-        updateRow = ui.linkRow(getString(R.string.update_check)) { onUpdateRowTapped(updateRow) }
-        body.addView(updateRow)
+        lateinit var updateButton: TextView
+        updateButton = ui.button(getString(R.string.update_check)) {
+            onUpdateRowTapped(updateButton)
+        }
+        body.addView(
+            updateButton,
+            LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+            ).apply { topMargin = ui.px(8f) },
+        )
 
         body.addView(ui.sub(getString(R.string.about_footer)), marginTop(ui.px(30f)))
 

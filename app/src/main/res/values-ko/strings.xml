@@ -17,6 +17,7 @@
     <string name="row_accessibility_value">시스템 설정 열기</string>
     <string name="toast_hint">목록에서 “metrocore — La Barre”를 찾아 켜세요.</string>
     <string name="toast_no_settings">접근성 설정을 열 수 없습니다.</string>
+    <string name="hint_restricted">스위치가 회색인가요? Android 13 부터는 스토어 밖에서 설치한 앱에 대해 잠깁니다. 앱 정보 → ⋮ → 제한된 설정 허용.</string>
 
     <string name="label_dynamic_color_hint">막대가 배경화면 색을 따릅니다</string>
     <string name="label_bar_color">배경 색상</string>

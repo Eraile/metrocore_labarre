@@ -17,6 +17,7 @@
     <string name="row_accessibility_value">apri le impostazioni di sistema</string>
     <string name="toast_hint">Cerca «metrocore — La Barre» nell\'elenco e attivalo.</string>
     <string name="toast_no_settings">Impossibile aprire le impostazioni di accessibilita.</string>
+    <string name="hint_restricted">interruttore grigio? Da Android 13 e bloccato per le applicazioni installate fuori da uno store. Info applicazione → ⋮ → consenti impostazioni con restrizioni.</string>
 
     <string name="label_dynamic_color_hint">la barra prende il colore dello sfondo</string>
     <string name="label_bar_color">colore dello sfondo</string>

@@ -24,6 +24,7 @@
     <string name="row_accessibility_value">فتح إعدادات النظام</string>
     <string name="toast_hint">ابحث عن «metrocore — La Barre» في القائمة وفعّله.</string>
     <string name="toast_no_settings">تعذّر فتح إعدادات إمكانية الوصول.</string>
+    <string name="hint_restricted">هل المفتاح باهت؟ منذ Android 13 يُقفل للتطبيقات المثبّتة خارج المتاجر. معلومات التطبيق ← ⋮ ← السماح بالإعدادات المقيّدة.</string>
 
     <string name="label_dynamic_color_hint">يأخذ الشريط لونه من خلفية الشاشة</string>
     <string name="label_bar_color">لون الخلفية</string>

@@ -21,6 +21,7 @@
     <string name="row_accessibility_value">systemeinstellungen oeffnen</string>
     <string name="toast_hint">Suche „metrocore — La Barre“ in der Liste und aktiviere es.</string>
     <string name="toast_no_settings">Die Bedienungshilfen konnten nicht geoeffnet werden.</string>
+    <string name="hint_restricted">schalter ausgegraut? Seit Android 13 ist er fuer apps gesperrt, die ausserhalb eines stores installiert wurden. App-info → ⋮ → eingeschraenkte einstellungen zulassen.</string>
 
     <string name="label_dynamic_color_hint">die leiste nimmt die farbe deines hintergrunds</string>
     <string name="label_bar_color">hintergrundfarbe</string>

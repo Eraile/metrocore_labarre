@@ -103,6 +103,28 @@ la mise à jour par-dessus — c'est tout l'intérêt de garder la même clé à
    *Applications installées* / *Services téléchargés*), activer l'interrupteur, confirmer.
 4. La barre apparaît immédiatement. Pour l'enlever : désactiver le même interrupteur.
 
+### Si l'interrupteur est grisé — « paramètres restreints »
+
+Depuis **Android 13**, le système verrouille l'interrupteur d'accessibilité de toute
+application installée hors magasin. L'écran ne dit rien : l'interrupteur ne répond
+simplement pas, ou affiche *Restricted setting*. Ça n'a aucun rapport avec La Barre, tous
+les APK distribués directement y passent.
+
+Le déverrouillage :
+
+> **Paramètres → Applications → toutes les applications → metrocore — La Barre → menu ⋮
+> → Autoriser les paramètres restreints**
+
+Sur certaines surcouches l'entrée du menu n'apparaît pas. Le repli, avec un câble :
+
+```bash
+adb shell cmd appops set dev.metrocore.navbar ACCESS_RESTRICTED_SETTINGS allow
+```
+
+Vérifié sur Android 14 : l'opération existe et bascule bien entre `default` et `allow`.
+Une installation depuis le Play Store n'est pas concernée — c'est le seul vrai contournement,
+et c'est le compromis assumé de la distribution directe ([SIGNING.md](SIGNING.md)).
+
 ## Fidélité : d'où viennent les constantes
 
 Rien n'est réglé à l'œil. Métriques, couleurs, courbes et durées viennent de

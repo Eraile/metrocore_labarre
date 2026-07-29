@@ -17,6 +17,7 @@
     <string name="row_accessibility_value">otworz ustawienia systemu</string>
     <string name="toast_hint">Znajdz „metrocore — La Barre” na liscie i wlacz go.</string>
     <string name="toast_no_settings">Nie udalo sie otworzyc ustawien ulatwien dostepu.</string>
+    <string name="hint_restricted">przelacznik wyszarzony? Od Androida 13 jest zablokowany dla aplikacji zainstalowanych spoza sklepu. Informacje o aplikacji → ⋮ → zezwol na ustawienia z ograniczeniami.</string>
 
     <string name="label_dynamic_color_hint">pasek przyjmuje kolor tapety</string>
     <string name="label_bar_color">kolor tla</string>

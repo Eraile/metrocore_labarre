@@ -169,6 +169,12 @@ class MainActivity : AppCompatActivity() {
             ) { openAccessibilitySettings() },
         )
 
+        // Le mur le plus frequent a l'installation : depuis Android 13, l'interrupteur
+        // d'accessibilite est verrouille pour toute application installee hors magasin.
+        // Rien ne le dit a l'ecran ou l'utilisateur se trouve, il voit juste un
+        // interrupteur qui ne repond pas — autant l'expliquer ici, avant qu'il n'y aille.
+        body.addView(ui.sub(getString(R.string.hint_restricted)))
+
         body.addView(
             ui.actionRow(getString(R.string.row_reset), getString(R.string.row_reset_value)) {
                 store.reset()

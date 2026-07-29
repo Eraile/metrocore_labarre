@@ -28,6 +28,7 @@
     <string name="row_accessibility_value">open system settings</string>
     <string name="toast_hint">Find “metrocore — La Barre” in the list and turn it on.</string>
     <string name="toast_no_settings">Could not open the accessibility settings.</string>
+    <string name="hint_restricted">switch greyed out? Since Android 13 it is locked for apps installed outside a store. App info → ⋮ → allow restricted settings.</string>
 
     <!-- appearance -->
     <string name="label_dynamic_color" translatable="false">Material You</string>

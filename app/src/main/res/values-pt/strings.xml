@@ -17,6 +17,7 @@
     <string name="row_accessibility_value">abrir as definicoes do sistema</string>
     <string name="toast_hint">Procura «metrocore — La Barre» na lista e ativa-o.</string>
     <string name="toast_no_settings">Nao foi possivel abrir as definicoes de acessibilidade.</string>
+    <string name="hint_restricted">interruptor a cinzento? Desde o Android 13 esta bloqueado para aplicacoes instaladas fora de uma loja. Info da aplicacao → ⋮ → permitir definicoes restritas.</string>
 
     <string name="label_dynamic_color_hint">a barra usa a cor do teu fundo de ecra</string>
     <string name="label_bar_color">cor do fundo</string>

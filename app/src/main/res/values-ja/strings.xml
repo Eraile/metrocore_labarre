@@ -17,6 +17,7 @@
     <string name="row_accessibility_value">システム設定を開く</string>
     <string name="toast_hint">一覧から「metrocore — La Barre」を探して有効にしてください。</string>
     <string name="toast_no_settings">ユーザー補助の設定を開けませんでした。</string>
+    <string name="hint_restricted">スイッチが灰色ですか。Android 13 以降、ストア以外から入れたアプリではロックされます。アプリ情報 → ⋮ → 制限付き設定を許可。</string>
 
     <string name="label_dynamic_color_hint">バーが壁紙の色を使います</string>
     <string name="label_bar_color">背景の色</string>

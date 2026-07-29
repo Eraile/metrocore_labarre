@@ -17,6 +17,7 @@
     <string name="row_accessibility_value">открыть настройки системы</string>
     <string name="toast_hint">Найдите «metrocore — La Barre» в списке и включите.</string>
     <string name="toast_no_settings">Не удалось открыть настройки специальных возможностей.</string>
+    <string name="hint_restricted">переключатель неактивен? С Android 13 он заблокирован для приложений, установленных не из магазина. О приложении → ⋮ → разрешить ограниченные настройки.</string>
 
     <string name="label_dynamic_color_hint">панель берёт цвет из обоев</string>
     <string name="label_bar_color">цвет фона</string>

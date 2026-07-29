@@ -99,4 +99,5 @@
     <string name="update_downloading">wird geladen…</string>
     <string name="update_failed">das laden ist fehlgeschlagen</string>
     <string name="update_needs_permission">Erlaube La Barre, apps zu installieren, und tippe erneut.</string>
+    <string name="update_releases">alle versionen auf GitHub</string>
 </resources>

@@ -95,4 +95,5 @@
     <string name="update_downloading">내려받는 중…</string>
     <string name="update_failed">내려받기에 실패했습니다</string>
     <string name="update_needs_permission">La Barre 에 앱 설치를 허용한 뒤 다시 누르세요.</string>
+    <string name="update_releases">GitHub 에서 모든 버전 보기</string>
 </resources>

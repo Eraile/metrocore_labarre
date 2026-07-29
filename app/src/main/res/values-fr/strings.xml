@@ -95,4 +95,5 @@
     <string name="update_downloading">telechargement…</string>
     <string name="update_failed">le telechargement a echoue</string>
     <string name="update_needs_permission">Autorise La Barre a installer des applications, puis appuie de nouveau.</string>
+    <string name="update_releases">toutes les versions sur GitHub</string>
 </resources>

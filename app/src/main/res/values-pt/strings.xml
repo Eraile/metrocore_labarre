@@ -95,4 +95,5 @@
     <string name="update_downloading">a transferir…</string>
     <string name="update_failed">a transferencia falhou</string>
     <string name="update_needs_permission">Permite a La Barre instalar aplicacoes e toca outra vez.</string>
+    <string name="update_releases">todas as versoes no GitHub</string>
 </resources>

@@ -118,4 +118,5 @@
     <string name="update_downloading">downloading…</string>
     <string name="update_failed">download failed</string>
     <string name="update_needs_permission">Allow La Barre to install apps, then tap again.</string>
+    <string name="update_releases">all versions on GitHub</string>
 </resources>

@@ -100,4 +100,5 @@
     <string name="update_downloading">deskargatzen…</string>
     <string name="update_failed">deskargak huts egin du</string>
     <string name="update_needs_permission">Baimendu La Barre aplikazioak instalatzen, eta sakatu berriro.</string>
+    <string name="update_releases">bertsio guztiak GitHub-en</string>
 </resources>

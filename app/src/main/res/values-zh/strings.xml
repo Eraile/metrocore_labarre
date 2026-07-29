@@ -95,4 +95,5 @@
     <string name="update_downloading">正在下载…</string>
     <string name="update_failed">下载失败</string>
     <string name="update_needs_permission">请允许 La Barre 安装应用，然后再次点按。</string>
+    <string name="update_releases">在 GitHub 查看所有版本</string>
 </resources>

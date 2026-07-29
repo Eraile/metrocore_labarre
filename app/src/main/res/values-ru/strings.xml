@@ -95,4 +95,5 @@
     <string name="update_downloading">загрузка…</string>
     <string name="update_failed">загрузка не удалась</string>
     <string name="update_needs_permission">Разреши La Barre устанавливать приложения и нажми ещё раз.</string>
+    <string name="update_releases">все версии на GitHub</string>
 </resources>

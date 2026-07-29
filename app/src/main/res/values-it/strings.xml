@@ -95,4 +95,5 @@
     <string name="update_downloading">scaricamento…</string>
     <string name="update_failed">lo scaricamento non e riuscito</string>
     <string name="update_needs_permission">Consenti a La Barre di installare applicazioni, poi tocca di nuovo.</string>
+    <string name="update_releases">tutte le versioni su GitHub</string>
 </resources>

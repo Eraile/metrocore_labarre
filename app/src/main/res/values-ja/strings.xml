@@ -95,4 +95,5 @@
     <string name="update_downloading">ダウンロード中…</string>
     <string name="update_failed">ダウンロードに失敗しました</string>
     <string name="update_needs_permission">La Barre にアプリのインストールを許可してから、もう一度タップしてください。</string>
+    <string name="update_releases">GitHub ですべてのバージョンを見る</string>
 </resources>

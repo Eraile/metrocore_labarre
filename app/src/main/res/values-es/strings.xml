@@ -95,4 +95,5 @@
     <string name="update_downloading">descargando…</string>
     <string name="update_failed">la descarga ha fallado</string>
     <string name="update_needs_permission">Permite a La Barre instalar aplicaciones y vuelve a tocar.</string>
+    <string name="update_releases">todas las versiones en GitHub</string>
 </resources>

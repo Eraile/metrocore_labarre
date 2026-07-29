@@ -102,4 +102,5 @@
     <string name="update_downloading">جارٍ التنزيل…</string>
     <string name="update_failed">فشل التنزيل</string>
     <string name="update_needs_permission">اسمح لـ La Barre بتثبيت التطبيقات، ثم اضغط مرة أخرى.</string>
+    <string name="update_releases">كل الإصدارات على GitHub</string>
 </resources>

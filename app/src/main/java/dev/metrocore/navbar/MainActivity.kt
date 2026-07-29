@@ -546,6 +546,14 @@ class MainActivity : AppCompatActivity() {
             ).apply { topMargin = ui.px(8f) },
         )
 
+        // La porte de sortie : si la mise a jour integree ne peut pas aboutir — pas
+        // d'autorisation d'installer, reseau capricieux, envie de lire les notes de
+        // version — la page des Releases reste atteignable.
+        body.addView(
+            ui.linkRow(getString(R.string.update_releases)) { open(SITE_RELEASES) },
+            marginTop(ui.px(6f)),
+        )
+
         body.addView(ui.sub(getString(R.string.about_footer)), marginTop(ui.px(30f)))
 
         // Le drapeau et la mention sur leur propre ligne. Un seul TextView avec le
@@ -684,6 +692,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private const val SITE_PROJECT = "https://metrocore.dev"
+        private const val SITE_RELEASES =
+            "https://github.com/Eraile/metrocore_labarre/releases"
 
         /** Le mot-symbole, et la partie qu'on met en gras dedans. */
         private const val WORDMARK = "metrocore"

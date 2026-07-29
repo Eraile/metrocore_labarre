@@ -74,6 +74,17 @@ Les APK signés sont publiés dans
 d'autoriser l'installation depuis la source utilisée (navigateur ou gestionnaire de
 fichiers) — c'est normal, et ça ne se demande qu'une fois.
 
+Deux frictions attendent tout APK distribué hors Play Store, et elles n'ont rien de
+spécifique à La Barre :
+
+- **Play Protect** peut refuser l'installation d'une application qu'il ne connaît pas. Il
+  faut passer outre depuis son écran d'avertissement, ou le désactiver le temps de
+  l'installation. L'empreinte du certificat est publiée à chaque version, ce qui permet de
+  vérifier soi-même ce qu'on installe.
+- **L'interrupteur d'accessibilité arrive verrouillé** sur Android 13 et suivants. C'est
+  le point de blocage le plus fréquent : voir
+  [Si l'interrupteur est grisé](#si-linterrupteur-est-grisé--paramètres-restreints).
+
 Pour publier une version : [RELEASING.md](RELEASING.md).
 
 ### Se mettre à jour

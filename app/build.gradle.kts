@@ -24,8 +24,10 @@ android {
         applicationId = "dev.metrocore.navbar"
         minSdk = 24
         targetSdk = 35
-        versionCode = 2
-        versionName = "1.1"
+        // versionName colle desormais au tag, sans abreger : la mise a jour integree
+        // compare ce nom au `tag_name` de la Release, autant qu'ils soient identiques.
+        versionCode = 3
+        versionName = "1.2.0"
     }
 
     signingConfigs {

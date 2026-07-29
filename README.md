@@ -312,9 +312,32 @@ qu'un rappel que 48 dp est la hauteur d'une rangée de boutons pour un pouce.
 En navigation gestuelle il n'y a plus de bande à prendre, seulement la poignée. S'y caler
 donnerait une barre de 24 dp : sous n'importe quel minimum tactile — le token
 `TOUCH_MIN` de metrocore, déjà bas, est à 34 dp — et posée pile sur la zone du geste.
-Il n'y a donc plus de référentiel du tout : on revient à la proportion WP et le
-recouvrement est assumé. Le réglage **quand l'afficher**, dans *comportement*, tranche
-entre les deux seules réponses possibles :
+### En paysage, la bande passe sur le côté
+
+Beaucoup d'appareils déplacent leur barre de navigation sur un bord latéral en paysage —
+à droite quand le bas naturel du téléphone s'y retrouve, à gauche dans l'autre sens.
+Suivre le référentiel veut donc dire suivre le **bord**, et pas seulement l'épaisseur :
+La Barre devient une bande verticale du bon côté.
+
+L'ordre des touches suit l'appareil, pas l'écran. Les touches de Windows Phone étaient
+capacitives : elles ne bougeaient pas, elles restaient sur le bord bas du téléphone.
+Tourné dans le sens antihoraire, ce bord arrive à droite et « précédent », qui en occupait
+la gauche, se retrouve **en bas** de la bande. C'est pour la même raison que les glyphes
+ne pivotent pas : une touche capacitive est sérigraphiée sur la coque.
+
+Seuls les insets savent de quel côté est la bande — la rotation ne suffit pas, beaucoup
+d'appareils gardent leur barre en bas même en paysage, et c'est le cas qu'il ne faut pas
+casser. Un détail de synchronisation mérite d'être noté : `onConfigurationChanged` arrive
+**avant** que les insets ne soient à jour, si bien qu'une reconstruction déclenchée là
+utilise l'ancien bord. Le rattrapage se fait sur les évènements de fenêtre, qui eux
+arrivent une fois la rotation posée — sans lui, un passage de paysage à paysage inverse
+laissait la barre du mauvais côté.
+
+### Quand il n'y a pas de place
+
+Il n'y a plus de référentiel du tout : on revient à la proportion WP et le recouvrement
+est assumé. Le réglage **quand l'afficher**, dans *comportement*, tranche entre les deux
+seules réponses possibles :
 
 - **toujours** — la barre est là partout, elle recouvre là où il n'y a pas la place.
   C'est le défaut : une barre absente au premier lancement passe pour une panne.

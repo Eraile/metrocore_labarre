@@ -11,19 +11,31 @@ import android.view.WindowInsets
 import android.view.WindowManager
 import kotlin.math.roundToInt
 
+/** Le bord de l'ecran ou le systeme reserve sa bande de navigation. */
+enum class BarEdge {
+    BOTTOM,
+    LEFT,
+    RIGHT,
+    ;
+
+    val isVertical: Boolean get() = this != BOTTOM
+}
+
+/** Le bord occupe et l'epaisseur de la bande, en dp. */
+data class Reserved(val edge: BarEdge, val sizeDp: Int)
+
 /**
- * Ce que le systeme reserve deja en bas de l'ecran.
+ * Ce que le systeme reserve deja pour sa propre barre de navigation.
  *
  * Aucun overlay ne peut reserver d'inset : ni TYPE_ACCESSIBILITY_OVERLAY, ni
  * TYPE_APPLICATION_OVERLAY. Seul le systeme le fait, pour sa propre barre. La Barre se
  * pose donc toujours *par-dessus*, et la seule facon de ne pas mordre sur le contenu est
- * de se caler exactement sur la zone que le systeme a deja mise de cote — ce que rend
- * [navigationBarHeightDp].
+ * de se caler exactement sur la zone que le systeme a deja mise de cote.
  *
- * En navigation a 3 boutons cette zone fait la hauteur de la barre systeme : La Barre la
- * recouvre au pixel pres et rien n'est perdu. En navigation gestuelle elle se reduit a
- * la poignee (~24 dp), et une barre de cette hauteur est petite mais honnete : c'est
- * tout ce qui est libre.
+ * Cette zone n'est pas toujours en bas. Beaucoup d'appareils font passer leur barre de
+ * navigation sur le cote en paysage — a droite quand le bas naturel du telephone se
+ * retrouve a droite, a gauche dans l'autre sens. Suivre le referentiel veut donc dire
+ * suivre le bord, et pas seulement l'epaisseur : voir [reserved].
  */
 object SystemBars {
 
@@ -39,36 +51,50 @@ object SystemBars {
 
     /**
      * Vrai quand le systeme ne reserve pas de bande de boutons : navigation gestuelle,
-     * ou barre systeme masquee. Il n'y a alors aucune place a prendre en bas de l'ecran,
-     * et tout ce qu'on y dessine est pris sur le contenu.
+     * ou barre systeme masquee. Il n'y a alors aucune place a prendre, et tout ce qu'on
+     * dessine est pris sur le contenu.
      */
-    fun isGestureNav(context: Context): Boolean =
-        navigationBarHeightDp(context) < USABLE_MIN_DP
+    fun isGestureNav(context: Context): Boolean = reserved(context).sizeDp < USABLE_MIN_DP
 
-    /** 0 si le systeme ne reserve rien, ou si la mesure echoue. */
-    fun navigationBarHeightDp(context: Context): Int {
-        val px = navigationBarHeightPx(context)
-        if (px <= 0) return 0
-        return (px / context.resources.displayMetrics.density).roundToInt()
-    }
+    /**
+     * Le bord et l'epaisseur de la bande systeme. `sizeDp` vaut 0 si le systeme ne
+     * reserve rien ou si la mesure echoue — le bord est alors [BarEdge.BOTTOM], qui est
+     * le cas de tous les telephones en portrait et le repli le plus sur.
+     *
+     * Seuls les insets savent de quel cote se trouve la bande : la rotation ne suffit
+     * pas, beaucoup d'appareils gardent leur barre en bas meme en paysage. Quand les
+     * insets ne repondent pas, on retombe sur la ressource systeme, qui ne donne qu'une
+     * hauteur — donc le bord bas.
+     */
+    fun reserved(context: Context): Reserved {
+        val density = context.resources.displayMetrics.density
+        fun dp(px: Int) = (px / density).roundToInt()
 
-    private fun navigationBarHeightPx(context: Context): Int {
         // currentWindowMetrics veut un contexte visuel. Un service n'en est pas un au
         // sens strict, meme s'il tient un WindowManager pour son overlay : selon les
         // versions ca journalise, ca renvoie zero ou ca leve. On tente, et on retombe
-        // sur la ressource systeme — qui existe depuis toujours et suffit ici.
+        // sur la ressource systeme — qui existe depuis toujours.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val measured = runCatching {
+            val insets = runCatching {
                 val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
                 wm.currentWindowMetrics.windowInsets
                     .getInsets(WindowInsets.Type.navigationBars())
-                    .bottom
-            }.getOrDefault(0)
-            if (measured > 0) return measured
+            }.getOrNull()
+
+            if (insets != null) {
+                // L'ordre compte : un appareil qui garde sa barre en bas en paysage a
+                // aussi des insets lateraux non nuls a cause de l'encoche.
+                when {
+                    insets.bottom > 0 -> return Reserved(BarEdge.BOTTOM, dp(insets.bottom))
+                    insets.right > 0 -> return Reserved(BarEdge.RIGHT, dp(insets.right))
+                    insets.left > 0 -> return Reserved(BarEdge.LEFT, dp(insets.left))
+                }
+            }
         }
 
         @SuppressLint("DiscouragedApi")
         val id = context.resources.getIdentifier("navigation_bar_height", "dimen", "android")
-        return if (id > 0) context.resources.getDimensionPixelSize(id) else 0
+        val px = if (id > 0) context.resources.getDimensionPixelSize(id) else 0
+        return Reserved(BarEdge.BOTTOM, if (px > 0) dp(px) else 0)
     }
 }

@@ -138,10 +138,15 @@ data class NavBarConfig(
     fun resolvedHeightDp(context: Context): Int {
         if (barHeightDp > 0) return barHeightDp
 
-        val system = SystemBars.navigationBarHeightDp(context)
+        val system = SystemBars.reserved(context).sizeDp
         if (system >= SystemBars.USABLE_MIN_DP) return system
 
-        return MetroTokens.barHeightDpFor(context.resources.configuration.screenWidthDp)
+        // La proportion WP s'ancre sur la largeur d'ecran ; en paysage, `screenWidthDp`
+        // est le grand cote et donnerait une bande enorme. On prend donc toujours le
+        // petit cote, qui est la largeur du telephone quel que soit son sens.
+        val config = context.resources.configuration
+        val shortSide = minOf(config.screenWidthDp, config.screenHeightDp)
+        return MetroTokens.barHeightDpFor(shortSide)
     }
 
     /** Taille de glyphe commune, en dp. */
@@ -153,13 +158,23 @@ data class NavBarConfig(
         iconDp(screenWidthDp, slots.getValue(slot).iconScalePct)
 
     /**
+     * La meme, calee sur la hauteur reelle de la barre — celle que le systeme dicte.
+     * Sans ca, la glyphe se dimensionnerait sur une hauteur theorique differente de la
+     * bande effectivement dessinee.
+     */
+    fun resolvedIconDp(context: Context, slot: Slot): Int =
+        scaleIcon(resolvedHeightDp(context), slots.getValue(slot).iconScalePct)
+
+    /**
      * Tout le calcul se fait en flottant et n'arrondit qu'a la fin : enchainer deux
      * pourcentages sur des entiers tronques perdait plusieurs pour cent en route.
      */
-    private fun iconDp(screenWidthDp: Int, scalePct: Int): Int {
-        val bar = resolvedHeightDp(screenWidthDp)
+    private fun iconDp(screenWidthDp: Int, scalePct: Int): Int =
+        scaleIcon(resolvedHeightDp(screenWidthDp), scalePct)
+
+    private fun scaleIcon(barDp: Int, scalePct: Int): Int {
         val pct = if (iconSizePct > 0) iconSizePct else DEFAULT_ICON_PCT
-        return (bar * pct / 100f * scalePct / 100f).roundToInt().coerceAtLeast(8)
+        return (barDp * pct / 100f * scalePct / 100f).roundToInt().coerceAtLeast(8)
     }
 
     /**

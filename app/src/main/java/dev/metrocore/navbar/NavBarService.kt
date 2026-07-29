@@ -48,6 +48,15 @@ class NavBarService : AccessibilityService(),
     private var sawNavBar = false
 
     /**
+     * La bande systeme telle qu'elle etait au moment de construire la vue. Sert a
+     * rattraper la rotation : voir [applyVisibility].
+     */
+    private var builtWith: Reserved? = null
+
+    /** Garde-fou : [rebuild] appelle [applyVisibility], qui peut rappeler [rebuild]. */
+    private var rebuilding = false
+
+    /**
      * Le verrouillage ne produit pas toujours d'evenement d'accessibilite exploitable —
      * l'ecran s'eteint et rien ne bouge cote fenetres. On ecoute donc aussi l'ecran.
      */
@@ -117,17 +126,25 @@ class NavBarService : AccessibilityService(),
     }
 
     private fun rebuild() {
+        rebuilding = true
         hideBar()
 
         config = store.load()
         val wm = getSystemService(WINDOW_SERVICE) as WindowManager
         windowManager = wm
 
-        val view = NavBarView.build(this, config, haptics) { action, payload ->
+        // Le bord que le systeme reserve, et non le bas par principe : en paysage la
+        // bande systeme passe souvent sur le cote, et suivre le referentiel veut dire
+        // suivre le bord.
+        val reserved = SystemBars.reserved(this)
+        builtWith = reserved
+        val edge = reserved.edge
+
+        val view = NavBarView.build(this, config, haptics, edge) { action, payload ->
             action.perform(this, payload)
         }
 
-        val heightPx = NavBarView.dp(this, config.resolvedHeightDp(this))
+        val thicknessPx = NavBarView.dp(this, config.resolvedHeightDp(this))
 
         val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
@@ -137,15 +154,21 @@ class NavBarService : AccessibilityService(),
         }
 
         val params = WindowManager.LayoutParams(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            heightPx,
+            if (edge.isVertical) thicknessPx else WindowManager.LayoutParams.MATCH_PARENT,
+            if (edge.isVertical) WindowManager.LayoutParams.MATCH_PARENT else thicknessPx,
             type,
             WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
             PixelFormat.TRANSLUCENT,
         ).apply {
-            gravity = Gravity.BOTTOM or Gravity.START
+            // LEFT et RIGHT plutot que START et END : on vise un bord physique de
+            // l'ecran, qu'aucun sens de lecture ne doit pouvoir retourner.
+            gravity = when (edge) {
+                BarEdge.BOTTOM -> Gravity.BOTTOM or Gravity.LEFT
+                BarEdge.LEFT -> Gravity.LEFT or Gravity.TOP
+                BarEdge.RIGHT -> Gravity.RIGHT or Gravity.TOP
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 layoutInDisplayCutoutMode =
                     WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
@@ -153,10 +176,10 @@ class NavBarService : AccessibilityService(),
         }
 
         runCatching { wm.addView(view, params) }
-            .onSuccess {
-                barView = view
-                applyVisibility()
-            }
+            .onSuccess { barView = view }
+
+        rebuilding = false
+        applyVisibility()
     }
 
     private fun hideBar() {
@@ -169,6 +192,19 @@ class NavBarService : AccessibilityService(),
 
     private fun applyVisibility() {
         val view = barView ?: return
+
+        // A la rotation, `onConfigurationChanged` arrive *avant* que les insets ne soient
+        // a jour : on reconstruit alors sur l'ancien bord, et la barre reste du mauvais
+        // cote. Les evenements de fenetre, eux, arrivent une fois la rotation posee — on
+        // en profite pour rattraper l'ecart. Mesure a l'appui : sans ce rattrapage, un
+        // passage de paysage a paysage inverse laissait la barre a droite.
+        if (!rebuilding) {
+            val now = SystemBars.reserved(this)
+            if (now != builtWith) {
+                rebuild()
+                return
+            }
+        }
 
         val hidden = (config.hideLockscreen && isLocked()) ||
             (config.hideFullscreen && isFullscreen()) ||
@@ -210,17 +246,25 @@ class NavBarService : AccessibilityService(),
         if (open.isEmpty()) return false
 
         val screenHeight = resources.displayMetrics.heightPixels
+        val screenWidth = resources.displayMetrics.widthPixels
         val rect = Rect()
 
         val navBarShown = open.any { window ->
             if (window.type != AccessibilityWindowInfo.TYPE_SYSTEM) return@any false
             window.getBoundsInScreen(rect)
-            // Collee au bord bas et mince. Le plafond de hauteur ecarte les fenetres
-            // systeme qui touchent le bas en couvrant l'ecran — volet de notifications
-            // deploye, menu marche/arret.
-            !rect.isEmpty &&
-                rect.bottom >= screenHeight - EDGE_SLACK &&
+            if (rect.isEmpty) return@any false
+
+            // Une bande mince collee a un bord. En paysage elle passe sur le cote, donc
+            // les trois cas comptent. Le plafond d'epaisseur ecarte les fenetres systeme
+            // qui touchent un bord en couvrant l'ecran — volet de notifications deploye,
+            // menu marche/arret.
+            val bottom = rect.bottom >= screenHeight - EDGE_SLACK &&
                 rect.height() <= screenHeight / 4
+            val right = rect.right >= screenWidth - EDGE_SLACK &&
+                rect.width() <= screenWidth / 4
+            val left = rect.left <= EDGE_SLACK && rect.width() <= screenWidth / 4
+
+            bottom || right || left
         }
 
         if (DEBUG) logWindows(open, navBarShown)

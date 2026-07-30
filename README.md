@@ -345,7 +345,22 @@ qu'un rappel que 48 dp est la hauteur d'une rangée de boutons pour un pouce.
 En navigation gestuelle il n'y a plus de bande à prendre, seulement la poignée. S'y caler
 donnerait une barre de 24 dp : sous n'importe quel minimum tactile — le token
 `TOUCH_MIN` de metrocore, déjà bas, est à 34 dp — et posée pile sur la zone du geste.
-### En paysage, la bande passe sur le côté
+### En paysage, deux réponses défendables — donc un réglage
+
+**où se poser quand l'écran tourne**, dans *comportement* :
+
+- **là où est la barre système** (défaut) — La Barre suit la bande réservée. Elle ne
+  recouvre rien, et sur un téléphone elle ne bouge pas non plus par rapport à l'appareil :
+  c'est le comportement « solidaire de la coque ».
+- **toujours en bas de l'écran** — le bas reste le bas du point de vue de celui qui
+  regarde, dans les quatre rotations. La contrepartie est que rien ne réserve cette bande
+  en paysage : elle est prise sur le contenu.
+
+Le défaut est le premier parce que c'est le seul qui ne recouvre rien, et parce que c'est
+le référentiel de tout le reste. Mais le second est ce que faisaient les versions
+précédentes, et des gens y tiennent — d'où le choix plutôt qu'une décision imposée.
+
+### Comment la bande système se déplace
 
 Beaucoup d'appareils déplacent leur barre de navigation sur un bord latéral en paysage —
 à droite quand le bas naturel du téléphone s'y retrouve, à gauche dans l'autre sens.

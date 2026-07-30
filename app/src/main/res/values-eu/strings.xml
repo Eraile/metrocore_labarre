@@ -34,6 +34,10 @@
     <string name="label_bar_mode_hint">keinu bidezko nabigazioak ez du lekurik uzten behean — «lekua dagoen tokian bakarrik» hortik aldentzen da</string>
     <string name="mode_fitted">lekua dagoen tokian bakarrik</string>
     <string name="mode_always">beti</string>
+    <string name="label_placement">non kokatu pantaila biratzean</string>
+    <string name="label_placement_hint">horizontalean, sistemaren banda alboetara pasatzen da telefono gehienetan. Hari jarraitzeak barra telefonoko leku berean mantentzen du eta ez du ezer estaltzen; pantailaren behealdea, berriz, aplikazioari kentzen zaio.</string>
+    <string name="placement_system">sistemaren barra dagoen tokian</string>
+    <string name="placement_bottom">beti pantailaren behealdean</string>
     <string name="label_hide_fullscreen">pantaila osoan ezkutatu</string>
     <string name="label_hide_fullscreen_hint">aplikazio batek pantaila osoa hartzen duenean barra baztertu egiten da — bideoa, jokoak, irakurketa</string>
     <string name="label_hide_lockscreen">blokeo-pantailan ezkutatu</string>

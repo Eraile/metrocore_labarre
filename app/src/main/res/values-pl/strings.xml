@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">nawigacja gestami nie zostawia miejsca na dole — „tylko tam, gdzie sie miesci” omija ten problem</string>
     <string name="mode_fitted">tylko tam, gdzie sie miesci</string>
     <string name="mode_always">zawsze</string>
+    <string name="label_placement">gdzie sie ustawic po obrocie ekranu</string>
+    <string name="label_placement_hint">w poziomie pasek systemowy przechodzi na bok w wiekszosci telefonow. Podazanie za nim utrzymuje pasek w tym samym miejscu telefonu i niczego nie zaslania; dol ekranu jest natomiast zabierany aplikacji.</string>
+    <string name="placement_system">tam, gdzie pasek systemowy</string>
+    <string name="placement_bottom">zawsze na dole ekranu</string>
     <string name="label_hide_fullscreen">ukryj na pelnym ekranie</string>
     <string name="label_hide_fullscreen_hint">pasek ustepuje, gdy aplikacja zajmuje caly ekran — wideo, gry, czytanie</string>
     <string name="label_hide_lockscreen">ukryj na ekranie blokady</string>

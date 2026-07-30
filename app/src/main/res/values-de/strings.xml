@@ -33,6 +33,10 @@
     <string name="label_bar_mode_hint">die gestensteuerung haelt unten keinen platz frei — „nur wo platz ist“ bleibt dort weg</string>
     <string name="mode_fitted">nur wo platz ist</string>
     <string name="mode_always">immer</string>
+    <string name="label_placement">wohin beim drehen des bildschirms</string>
+    <string name="label_placement_hint">im querformat wandert die systemleiste bei den meisten telefonen an einen seitenrand. Ihr zu folgen haelt die leiste an derselben stelle am telefon und verdeckt nichts; der bildschirmrand unten wird der app genommen.</string>
+    <string name="placement_system">dort, wo die systemleiste ist</string>
+    <string name="placement_bottom">immer unten am bildschirm</string>
     <string name="label_hide_fullscreen">im vollbild ausblenden</string>
     <string name="label_hide_fullscreen_hint">die leiste tritt zurueck, wenn eine app den ganzen bildschirm einnimmt — video, spiele, lesen</string>
     <string name="label_hide_lockscreen">auf dem sperrbildschirm ausblenden</string>

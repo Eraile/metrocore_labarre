@@ -43,6 +43,10 @@
     <string name="label_bar_mode_hint">gesture navigation keeps no room at the bottom — “only where it fits” stays out of it</string>
     <string name="mode_fitted">only where it fits</string>
     <string name="mode_always">always</string>
+    <string name="label_placement">where to sit when the screen turns</string>
+    <string name="label_placement_hint">in landscape the system band moves to a side edge on most phones. Following it keeps the bar in the same place on the phone and covers nothing; the bottom of the screen is taken from the app.</string>
+    <string name="placement_system">where the system bar is</string>
+    <string name="placement_bottom">always at the bottom of the screen</string>
     <string name="label_hide_fullscreen">hide in fullscreen</string>
     <string name="label_hide_fullscreen_hint">the bar steps aside when an app takes the whole screen — video, games, reading</string>
     <string name="label_hide_lockscreen">hide on the lock screen</string>

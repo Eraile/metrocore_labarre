@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">навигация жестами не оставляет места внизу — «только там, где есть место» туда не лезет</string>
     <string name="mode_fitted">только там, где есть место</string>
     <string name="mode_always">всегда</string>
+    <string name="label_placement">где располагаться при повороте экрана</string>
+    <string name="label_placement_hint">в ландшафтном режиме системная полоса на большинстве телефонов уходит к боковому краю. Следуя за ней, панель остаётся на том же месте телефона и ничего не закрывает; низ экрана же отнимается у приложения.</string>
+    <string name="placement_system">там, где системная панель</string>
+    <string name="placement_bottom">всегда внизу экрана</string>
     <string name="label_hide_fullscreen">скрывать в полноэкранном режиме</string>
     <string name="label_hide_fullscreen_hint">панель уходит, когда приложение занимает весь экран — видео, игры, чтение</string>
     <string name="label_hide_lockscreen">скрывать на экране блокировки</string>

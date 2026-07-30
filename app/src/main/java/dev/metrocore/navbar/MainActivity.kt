@@ -317,6 +317,27 @@ class MainActivity : AppCompatActivity() {
         body.addView(modeRow)
         body.addView(ui.sub(getString(R.string.label_bar_mode_hint)))
 
+        // Sans effet en portrait : les deux valeurs y donnent le bas. Le reglage se
+        // propose quand meme, sinon on ne le trouve que par hasard — et c'est en paysage,
+        // ecran tourne, qu'on a le moins envie de partir a sa recherche.
+        lateinit var placementRow: View
+        placementRow = ui.pickerRow(
+            getString(R.string.label_placement),
+            getString(config.placement.labelRes),
+        ) {
+            ui.showPicker(
+                title = getString(R.string.label_placement),
+                options = BarPlacement.entries.toList(),
+                selected = config.placement,
+                labelOf = { getString(it.labelRes) },
+            ) { picked ->
+                update { it.copy(placement = picked) }
+                ui.updatePickerRow(placementRow, getString(picked.labelRes))
+            }
+        }
+        body.addView(placementRow, marginTop(ui.px(18f)))
+        body.addView(ui.sub(getString(R.string.label_placement_hint)))
+
         body.addView(
             ui.Toggle(
                 getString(R.string.label_hide_fullscreen),

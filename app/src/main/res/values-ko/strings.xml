@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">제스처 탐색은 화면 아래에 자리를 남기지 않습니다. ‘자리가 있을 때만’은 그곳을 피합니다</string>
     <string name="mode_fitted">자리가 있을 때만</string>
     <string name="mode_always">항상</string>
+    <string name="label_placement">화면이 돌아갈 때 놓일 곳</string>
+    <string name="label_placement_hint">가로 모드에서는 대부분의 기기에서 시스템 띠가 측면으로 옮겨갑니다. 그것을 따라가면 막대는 기기 위의 같은 자리에 남고 아무것도 가리지 않습니다. 화면 아래에 두면 그만큼 앱에서 가져옵니다.</string>
+    <string name="placement_system">시스템 막대가 있는 곳</string>
+    <string name="placement_bottom">항상 화면 아래</string>
     <string name="label_hide_fullscreen">전체 화면에서 숨기기</string>
     <string name="label_hide_fullscreen_hint">앱이 화면 전체를 사용할 때 막대가 물러납니다 — 동영상, 게임, 읽기</string>
     <string name="label_hide_lockscreen">잠금 화면에서 숨기기</string>

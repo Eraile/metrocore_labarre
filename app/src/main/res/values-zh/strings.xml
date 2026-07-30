@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">手势导航不会在底部留出空间 —「只在放得下时」会避开那里</string>
     <string name="mode_fitted">只在放得下时</string>
     <string name="mode_always">始终</string>
+    <string name="label_placement">屏幕旋转时的位置</string>
+    <string name="label_placement_hint">横屏时，多数手机的系统栏会移到侧边。跟随它可让导航栏留在手机上的同一位置，且不遮挡任何内容；放在屏幕底部则会占用应用的空间。</string>
+    <string name="placement_system">跟随系统栏</string>
+    <string name="placement_bottom">始终在屏幕底部</string>
     <string name="label_hide_fullscreen">全屏时隐藏</string>
     <string name="label_hide_fullscreen_hint">应用占满屏幕时导航栏自动让开 — 视频、游戏、阅读</string>
     <string name="label_hide_lockscreen">锁屏时隐藏</string>

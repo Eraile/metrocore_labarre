@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">la navigation gestuelle ne laisse aucune place en bas — « seulement la ou elle tient » l\'y evite</string>
     <string name="mode_fitted">seulement la ou elle tient</string>
     <string name="mode_always">toujours</string>
+    <string name="label_placement">ou se poser quand l\'ecran tourne</string>
+    <string name="label_placement_hint">en paysage, la bande systeme passe sur un cote sur la plupart des telephones. La suivre garde la barre au meme endroit sur le telephone et ne recouvre rien ; le bas de l\'ecran, lui, est pris sur l\'application.</string>
+    <string name="placement_system">la ou est la barre systeme</string>
+    <string name="placement_bottom">toujours en bas de l\'ecran</string>
     <string name="label_hide_fullscreen">masquer en plein ecran</string>
     <string name="label_hide_fullscreen_hint">la barre s\'efface quand une application prend tout l\'ecran — video, jeux, lecture</string>
     <string name="label_hide_lockscreen">masquer sur l\'ecran de verrouillage</string>

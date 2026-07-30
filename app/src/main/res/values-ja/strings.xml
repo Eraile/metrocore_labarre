@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">ジェスチャーナビゲーションは画面下に場所を空けません。「収まるときだけ」ならそこを避けます</string>
     <string name="mode_fitted">収まるときだけ</string>
     <string name="mode_always">常に</string>
+    <string name="label_placement">画面が回ったときの位置</string>
+    <string name="label_placement_hint">横向きでは、ほとんどの端末でシステムの帯が横の縁に移ります。それに従うとバーは端末上の同じ位置に留まり、何も隠しません。画面下端に置く場合は、その分がアプリから取られます。</string>
+    <string name="placement_system">システムバーと同じ位置</string>
+    <string name="placement_bottom">常に画面の下</string>
     <string name="label_hide_fullscreen">全画面時に隠す</string>
     <string name="label_hide_fullscreen_hint">アプリが画面全体を使うときにバーが退きます — 動画、ゲーム、読書</string>
     <string name="label_hide_lockscreen">ロック画面で隠す</string>

@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">la navegacion por gestos no deja sitio abajo — «solo donde cabe» se aparta de ahi</string>
     <string name="mode_fitted">solo donde cabe</string>
     <string name="mode_always">siempre</string>
+    <string name="label_placement">donde ponerse al girar la pantalla</string>
+    <string name="label_placement_hint">en horizontal, la banda del sistema pasa a un lateral en la mayoria de los telefonos. Seguirla mantiene la barra en el mismo sitio del telefono y no tapa nada; la parte de abajo de la pantalla se le quita a la aplicacion.</string>
+    <string name="placement_system">donde esta la barra del sistema</string>
+    <string name="placement_bottom">siempre abajo en la pantalla</string>
     <string name="label_hide_fullscreen">ocultar en pantalla completa</string>
     <string name="label_hide_fullscreen_hint">la barra se aparta cuando una aplicacion ocupa toda la pantalla — video, juegos, lectura</string>
     <string name="label_hide_lockscreen">ocultar en la pantalla de bloqueo</string>

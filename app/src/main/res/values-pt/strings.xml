@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">a navegacao por gestos nao deixa espaco em baixo — «so onde cabe» fica de fora</string>
     <string name="mode_fitted">so onde cabe</string>
     <string name="mode_always">sempre</string>
+    <string name="label_placement">onde ficar quando o ecra roda</string>
+    <string name="label_placement_hint">na horizontal, a banda do sistema passa para um dos lados na maioria dos telefones. Segui-la mantem a barra no mesmo sitio do telefone e nao tapa nada; a parte de baixo do ecra e tirada a aplicacao.</string>
+    <string name="placement_system">onde esta a barra do sistema</string>
+    <string name="placement_bottom">sempre em baixo no ecra</string>
     <string name="label_hide_fullscreen">ocultar em ecra inteiro</string>
     <string name="label_hide_fullscreen_hint">a barra afasta-se quando uma aplicacao ocupa todo o ecra — video, jogos, leitura</string>
     <string name="label_hide_lockscreen">ocultar no ecra de bloqueio</string>

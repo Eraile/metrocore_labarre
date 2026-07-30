@@ -30,6 +30,33 @@ enum class Haptic(val key: String, val labelRes: Int, val ms: Long, val amplitud
 }
 
 /**
+ * Ou la barre se pose quand l'ecran tourne.
+ *
+ * Les deux reponses sont legitimes et s'excluent, d'ou le reglage. En portrait elles
+ * donnent la meme chose ; tout se joue en paysage.
+ */
+enum class BarPlacement(val key: String, val labelRes: Int) {
+    /**
+     * La ou le systeme reserve sa bande. En paysage elle passe sur le cote sur la plupart
+     * des telephones, et La Barre l'y suit : elle ne recouvre alors rien, et elle ne bouge
+     * pas par rapport a l'appareil — le comportement « solidaire de la coque ».
+     */
+    SYSTEM("system", R.string.placement_system),
+
+    /**
+     * Toujours en bas de l'ecran, quelle que soit la rotation. Le bas reste le bas du
+     * point de vue de celui qui regarde. La contrepartie est que rien ne reserve cette
+     * bande en paysage : elle est prise sur le contenu.
+     */
+    SCREEN_BOTTOM("screen_bottom", R.string.placement_bottom),
+    ;
+
+    companion object {
+        fun from(key: String?): BarPlacement = entries.firstOrNull { it.key == key } ?: SYSTEM
+    }
+}
+
+/**
  * Quand la barre s'affiche, face a la place disponible.
  *
  * Il n'y a que deux reponses possibles au fait qu'aucun overlay ne peut reserver
@@ -111,6 +138,8 @@ data class NavBarConfig(
      * en navigation a 3 boutons : la bande est reservee, les deux modes s'y valent.
      */
     val mode: BarMode = BarMode.ALWAYS,
+    /** Ou se poser quand l'ecran tourne. Sans effet en portrait. */
+    val placement: BarPlacement = BarPlacement.SYSTEM,
     /** S'effacer quand l'application au premier plan passe en plein ecran. */
     val hideFullscreen: Boolean = true,
     /** S'effacer sur l'ecran de verrouillage. */
@@ -273,6 +302,7 @@ class ConfigStore(context: Context) {
             pressFeedback = prefs.getBoolean("press_feedback", d.pressFeedback),
             dynamicColor = prefs.getBoolean("dynamic_color", d.dynamicColor),
             mode = BarMode.from(prefs.getString("bar_mode", d.mode.key)),
+            placement = BarPlacement.from(prefs.getString("placement", d.placement.key)),
             hideFullscreen = prefs.getBoolean("hide_fullscreen", d.hideFullscreen),
             hideLockscreen = prefs.getBoolean("hide_lockscreen", d.hideLockscreen),
             slots = Slot.entries.associateWith { slot ->
@@ -302,6 +332,7 @@ class ConfigStore(context: Context) {
             putBoolean("press_feedback", config.pressFeedback)
             putBoolean("dynamic_color", config.dynamicColor)
             putString("bar_mode", config.mode.key)
+            putString("placement", config.placement.key)
             putBoolean("hide_fullscreen", config.hideFullscreen)
             putBoolean("hide_lockscreen", config.hideLockscreen)
             config.slots.forEach { (slot, sc) ->

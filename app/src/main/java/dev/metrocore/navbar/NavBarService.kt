@@ -136,9 +136,15 @@ class NavBarService : AccessibilityService(),
         // Le bord que le systeme reserve, et non le bas par principe : en paysage la
         // bande systeme passe souvent sur le cote, et suivre le referentiel veut dire
         // suivre le bord.
+        // `builtWith` garde la mesure brute, pas le bord retenu : c'est elle qu'on
+        // comparera pour rattraper une rotation, et elle ne depend pas du reglage.
         val reserved = SystemBars.reserved(this)
         builtWith = reserved
-        val edge = reserved.edge
+
+        val edge = when (config.placement) {
+            BarPlacement.SYSTEM -> reserved.edge
+            BarPlacement.SCREEN_BOTTOM -> BarEdge.BOTTOM
+        }
 
         val view = NavBarView.build(this, config, haptics, edge) { action, payload ->
             action.perform(this, payload)

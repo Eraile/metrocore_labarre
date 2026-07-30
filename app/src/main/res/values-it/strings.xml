@@ -29,6 +29,10 @@
     <string name="label_bar_mode_hint">la navigazione a gesti non lascia spazio in basso — «solo dove ci sta» se ne tiene fuori</string>
     <string name="mode_fitted">solo dove ci sta</string>
     <string name="mode_always">sempre</string>
+    <string name="label_placement">dove mettersi quando lo schermo ruota</string>
+    <string name="label_placement_hint">in orizzontale la banda di sistema passa su un lato nella maggior parte dei telefoni. Seguirla tiene la barra nello stesso punto del telefono e non copre nulla; il fondo dello schermo invece e preso all\'applicazione.</string>
+    <string name="placement_system">dove sta la barra di sistema</string>
+    <string name="placement_bottom">sempre in fondo allo schermo</string>
     <string name="label_hide_fullscreen">nascondi a schermo intero</string>
     <string name="label_hide_fullscreen_hint">la barra si ritira quando un\'applicazione occupa tutto lo schermo — video, giochi, lettura</string>
     <string name="label_hide_lockscreen">nascondi nella schermata di blocco</string>

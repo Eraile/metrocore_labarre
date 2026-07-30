@@ -36,6 +36,10 @@
     <string name="label_bar_mode_hint">التنقّل بالإيماءات لا يترك مساحة في الأسفل — خيار «فقط حيث يتّسع» يتجنّبها</string>
     <string name="mode_fitted">فقط حيث يتّسع</string>
     <string name="mode_always">دائمًا</string>
+    <string name="label_placement">مكانه عند تدوير الشاشة</string>
+    <string name="label_placement_hint">في الوضع الأفقي ينتقل شريط النظام إلى إحدى الحافتين الجانبيتين في معظم الهواتف. اتّباعه يُبقي الشريط في الموضع نفسه من الهاتف ولا يغطي شيئًا؛ أما أسفل الشاشة فيُؤخذ من التطبيق.</string>
+    <string name="placement_system">حيث يوجد شريط النظام</string>
+    <string name="placement_bottom">دائمًا أسفل الشاشة</string>
     <string name="label_hide_fullscreen">إخفاء في وضع ملء الشاشة</string>
     <string name="label_hide_fullscreen_hint">ينزوي الشريط عندما يشغل تطبيق الشاشة بأكملها — الفيديو والألعاب والقراءة</string>
     <string name="label_hide_lockscreen">إخفاء في شاشة القفل</string>

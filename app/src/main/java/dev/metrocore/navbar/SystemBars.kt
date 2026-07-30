@@ -22,7 +22,13 @@ enum class BarEdge {
 }
 
 /** Le bord occupe et l'epaisseur de la bande, en dp. */
-data class Reserved(val edge: BarEdge, val sizeDp: Int)
+data class Reserved(val edge: BarEdge, val sizeDp: Int) {
+    /**
+     * Vrai quand la bande est trop mince pour etre une rangee de boutons : navigation
+     * gestuelle, ou barre systeme masquee. Il n'y a alors pas de place a prendre.
+     */
+    val isGesture: Boolean get() = sizeDp < SystemBars.USABLE_MIN_DP
+}
 
 /**
  * Ce que le systeme reserve deja pour sa propre barre de navigation.

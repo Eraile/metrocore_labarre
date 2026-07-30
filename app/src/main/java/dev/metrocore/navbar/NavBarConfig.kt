@@ -164,10 +164,18 @@ data class NavBarConfig(
      * on revient a la proportion WP, et le recouvrement est assume. [showInGestureNav]
      * decide si on affiche quand meme.
      */
-    fun resolvedHeightDp(context: Context): Int {
+    fun resolvedHeightDp(context: Context): Int =
+        resolvedHeightDp(context, SystemBars.reserved(context))
+
+    /**
+     * La meme, sur une mesure deja faite. Le service dispose d'une source plus fiable que
+     * les insets — la liste des fenetres d'accessibilite — et la passe ici plutot que de
+     * laisser recalculer depuis une lecture moins sure.
+     */
+    fun resolvedHeightDp(context: Context, reserved: Reserved): Int {
         if (barHeightDp > 0) return barHeightDp
 
-        val system = SystemBars.reserved(context).sizeDp
+        val system = reserved.sizeDp
         if (system >= SystemBars.USABLE_MIN_DP) return system
 
         // La proportion WP s'ancre sur la largeur d'ecran ; en paysage, `screenWidthDp`

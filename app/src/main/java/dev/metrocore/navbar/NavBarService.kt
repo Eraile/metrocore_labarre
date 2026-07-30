@@ -20,6 +20,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityWindowInfo
+import kotlin.math.roundToInt
 
 /**
  * Service d'accessibilite : affiche la barre en overlay et execute les actions systeme.
@@ -138,7 +139,7 @@ class NavBarService : AccessibilityService(),
         // suivre le bord.
         // `builtWith` garde la mesure brute, pas le bord retenu : c'est elle qu'on
         // comparera pour rattraper une rotation, et elle ne depend pas du reglage.
-        val reserved = SystemBars.reserved(this)
+        val reserved = measureBand()
         builtWith = reserved
 
         val edge = when (config.placement) {
@@ -150,7 +151,7 @@ class NavBarService : AccessibilityService(),
             action.perform(this, payload)
         }
 
-        val thicknessPx = NavBarView.dp(this, config.resolvedHeightDp(this))
+        val thicknessPx = NavBarView.dp(this, config.resolvedHeightDp(this, reserved))
 
         val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             WindowManager.LayoutParams.TYPE_ACCESSIBILITY_OVERLAY
@@ -205,7 +206,7 @@ class NavBarService : AccessibilityService(),
         // en profite pour rattraper l'ecart. Mesure a l'appui : sans ce rattrapage, un
         // passage de paysage a paysage inverse laissait la barre a droite.
         if (!rebuilding) {
-            val now = SystemBars.reserved(this)
+            val now = measureBand()
             if (now != builtWith) {
                 rebuild()
                 return
@@ -214,7 +215,7 @@ class NavBarService : AccessibilityService(),
 
         val hidden = (config.hideLockscreen && isLocked()) ||
             (config.hideFullscreen && isFullscreen()) ||
-            (config.mode == BarMode.FITTED && SystemBars.isGestureNav(this))
+            (config.mode == BarMode.FITTED && builtWith?.isGesture == true)
 
         val target = if (hidden) View.GONE else View.VISIBLE
         if (view.visibility != target) view.visibility = target
@@ -251,48 +252,103 @@ class NavBarService : AccessibilityService(),
         val open = runCatching { windows }.getOrNull() ?: return false
         if (open.isEmpty()) return false
 
-        val screenHeight = resources.displayMetrics.heightPixels
-        val screenWidth = resources.displayMetrics.widthPixels
-        val rect = Rect()
-
-        val navBarShown = open.any { window ->
-            if (window.type != AccessibilityWindowInfo.TYPE_SYSTEM) return@any false
-            window.getBoundsInScreen(rect)
-            if (rect.isEmpty) return@any false
-
-            // Une bande mince collee a un bord. En paysage elle passe sur le cote, donc
-            // les trois cas comptent. Le plafond d'epaisseur ecarte les fenetres systeme
-            // qui touchent un bord en couvrant l'ecran — volet de notifications deploye,
-            // menu marche/arret.
-            val bottom = rect.bottom >= screenHeight - EDGE_SLACK &&
-                rect.height() <= screenHeight / 4
-            val right = rect.right >= screenWidth - EDGE_SLACK &&
-                rect.width() <= screenWidth / 4
-            val left = rect.left <= EDGE_SLACK && rect.width() <= screenWidth / 4
-
-            bottom || right || left
-        }
-
-        if (DEBUG) logWindows(open, navBarShown)
+        val band = systemBand()
+        if (DEBUG) logWindows(open, band)
 
         // Tant qu'on n'a jamais reconnu de barre de navigation ici, on ne sait pas lire
         // cet appareil — et on ne masque rien. Sans ce garde-fou, un fabricant qui
         // exposerait ses barres autrement verrait La Barre disparaitre en permanence, ce
         // qui est bien pire que de ne jamais se masquer.
-        if (navBarShown) {
+        if (band != null) {
             sawNavBar = true
             return false
         }
         return sawNavBar
     }
 
-    private fun logWindows(open: List<AccessibilityWindowInfo>, navBarShown: Boolean) {
+    /**
+     * Ou se trouve la bande systeme, lue de la liste des fenetres — bord et epaisseur.
+     * `null` quand il n'y en a aucune, ce qui est le critere de plein ecran.
+     *
+     * **C'est la source de verite.** `currentWindowMetrics.windowInsets` s'est revele
+     * inexploitable depuis un service : sur certains appareils il rend encore l'inset du
+     * portrait apres une rotation, et ne se rafraichit qu'a l'apparition d'une fenetre
+     * systeme. Symptome mesure chez un utilisateur : barre posee en bas en paysage, qui
+     * sautait au bon bord des qu'on tirait les reglages rapides — la bonne valeur etait
+     * atteignable, on la lisait juste trop tard.
+     *
+     * La liste des fenetres, elle, donne les bornes vraies au moment ou l'on regarde. Et
+     * « ou est la bande » et « y en a-t-il une » deviennent la meme question, posee une
+     * seule fois.
+     */
+    private fun systemBand(): Reserved? {
+        val open = runCatching { windows }.getOrNull() ?: return null
+
+        val metrics = resources.displayMetrics
+        val h = metrics.heightPixels
+        val w = metrics.widthPixels
+        val rect = Rect()
+
+        for (window in open) {
+            if (window.type != AccessibilityWindowInfo.TYPE_SYSTEM) continue
+            window.getBoundsInScreen(rect)
+            if (rect.isEmpty) continue
+
+            // Une bande mince collee a un bord, et longue sur l'autre axe. Les deux
+            // conditions comptent : le plafond d'epaisseur ecarte le volet de
+            // notifications deploye et le menu marche/arret, qui touchent un bord en
+            // couvrant l'ecran ; l'exigence de longueur ecarte les vignettes systeme.
+            if (rect.bottom >= h - EDGE_SLACK &&
+                rect.height() <= h / 4 &&
+                rect.width() >= w - EDGE_SLACK
+            ) {
+                return Reserved(BarEdge.BOTTOM, dp(rect.height(), metrics.density))
+            }
+            if (rect.right >= w - EDGE_SLACK &&
+                rect.width() <= w / 4 &&
+                rect.height() >= h - EDGE_SLACK
+            ) {
+                return Reserved(BarEdge.RIGHT, dp(rect.width(), metrics.density))
+            }
+            if (rect.left <= EDGE_SLACK &&
+                rect.width() <= w / 4 &&
+                rect.height() >= h - EDGE_SLACK
+            ) {
+                return Reserved(BarEdge.LEFT, dp(rect.width(), metrics.density))
+            }
+        }
+        return null
+    }
+
+    private fun dp(px: Int, density: Float) = (px / density).roundToInt()
+
+    /**
+     * La bande retenue, en prenant a chaque source ce qu'elle sait faire.
+     *
+     * **Le bord vient de la liste des fenetres** : c'est la seule lecture vivante, et
+     * c'est le bord qui etait faux.
+     *
+     * **L'epaisseur vient des insets**, parce que la liste des fenetres oscille pendant
+     * l'animation de rotation — mesure sur emulateur : 98 puis 51 puis 48 dp en 400 ms,
+     * la barre suivant l'animation de la barre systeme. Comme [applyVisibility]
+     * reconstruit des que la mesure change, chaque valeur intermediaire aurait provoque
+     * une reconstruction : la barre aurait clignote a chaque rotation. L'epaisseur est de
+     * toute facon peu sensible a la peremption — elle vaut 48 dp dans les deux sens.
+     */
+    private fun measureBand(): Reserved {
+        val insets = SystemBars.reserved(this)
+        val band = systemBand() ?: return insets
+        return Reserved(band.edge, if (insets.sizeDp > 0) insets.sizeDp else band.sizeDp)
+    }
+
+    private fun logWindows(open: List<AccessibilityWindowInfo>, band: Reserved?) {
         val rect = Rect()
         val inventory = open.joinToString(" | ") { window ->
             window.getBoundsInScreen(rect)
             "type=${window.type} $rect"
         }
-        Log.d(TAG, "navBar=$sawNavBar/$navBarShown fenetres: $inventory")
+        // Les deux sources cote a cote : c'est leur desaccord qui etait le bug.
+        Log.d(TAG, "fenetres=$band insets=${SystemBars.reserved(this)} | $inventory")
     }
 
     companion object {

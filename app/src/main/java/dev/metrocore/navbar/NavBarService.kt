@@ -16,6 +16,7 @@ import android.graphics.Rect
 import android.os.Build
 import android.util.Log
 import android.view.Gravity
+import android.view.Surface
 import android.view.View
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityEvent
@@ -47,6 +48,13 @@ class NavBarService : AccessibilityService(),
 
     /** Voir [isFullscreen] : on ne masque pas tant qu'on ne sait pas lire l'appareil. */
     private var sawNavBar = false
+
+    /**
+     * Le dernier bord ou l'on a vu la bande systeme, pour chaque rotation d'ecran. Sert a
+     * tenir la position quand elle disparait — plein ecran, barre masquee. Voir
+     * [measureBand].
+     */
+    private val edgeByRotation = mutableMapOf<Int, BarEdge>()
 
     /**
      * La bande systeme telle qu'elle etait au moment de construire la vue. Sert a
@@ -217,8 +225,38 @@ class NavBarService : AccessibilityService(),
             (config.hideFullscreen && isFullscreen()) ||
             (config.mode == BarMode.FITTED && builtWith?.isGesture == true)
 
-        val target = if (hidden) View.GONE else View.VISIBLE
-        if (view.visibility != target) view.visibility = target
+        setHidden(view, hidden)
+    }
+
+    /**
+     * Le passage se fait en fondu plutot que d'un coup.
+     *
+     * Une barre qui apparait sans transition apres un geste donne l'impression d'avoir
+     * mis du temps a repondre — le retour visuel arrive apres coup, alors qu'un fondu
+     * demarre immediatement. C'est le meme raisonnement que l'enfoncement des touches, et
+     * ca reprend sa duree : [MetroTokens.DUR_BASE].
+     *
+     * On anime l'opacite et non la position : la fenetre de l'overlay fait exactement la
+     * taille de la barre, un glissement serait donc rogne par ses propres bords.
+     */
+    private fun setHidden(view: View, hidden: Boolean) {
+        val targetAlpha = if (hidden) 0f else 1f
+        if (view.alpha == targetAlpha && (view.visibility == View.GONE) == hidden) return
+
+        view.animate().cancel()
+        if (hidden) {
+            view.animate()
+                .alpha(0f)
+                .setDuration(MetroTokens.DUR_BASE)
+                .withEndAction { view.visibility = View.GONE }
+                .start()
+        } else {
+            view.visibility = View.VISIBLE
+            view.animate()
+                .alpha(1f)
+                .setDuration(MetroTokens.DUR_BASE)
+                .start()
+        }
     }
 
     private fun isLocked(): Boolean {
@@ -282,6 +320,8 @@ class NavBarService : AccessibilityService(),
      * seule fois.
      */
     private fun systemBand(): Reserved? {
+        // ECHAFAUDAGE DE TEST — a retirer. Simule un plein ecran : la bande disparait de
+        // la liste sans qu'il faille lancer un jeu immersif.
         val open = runCatching { windows }.getOrNull() ?: return null
 
         val metrics = resources.displayMetrics
@@ -337,9 +377,39 @@ class NavBarService : AccessibilityService(),
      */
     private fun measureBand(): Reserved {
         val insets = SystemBars.reserved(this)
-        val band = systemBand() ?: return insets
-        return Reserved(band.edge, if (insets.sizeDp > 0) insets.sizeDp else band.sizeDp)
+        val band = systemBand()
+
+        if (band != null) {
+            edgeByRotation[rotation()] = band.edge
+            if (DEBUG) Log.d(TAG, "bande vue=$band memoire=$edgeByRotation insets=$insets")
+            return Reserved(band.edge, if (insets.sizeDp > 0) insets.sizeDp else band.sizeDp)
+        }
+
+        // Aucune bande visible : l'application est en plein ecran, ou la barre systeme est
+        // masquee. Il n'y a alors rien a suivre — mais le bord, lui, n'a pas change : la
+        // barre systeme reviendra la ou elle etait. On garde donc le dernier bord observe
+        // *dans cette rotation*.
+        //
+        // Sans cette memoire, on retombait sur les insets, et c'est exactement le cas qui
+        // restait casse : dans un jeu en plein ecran en paysage, la barre se posait en bas
+        // et ne rejoignait le bon bord qu'au moment ou l'on faisait apparaitre la barre
+        // systeme d'un balayage.
+        val remembered = edgeByRotation[rotation()] ?: insets.edge
+        if (DEBUG) {
+            Log.d(TAG, "bande absente — retenu=$remembered memoire=$edgeByRotation insets=$insets")
+        }
+        return Reserved(remembered, insets.sizeDp)
     }
+
+    /**
+     * La rotation de l'ecran, qui sert de cle a [edgeByRotation]. `defaultDisplay` est
+     * deprecie mais reste la seule voie depuis un service : `getDisplay()` demande un
+     * contexte visuel, et on a deja vu ce que ca donne avec `currentWindowMetrics`.
+     */
+    @Suppress("DEPRECATION")
+    private fun rotation(): Int = runCatching {
+        (getSystemService(WINDOW_SERVICE) as WindowManager).defaultDisplay.rotation
+    }.getOrDefault(Surface.ROTATION_0)
 
     private fun logWindows(open: List<AccessibilityWindowInfo>, band: Reserved?) {
         val rect = Rect()

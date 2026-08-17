@@ -16,12 +16,16 @@ enum class Slot(val key: String, val labelRes: Int) {
     RIGHT("right", R.string.slot_right),
 }
 
-/** Intensite du retour haptique. La duree est en ms, l'amplitude sur 255. */
-enum class Haptic(val key: String, val labelRes: Int, val ms: Long, val amplitude: Int) {
-    OFF("off", R.string.haptic_off, 0, 0),
-    LIGHT("light", R.string.haptic_light, 10, 60),
-    MEDIUM("medium", R.string.haptic_medium, 18, 130),
-    STRONG("strong", R.string.haptic_strong, 30, 220),
+/**
+ * Intensite du retour haptique. Les durees sont en ms (appui court / appui long),
+ * l'amplitude sur 255 — le plafond materiel : au-dela de moyen, seule la duree
+ * peut encore monter.
+ */
+enum class Haptic(val key: String, val labelRes: Int, val ms: Long, val holdMs: Long, val amplitude: Int) {
+    OFF("off", R.string.haptic_off, 0, 0, 0),
+    LIGHT("light", R.string.haptic_light, 30, 45, 200),
+    MEDIUM("medium", R.string.haptic_medium, 80, 120, 255),
+    STRONG("strong", R.string.haptic_strong, 100, 150, 255),
     ;
 
     companion object {

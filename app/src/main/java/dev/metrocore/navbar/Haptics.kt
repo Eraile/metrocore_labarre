@@ -35,41 +35,33 @@ class Haptics(context: Context) {
     fun tap(level: Haptic) {
         if (level == Haptic.OFF || !hasVibrator) return
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val effect = when (level) {
-                Haptic.LIGHT -> VibrationEffect.EFFECT_TICK
-                Haptic.MEDIUM -> VibrationEffect.EFFECT_CLICK
-                else -> VibrationEffect.EFFECT_HEAVY_CLICK
-            }
+        // Les effets predefinis sont mis a l'echelle par le reglage systeme et restent
+        // discrets sur beaucoup d'appareils : seul le niveau leger s'appuie encore sur
+        // le plus marque d'entre eux ; au-dela, impulsion directe a forte amplitude.
+        if (level == Haptic.LIGHT && Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             // createPredefined peut echouer silencieusement si l'effet n'est pas
             // implemente ; on retombe alors sur une impulsion simple.
-            runCatching { vibrator?.vibrate(VibrationEffect.createPredefined(effect)) }
-                .onFailure { oneShot(level) }
+            runCatching {
+                vibrator?.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_HEAVY_CLICK))
+            }.onFailure { oneShot(level.ms, level.amplitude) }
             return
         }
-        oneShot(level)
+        oneShot(level.ms, level.amplitude)
     }
 
     /** Un peu plus appuye, pour signaler qu'un appui long vient de partir. */
     fun hold(level: Haptic) {
         if (level == Haptic.OFF || !hasVibrator) return
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            runCatching {
-                vibrator?.vibrate(VibrationEffect.createPredefined(VibrationEffect.EFFECT_HEAVY_CLICK))
-            }.onFailure { oneShot(level) }
-            return
-        }
-        oneShot(level)
+        oneShot(level.holdMs, level.amplitude)
     }
 
-    private fun oneShot(level: Haptic) {
+    private fun oneShot(ms: Long, amplitude: Int) {
         val v = vibrator ?: return
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(level.ms, level.amplitude))
+            v.vibrate(VibrationEffect.createOneShot(ms, amplitude))
         } else {
             @Suppress("DEPRECATION")
-            v.vibrate(level.ms)
+            v.vibrate(ms)
         }
     }
 }
